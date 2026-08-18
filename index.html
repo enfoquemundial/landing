@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protege tu vehículo — Planes Premium y VIP | GPS Portátiles</title>
+<meta name="description" content="Protege tu vehículo del robo con GPS 4G, alertas en tiempo real y detección anti-jammer. Planes Premium y VIP con instalación incluida.">
+<link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  /* Estilos propios de esta página, además de los que ya trae el sitio */
+  .lp-hero { padding: var(--sp-11) 0 var(--sp-9); background: var(--bg); }
+  .lp-hero-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+  .lp-hero .eyebrow { justify-content: center; display: inline-flex; }
+  .lp-hero h1 { margin-top: var(--sp-4); font-size: clamp(2rem, 5vw, 2.8rem); }
+  .lp-hero p.lead { margin-top: var(--sp-5); font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; max-width: 62ch; margin-left: auto; margin-right: auto; }
+  .lp-hero-cta { margin-top: var(--sp-7); display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+  .lp-alert-strip { background: var(--navy-900); color: #fff; padding: var(--sp-8) 0; }
+  .lp-alert-inner { max-width: 820px; margin: 0 auto; display: flex; align-items: center; gap: var(--sp-5); text-align: left; }
+  .lp-alert-inner svg { width: 44px; height: 44px; color: var(--blue-600); flex-shrink: 0; }
+  .lp-alert-inner p { margin: 0; color: #A6B0C3; font-size: 1rem; line-height: 1.65; }
+  .lp-alert-inner strong { color: #fff; }
+
+  .lp-plans { padding: var(--sp-11) 0; }
+  .lp-plans-head { text-align: center; max-width: 640px; margin: 0 auto var(--sp-9); }
+  .lp-plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-7); max-width: 980px; margin: 0 auto; align-items: stretch; }
+  .lp-plan {
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: var(--sp-8); display: flex; flex-direction: column; position: relative;
+  }
+  .lp-plan--vip { border: 2px solid var(--blue-600); box-shadow: 0 20px 45px -18px rgba(250, 30, 78, 0.35); }
+  .lp-plan-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--blue-600); color: #fff; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em;
+    padding: 6px 16px; border-radius: 999px; text-transform: uppercase; white-space: nowrap;
+  }
+  .lp-plan-name { font-size: 1.4rem; margin-top: var(--sp-2); }
+  .lp-plan-desc { color: var(--text-muted); font-size: 0.92rem; margin-top: 6px; min-height: 40px; }
+  .lp-plan-price { margin-top: var(--sp-6); display: flex; align-items: baseline; gap: 8px; }
+  .lp-plan-price strong { font-family: var(--font-display); font-size: 2.1rem; font-weight: 800; color: var(--text); }
+  .lp-plan-price span { color: var(--text-muted); font-size: 0.85rem; }
+  .lp-plan-renewal { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+  .lp-plan-features { margin-top: var(--sp-6); display: flex; flex-direction: column; gap: 13px; flex-grow: 1; }
+  .lp-plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.92rem; color: var(--text); line-height: 1.5; }
+  .lp-plan-features svg { width: 18px; height: 18px; color: var(--blue-600); flex-shrink: 0; margin-top: 2px; }
+  .lp-plan-features strong { font-weight: 700; }
+  .lp-plan .btn { margin-top: var(--sp-7); }
+  .lp-plan-promo {
+    margin-top: var(--sp-4); background: var(--blue-50); color: var(--blue-700); border: 1px solid var(--blue-100);
+    border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.82rem; font-weight: 600; text-align: center;
+  }
+
+  .lp-jammer { background: var(--bg); padding: var(--sp-11) 0; }
+  .lp-jammer-inner { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-9); align-items: center; }
+  .lp-jammer-copy .eyebrow { color: var(--blue-600); }
+  .lp-jammer-copy h2 { margin-top: var(--sp-3); font-size: 1.9rem; }
+  .lp-jammer-copy p { margin-top: var(--sp-4); color: var(--text-muted); line-height: 1.7; }
+  .lp-jammer-visual {
+    background: var(--navy-900); border-radius: var(--radius-lg); padding: var(--sp-8);
+    display: flex; flex-direction: column; gap: var(--sp-5);
+  }
+  .lp-jammer-step { display: flex; align-items: center; gap: 14px; }
+  .lp-jammer-step-num {
+    width: 32px; height: 32px; border-radius: 50%; background: var(--blue-600); color: #fff;
+    font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .lp-jammer-step p { margin: 0; color: #E2E8F0; font-size: 0.92rem; }
+
+  .lp-features-strip { padding: var(--sp-10) 0; }
+  .lp-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-6); max-width: 980px; margin: 0 auto; }
+  .lp-feature-item { text-align: center; }
+  .lp-feature-item svg { width: 34px; height: 34px; color: var(--blue-600); margin-bottom: var(--sp-3); }
+  .lp-feature-item h3 { font-size: 0.98rem; }
+  .lp-feature-item p { margin-top: 4px; color: var(--text-muted); font-size: 0.84rem; line-height: 1.5; }
+
+  .lp-final-cta { background: var(--navy-900); color: #fff; padding: var(--sp-11) 0; text-align: center; }
+  .lp-final-cta h2 { color: #fff; font-size: 1.9rem; }
+  .lp-final-cta p { margin-top: var(--sp-4); color: #A6B0C3; max-width: 52ch; margin-left: auto; margin-right: auto; }
+  .lp-final-cta-actions { margin-top: var(--sp-7); display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+  @media (max-width: 860px) {
+    .lp-plans-grid { grid-template-columns: 1fr; max-width: 460px; }
+    .lp-jammer-inner { grid-template-columns: 1fr; }
+    .lp-features-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="https://gpsportatiles.com" class="brand">
+        <img class="brand-icon" src="assets/images/isotipo-gpsportatiles.webp" alt="" width="44" height="44">
+        <span class="brand-name">GPS <strong>Portátiles</strong></span>
+      </a>
+      <div class="header-actions">
+        <a class="btn btn-whatsapp" href="https://wa.me/18097526329?text=Hola%2C%20quiero%20proteger%20mi%20veh%C3%ADculo%2C%20me%20interesa%20el%20plan%20Premium%20o%20VIP." target="_blank" rel="noopener">
+          <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="lp-hero">
+      <div class="container lp-hero-inner">
+        <span class="eyebrow">Protección vehicular</span>
+        <h1>Hoy en día, robarse un carro es <span class="accent">más fácil de lo que crees</span></h1>
+        <p class="lead">Por eso creamos dos planes de protección real: rastreo GPS 4G, alertas al instante y tecnología que se adelanta al ladrón — incluso cuando intenta bloquear la señal.</p>
+        <div class="lp-hero-cta">
+          <a class="btn btn-primary btn-lg" href="#planes">Ver los planes <svg aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg></a>
+          <a class="btn btn-outline btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20tengo%20una%20duda%20sobre%20los%20planes%20de%20protecci%C3%B3n%20vehicular." target="_blank" rel="noopener">
+            <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
+            Hacer una pregunta
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FRANJA DE ALERTA -->
+    <section class="lp-alert-strip">
+      <div class="container lp-alert-inner">
+        <svg aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg>
+        <p><strong>No es solo ver dónde está tu carro — es tener control real.</strong> Elige entre nuestro plan Premium o el plan VIP con doble GPS y protección anti-jammer, según qué tan lejos quieras llevar tu seguridad.</p>
+      </div>
+    </section>
+
+    <!-- PLANES -->
+    <section class="lp-plans" id="planes">
+      <div class="container">
+        <div class="lp-plans-head">
+          <span class="eyebrow">Elige tu plan</span>
+          <h2>Premium o VIP: tú decides el nivel de seguridad</h2>
+        </div>
+
+        <div class="lp-plans-grid">
+
+          <!-- PREMIUM -->
+          <article class="lp-plan">
+            <h3 class="lp-plan-name">Plan Premium</h3>
+            <p class="lp-plan-desc">Ideal para tener tu vehículo rastreado en todo momento, con cobertura internacional real.</p>
+            <div class="lp-plan-price">
+              <strong>RD$7,990</strong>
+              <span>pago único + instalación</span>
+            </div>
+            <p class="lp-plan-renewal">Renovación anual: solo RD$2,490</p>
+            <ul class="lp-plan-features">
+              <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span>GPS con <strong>SIM internacional</strong> (no local) — mayor cobertura, incluso donde hay poca señal o si el vehículo sale del país</span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span>Alertas al instante por <strong>app, WhatsApp o Telegram</strong>: encendido, apagado, exceso de velocidad, desconexión de batería, salida de zona segura y más</span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span>Acceso a <strong>plataforma privada</strong> con ubicación en tiempo real</span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span>Soporte de nuestro equipo en todo momento</span></li>
+            </ul>
+            <a class="btn btn-whatsapp btn-block btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20quiero%20el%20plan%20PREMIUM%20de%20protecci%C3%B3n%20vehicular%20(RD%247%2C990)." target="_blank" rel="noopener">
+              <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
+              Elegir plan Premium
+            </a>
+          </article>
+
+          <!-- VIP -->
+          <article class="lp-plan lp-plan--vip">
+            <span class="lp-plan-badge">Máxima seguridad</span>
+            <h3 class="lp-plan-name">Plan VIP</h3>
+            <p class="lp-plan-desc">Todo lo del Premium, además de doble GPS y protección contra bloqueadores de señal.</p>
+            <div class="lp-plan-price">
+              <strong>RD$13,990</strong>
+              <span>pago único + instalación</span>
+            </div>
+            <p class="lp-plan-renewal">Renovación anual: solo RD$3,490</p>
+            <ul class="lp-plan-features">
+              <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span>Incluye <strong>todo lo del plan Premium</strong></span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span><strong>Dos GPS 4G instalados:</strong> uno puede encontrarse, el otro queda bien oculto — si el ladrón halla uno y deja de buscar, el segundo lo sigue rastreando</span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span><strong>Detección anti-jammer:</strong> si detectan el bloqueador de señal que usan los ladrones, el sistema avisa y bloquea el vehículo automáticamente, antes de que puedan actuar</span></li>
+              <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span><strong>Micrófono en tiempo real</strong> para escuchar lo que pasa dentro del vehículo</span></li>
+            </ul>
+            <a class="btn btn-whatsapp btn-block btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20quiero%20el%20plan%20VIP%20de%20protecci%C3%B3n%20vehicular%20(RD%2413%2C990)." target="_blank" rel="noopener">
+              <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
+              Elegir plan VIP
+            </a>
+            <p class="lp-plan-promo">🎁 Si instalas esta semana, te incluimos gratis el rastreo de un celular</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ANTI-JAMMER -->
+    <section class="lp-jammer">
+      <div class="container lp-jammer-inner">
+        <div class="lp-jammer-copy">
+          <span class="eyebrow">Solo en el plan VIP</span>
+          <h2>Los ladrones ahora usan bloqueadores de señal — nosotros ya nos adelantamos</h2>
+          <p>Hoy en día existen dispositivos llamados <strong>jammers</strong> que los ladrones encienden para dejar sin señal a los GPS tradicionales. Nuestro sistema del plan VIP detecta cuando esto pasa, te avisa al instante y bloquea el vehículo automáticamente — antes de que el ladrón pueda completar el robo.</p>
+        </div>
+        <div class="lp-jammer-visual">
+          <div class="lp-jammer-step">
+            <span class="lp-jammer-step-num">1</span>
+            <p>El ladrón enciende el jammer para bloquear la señal del GPS</p>
+          </div>
+          <div class="lp-jammer-step">
+            <span class="lp-jammer-step-num">2</span>
+            <p>Nuestro sistema detecta el bloqueo al instante</p>
+          </div>
+          <div class="lp-jammer-step">
+            <span class="lp-jammer-step-num">3</span>
+            <p>Te llega la alerta y el vehículo se bloquea automáticamente</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FRANJA DE BENEFICIOS -->
+    <section class="lp-features-strip">
+      <div class="container lp-features-grid">
+        <div class="lp-feature-item">
+          <svg aria-hidden="true" focusable="false"><use href="#icon-signal"></use></svg>
+          <h3>Cobertura internacional</h3>
+          <p>SIM propia, funciona incluso fuera del país</p>
+        </div>
+        <div class="lp-feature-item">
+          <svg aria-hidden="true" focusable="false"><use href="#icon-lock"></use></svg>
+          <h3>Plataforma privada</h3>
+          <p>Solo tú tienes acceso a la ubicación de tu vehículo</p>
+        </div>
+        <div class="lp-feature-item">
+          <svg aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg>
+          <h3>Soporte directo</h3>
+          <p>Habla con una persona real por WhatsApp</p>
+        </div>
+        <div class="lp-feature-item">
+          <svg aria-hidden="true" focusable="false"><use href="#icon-truck"></use></svg>
+          <h3>Instalación incluida</h3>
+          <p>Nosotros instalamos el equipo por ti</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="lp-final-cta">
+      <div class="container">
+        <h2>¿Te vas con el Premium o prefieres el VIP?</h2>
+        <p>Escríbenos ahora y te ayudamos a elegir el plan que mejor protege tu vehículo. Tenemos facilidades de pago disponibles.</p>
+        <div class="lp-final-cta-actions">
+          <a class="btn btn-whatsapp btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20me%20interesa%20proteger%20mi%20veh%C3%ADculo%2C%20quiero%20saber%20m%C3%A1s%20de%20los%20planes%20Premium%20y%20VIP." target="_blank" rel="noopener">
+            <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
+            Hablar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand"><svg class="brand-mark" aria-hidden="true" focusable="false"><use href="#icon-logo"></use></svg><span>GPS Portátiles</span></div>
+      <p style="margin-top:12px; font-size:0.85rem; color:#94A3B8;">© 2026 GPS Portátiles · Santiago de los Caballeros, República Dominicana</p>
+    </div>
+  </footer>
+
+  <!-- Sprite de íconos -->
+  <svg style="display:none" aria-hidden="true">
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M20 6L9 17l-5-5"/></symbol>
+    <symbol id="icon-truck" viewBox="0 0 24 24"><rect x="1" y="6" width="14" height="11" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" d="M15 10h4l3 3v4h-7z"/><circle cx="6" cy="19" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="19" r="2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 2l8 3v6c0 5-3.4 8.7-8 11-4.6-2.3-8-6-8-11V5z"/><path fill="none" stroke="currentColor" stroke-width="2" d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="icon-headset" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 13a9 9 0 0118 0v5a2 2 0 01-2 2h-1v-7h3M3 18v-5h3v7H5a2 2 0 01-2-2z"/></symbol>
+    <symbol id="icon-signal" viewBox="0 0 24 24"><rect x="3" y="14" width="4" height="7" rx="1" fill="currentColor"/><rect x="10" y="9" width="4" height="12" rx="1" fill="currentColor"/><rect x="17" y="4" width="4" height="17" rx="1" fill="currentColor"/></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 11V7.5a4.5 4.5 0 019 0V11" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="16" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="icon-logo" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7Zm0 4.2a1.6 1.6 0 110 3.2 1.6 1.6 0 010-3.2Z"/></symbol>
+  </svg>
+
+</body>
+</html>
