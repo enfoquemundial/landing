@@ -188,7 +188,7 @@ p { margin: 0; }
 }
 .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 .btn:active { transform: translateY(1px); }
-.btn-primary { background: var(--blue-600); color: #fff; }
+.btn-primary { background: var(--blue-600); color: var(--accent-contrast, #fff); }
 .btn-primary:hover { background: var(--blue-700); }
 .btn-whatsapp { background: var(--green-700); color: #fff; }
 .btn-whatsapp:hover { background: var(--green-800); }
