@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¿Qué quieres proteger? | Gordo GPS</title>
+<title>Bienvenido | Gordo GPS</title>
 <meta name="description" content="Elige dónde vas a instalar tu GPS: vehículo personal, moto, flotilla, dashcam o GPS portátil. Gordo GPS — protección vehicular con tecnología real.">
 <meta name="theme-color" content="#0C0C0E">
 <link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   :root {
     --bg: #0C0C0E; --bg-2: #121214; --card: #18181B;
@@ -22,274 +23,338 @@
   html { scroll-behavior: smooth; }
   body {
     margin: 0; min-height: 100vh; font-family: var(--font-body); font-size: 16px; color: var(--text);
-    background: var(--bg); background-image: radial-gradient(50% 40% at 85% 0%, rgba(220,38,38,.10), transparent 60%);
-    display: flex; flex-direction: column; align-items: center; padding: 24px 20px 110px;
+    background: var(--bg);
+    background-image: radial-gradient(55% 45% at 82% 30%, rgba(220,38,38,.13), transparent 62%);
   }
   h1, h2 { font-family: var(--font-head); margin: 0; }
-  .brand-bar { width: 100%; max-width: 1100px; display: flex; justify-content: flex-start; margin-bottom: 32px; }
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .brand img { height: 46px; width: auto; }
-  .intro { text-align: center; max-width: 560px; margin: 40px auto 8px; }
-  .intro .eyebrow {
+  .shell { max-width: 1200px; margin: 0 auto; padding: 26px 24px 60px; }
+
+  /* ---- Barra superior ---- */
+  .topbar { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }
+  .topbar-actions { display: flex; align-items: center; gap: 10px; }
+  .brand { display: flex; align-items: center; gap: 10px; opacity: 0; animation: fadeIn .6s ease-out .1s forwards; }
+  .brand img { height: 42px; width: auto; }
+  .topbar-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--text-muted); font-weight: 600; font-size: 0.86rem; text-decoration: none;
+    border: 1px solid var(--card-border-strong); border-radius: 999px; padding: 9px 16px;
+    transition: color .2s ease, border-color .2s ease;
+    opacity: 0; animation: fadeIn .6s ease-out .2s forwards;
+  }
+  .topbar-link:hover { color: var(--text); border-color: var(--accent); }
+  .topbar-link svg { width: 13px; height: 13px; }
+
+  /* ---- Cuerpo: dos columnas ---- */
+  .hero-grid {
+    margin-top: clamp(30px, 6vw, 70px);
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center;
+  }
+
+  .hero-left .eyebrow {
     display: inline-block; font-family: var(--font-head); font-size: 0.78rem; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--accent);
+    opacity: 0; animation: riseIn .6s ease-out .15s forwards;
   }
-  .intro h1 { margin-top: 12px; font-size: clamp(1.7rem, 5vw, 2.3rem); text-transform: uppercase; letter-spacing: -0.01em; }
-  .intro p { margin-top: 12px; color: var(--text-muted); font-size: 1.05rem; }
+  .hero-left h1 {
+    margin-top: 10px; font-size: clamp(2.6rem, 6.2vw, 4.4rem); font-weight: 700; line-height: 0.98;
+    letter-spacing: -0.01em;
+    opacity: 0; animation: riseIn .7s ease-out .3s forwards;
+  }
+  .hero-left h1 .accent { color: var(--accent); }
+  .hero-left p.lead {
+    margin-top: 18px; max-width: 46ch; color: var(--text-muted); font-size: 1.12rem; line-height: 1.6;
+    opacity: 0; animation: riseIn .6s ease-out .5s forwards;
+  }
 
-  .menu-list {
-    margin-top: 48px; width: 100%; max-width: 760px;
-    border-top: 1px solid var(--card-border);
-  }
+  .menu-list { margin-top: 34px; width: 100%; border-top: 1px solid var(--card-border); }
   .menu-row {
-    position: relative; display: flex; align-items: center; gap: 24px;
-    padding: 26px 8px; text-decoration: none; color: var(--text);
+    position: relative; display: flex; align-items: center; gap: 20px;
+    padding: 20px 6px; text-decoration: none; color: var(--text);
     border-bottom: 1px solid var(--card-border); overflow: hidden;
+    opacity: 0; transform: translateY(14px); animation: riseIn .55s ease-out forwards;
   }
+  .menu-row:nth-child(1) { animation-delay: .65s; }
+  .menu-row:nth-child(2) { animation-delay: .75s; }
+  .menu-row:nth-child(3) { animation-delay: .85s; }
+  .menu-row:nth-child(4) { animation-delay: .95s; }
+  .menu-row:nth-child(5) { animation-delay: 1.05s; }
   .menu-row::before {
     content: ""; position: absolute; inset: 0; left: -6%;
     background: var(--accent); transform: skewX(-12deg) translateX(-105%);
     transition: transform .38s cubic-bezier(.4,0,.2,1); z-index: 0;
   }
   .menu-row:hover::before { transform: skewX(-12deg) translateX(0); }
-  .menu-num {
-    position: relative; z-index: 1; font-family: var(--font-head); font-weight: 600;
-    font-size: 1.1rem; color: var(--card-border-strong); width: 40px; flex-shrink: 0;
-    transition: color .3s ease;
-  }
-  .menu-row:hover .menu-num { color: rgba(0,0,0,.4); }
   .menu-text { position: relative; z-index: 1; flex: 1; min-width: 0; }
   .menu-title {
-    font-family: var(--font-head); font-weight: 600; font-size: clamp(1.05rem, 3vw, 1.4rem);
+    font-family: var(--font-head); font-weight: 600; font-size: clamp(1rem, 2.4vw, 1.22rem);
     text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.2;
     transition: color .3s ease;
   }
   .menu-row:hover .menu-title { color: #0A0A0A; }
-  .menu-sub {
-    display: block; margin-top: 4px; font-size: 0.86rem; color: var(--text-muted);
-    transition: color .3s ease;
-  }
+  .menu-sub { display: block; margin-top: 3px; font-size: 0.84rem; color: var(--text-muted); transition: color .3s ease; }
   .menu-row:hover .menu-sub { color: rgba(10,10,10,.7); }
   .menu-arrow {
-    position: relative; z-index: 1; flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+    position: relative; z-index: 1; flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     border: 1px solid var(--card-border-strong); color: var(--text-muted);
     transition: border-color .3s ease, color .3s ease, transform .3s ease, background .3s ease;
   }
   .menu-row:hover .menu-arrow { border-color: #0A0A0A; color: #0A0A0A; background: rgba(10,10,10,.08); transform: translateX(4px); }
-  .menu-arrow svg { width: 15px; height: 15px; }
+  .menu-arrow svg { width: 14px; height: 14px; }
 
-  @media (max-width: 560px) {
-    .menu-row { gap: 14px; padding: 20px 4px; }
-    .menu-num { width: 28px; font-size: 0.9rem; }
-    .menu-sub { display: none; }
+  /* ---- Fondo: mapa completo de la página, en baja opacidad ---- */
+  .page-map-wrap { position: relative; }
+  .page-map-bg {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    -webkit-mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 92%);
+    mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 92%);
+  }
+  #heroMapEl { position: absolute; inset: 0; width: 100%; height: 100%; background: #0d0d0f; }
+  #heroMapEl .leaflet-tile-pane { opacity: 0; animation: tileFadeIn 1.8s ease-out .1s forwards; }
+  #heroMapEl .leaflet-tile-container { filter: contrast(1.2) saturate(1.05); }
+  .leaflet-control-attribution { display: none !important; }
+  @keyframes tileFadeIn { to { opacity: 0.78; } }
+
+  .shell { position: relative; z-index: 1; }
+
+  .hero-right { position: relative; display: flex; align-items: center; justify-content: center; min-height: 420px; }
+
+  .hero-map-loc {
+    position: absolute; bottom: 10px; left: 10px; z-index: 1000; pointer-events: none;
+    background: rgba(18,18,18,.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.1); padding: 7px 13px; border-radius: 12px;
+  }
+  .hero-map-loc span { display: block; font-family: var(--font-body); font-size: 11px; color: #d4d4d8; white-space: nowrap; }
+  .hero-map-loc .loaded-line { position: absolute; left: 13px; top: 7px; opacity: 0; animation: locIn .5s ease 2.3s forwards; }
+  .hero-map-loc .loading-line { animation: locOut .5s ease 2.1s forwards; }
+  @keyframes locOut { to { opacity: 0; } }
+  @keyframes locIn { to { opacity: 1; } }
+
+  .custom-marker { display: flex; justify-content: center; align-items: center; }
+  .marker-pin {
+    width: 16px; height: 16px; background: var(--accent); border: 2px solid #fff; border-radius: 50%;
+    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
+    animation: markerPulse 2s infinite;
+  }
+  @keyframes markerPulse {
+    0% { transform: scale(.95); box-shadow: 0 0 0 0 rgba(220,38,38,.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(220,38,38,0); }
+    100% { transform: scale(.95); box-shadow: 0 0 0 0 rgba(220,38,38,0); }
   }
 
-  .old-site-btn {
-    position: fixed; right: 18px; bottom: 18px; z-index: 50;
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--card); border: 1px solid var(--card-border-strong); color: var(--text-muted);
-    font-family: var(--font-body); font-weight: 600; font-size: 0.82rem;
-    padding: 10px 16px; border-radius: 999px; text-decoration: none;
-    box-shadow: 0 10px 24px -10px rgba(0,0,0,.6);
-    transition: color .2s ease, border-color .2s ease, transform .2s ease;
+  /* ---- Logo: cada pieza por separado, animada individualmente ---- */
+  .hero-logo-group {
+    position: relative; z-index: 5;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    pointer-events: none; padding: 60px 0;
   }
-  .old-site-btn:hover { color: var(--text); border-color: var(--accent); transform: translateY(-2px); }
-  .old-site-btn svg { width: 14px; height: 14px; }
-
-  @media (max-width: 480px) {
-    .old-site-btn { right: 12px; bottom: 12px; padding: 9px 13px; font-size: 0.76rem; }
+  .hero-icon-stack {
+    position: relative; width: min(28vw, 175px); aspect-ratio: 936/805;
+    filter: drop-shadow(0 20px 40px rgba(220,38,38,.35));
   }
-
-  /* ================= SECUENCIA DE ENTRADA ================= */
-  .intro-stage {
-    position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center;
-    background: var(--bg);
-    background-image: radial-gradient(55% 45% at 78% 42%, rgba(220,38,38,.14), transparent 62%);
-    pointer-events: none;
-    animation: stageFadeOut 2.9s ease-in-out forwards;
+  .hero-icon-stack img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .piece-plane {
+    opacity: 0; animation: planeFly 1s cubic-bezier(.2,.75,.25,1) .3s forwards;
   }
-  @keyframes stageFadeOut { 0%, 88% { opacity: 1; } 100% { opacity: 0; } }
-
-  .intro-rings { position: absolute; right: 4%; top: 50%; width: min(60vw, 640px); aspect-ratio: 1/1; transform: translateY(-50%); animation: ringsLife 3s ease-in-out forwards; }
-  .intro-rings svg { width: 100%; height: 100%; }
-  @keyframes ringsLife {
-    0%   { opacity: 0; transform: translateY(-50%) scale(.88) rotate(0deg); }
-    22%  { opacity: 1; transform: translateY(-50%) scale(1) rotate(2deg); }
-    82%  { opacity: 1; transform: translateY(-50%) scale(1.03) rotate(-2deg); }
-    100% { opacity: 0; transform: translateY(-50%) scale(1.08) rotate(0deg); }
-  }
-
-  .intro-logo-group {
-    position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 14px;
-    animation: logoGroupSettle .6s ease-in 2.25s forwards;
-  }
-  @keyframes logoGroupSettle { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(.8) translateY(-14px); } }
-
-  .intro-icon { width: min(30vw, 190px); height: auto; animation: iconFly 1s cubic-bezier(.22,.75,.25,1) .3s both; filter: drop-shadow(0 20px 40px rgba(220,38,38,.35)); }
-  @keyframes iconFly {
-    0%   { opacity: 0; transform: translate(240px, -50px) rotate(16deg) scale(.85); }
-    55%  { opacity: 1; transform: translate(-16px, 8px) rotate(-5deg) scale(1.05); }
-    76%  { opacity: 1; transform: translate(5px, -5px) rotate(2deg) scale(.99); }
+  @keyframes planeFly {
+    0%   { opacity: 0; transform: translate(-260px, -55px) rotate(-18deg) scale(.85); }
+    58%  { opacity: 1; transform: translate(18px, 9px) rotate(5deg) scale(1.05); }
+    78%  { opacity: 1; transform: translate(-6px, -6px) rotate(-2deg) scale(.99); }
     100% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
   }
+  .piece-pin {
+    opacity: 0; animation: pinDrop .7s cubic-bezier(.34,1.4,.4,1) 2.55s forwards;
+  }
+  @keyframes pinDrop {
+    0%   { opacity: 0; transform: translateY(-90px) scale(.9); }
+    55%  { opacity: 1; transform: translateY(8px) scale(1.06); }
+    75%  { transform: translateY(-4px) scale(.98); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
 
-  .intro-word { width: min(40vw, 260px); height: auto; animation: wordDrop .8s cubic-bezier(.22,.75,.25,1) 1.25s both; }
-  @keyframes wordDrop {
-    0%   { opacity: 0; transform: translateY(-80px); }
-    65%  { opacity: 1; transform: translateY(12px); }
+  .piece-gordo {
+    width: min(32vw, 220px); height: auto;
+    opacity: 0; animation: gordoDrop .9s cubic-bezier(.2,.75,.25,1) 1.15s forwards;
+  }
+  @keyframes gordoDrop {
+    0%   { opacity: 0; transform: translateY(-70px); }
+    68%  { opacity: 1; transform: translateY(11px); }
     100% { opacity: 1; transform: translateY(0); }
   }
 
-  /* logo del header: aparece justo cuando el de la animación se va */
-  .brand { opacity: 0; animation: headerBrandIn .5s ease-out 2.4s forwards; }
-  @keyframes headerBrandIn { 0% { opacity: 0; transform: translateY(-8px); } 100% { opacity: 1; transform: translateY(0); } }
+  .hero-gps-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 2px; }
+  .piece-dash { width: min(6.5vw, 46px); height: auto; opacity: 0; }
+  .piece-dash--left { animation: dashLeftIn .55s ease-out 1.85s forwards; }
+  .piece-dash--right { animation: dashRightIn .55s ease-out 1.85s forwards; }
+  @keyframes dashLeftIn { 0% { opacity: 0; transform: translateX(-36px); } 100% { opacity: 1; transform: translateX(0); } }
+  @keyframes dashRightIn { 0% { opacity: 0; transform: translateX(36px); } 100% { opacity: 1; transform: translateX(0); } }
 
-  /* contenido principal: aparece cuando la escena de entrada se retira */
-  .intro { opacity: 0; animation: contentIn .6s ease-out 2.55s forwards; }
-  .menu-row { opacity: 0; transform: translateY(16px); animation: contentIn .55s ease-out forwards; }
-  .menu-row:nth-child(1) { animation-delay: 2.75s; }
-  .menu-row:nth-child(2) { animation-delay: 2.85s; }
-  .menu-row:nth-child(3) { animation-delay: 2.95s; }
-  .menu-row:nth-child(4) { animation-delay: 3.05s; }
-  .menu-row:nth-child(5) { animation-delay: 3.15s; }
-  .old-site-btn { opacity: 0; animation: contentIn .5s ease-out 3.3s forwards; }
-  @keyframes contentIn { 0% { opacity: 0; transform: translateY(18px); } 100% { opacity: 1; transform: translateY(0); } }
+  .piece-gps-text {
+    width: min(9.5vw, 68px); height: auto;
+    opacity: 0; transform: scale(.6);
+    animation: gpsPop .5s cubic-bezier(.3,1.6,.4,1) 1.7s forwards;
+  }
+  @keyframes gpsPop { 0% { opacity: 0; transform: scale(.6); } 70% { opacity: 1; transform: scale(1.12); } 100% { opacity: 1; transform: scale(1); } }
+
+  @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+  @keyframes riseIn { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
 
   @media (prefers-reduced-motion: reduce) {
-    .intro-stage { display: none; }
-    .brand, .intro, .menu-row, .old-site-btn { opacity: 1; animation: none; transform: none; }
+    .topbar-link, .hero-left .eyebrow, .hero-left h1, .hero-left p.lead,
+    .menu-row, .page-map-bg, .piece-plane, .piece-pin, .piece-gordo, .piece-dash, .piece-gps-text
+    { opacity: 1; animation: none !important; transform: none; }
+    .page-map-bg { opacity: .26; }
   }
-  @media (max-width: 640px) {
-    .intro-rings { right: 50%; top: 40%; transform: translate(50%, -50%); width: 80vw; }
-    @keyframes ringsLife {
-      0%   { opacity: 0; transform: translate(50%,-50%) scale(.88) rotate(0deg); }
-      22%  { opacity: 1; transform: translate(50%,-50%) scale(1) rotate(2deg); }
-      82%  { opacity: 1; transform: translate(50%,-50%) scale(1.03) rotate(-2deg); }
-      100% { opacity: 0; transform: translate(50%,-50%) scale(1.08) rotate(0deg); }
-    }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-right { order: -1; min-height: 340px; margin-bottom: 8px; }
+    .hero-icon-stack { width: 130px; }
+    .piece-gordo { width: 165px; }
+    .piece-dash { width: 34px; }
+    .piece-gps-text { width: 50px; }
+  }
+  @media (max-width: 560px) {
+    .menu-row { gap: 14px; padding: 16px 4px; }
+    .menu-sub { display: none; }
+    .topbar-link span.full { display: none; }
   }
 </style>
 </head>
 <body>
 
-  <div class="intro-stage" id="introStage" aria-hidden="true">
-    <div class="intro-rings"><svg id="introRingsSvg" viewBox="0 0 600 600"></svg></div>
-    <div class="intro-logo-group">
-      <img class="intro-icon" src="assets/images/intro-icon.webp" alt="">
-      <img class="intro-word" src="assets/images/intro-word.webp" alt="">
+<div class="page-map-wrap">
+  <div class="page-map-bg" aria-hidden="true"><div id="heroMapEl"></div></div>
+
+<div class="shell">
+
+  <div class="topbar">
+    <a href="gps-portatiles.html" class="topbar-link">
+      <span class="full">Web antigua</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+  <div class="hero-grid">
+
+    <div class="hero-left">
+      <h1>Bienvenido<span class="accent">.</span></h1>
+      <p class="lead">Selecciona el servicio que necesitas</p>
+
+      <div class="menu-list">
+
+        <a class="menu-row" href="gps-portatiles.html">
+          <span class="menu-text">
+            <span class="menu-title">Vehículo personal</span>
+            <span class="menu-sub">GPS 4G, alertas en tiempo real y protección anti-jammer</span>
+          </span>
+          <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="menu-row" href="gps-portatiles.html">
+          <span class="menu-text">
+            <span class="menu-title">Motor / Pasola</span>
+            <span class="menu-sub">Rastreo compacto pensado para dos ruedas</span>
+          </span>
+          <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="menu-row" href="gps-portatiles.html">
+          <span class="menu-text">
+            <span class="menu-title">Flotillas / empresas</span>
+            <span class="menu-sub">Monitorea varios vehículos desde un solo panel</span>
+          </span>
+          <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="menu-row" href="gps-portatiles.html">
+          <span class="menu-text">
+            <span class="menu-title">Dashcam / Cámara vehicular</span>
+            <span class="menu-sub">Video en vivo y grabación ante cualquier incidente</span>
+          </span>
+          <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="menu-row" href="gps-portatiles.html">
+          <span class="menu-text">
+            <span class="menu-title">GPS Portátiles</span>
+            <span class="menu-sub">Rastrea personas, mascotas o cualquier objeto de valor</span>
+          </span>
+          <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+      </div>
     </div>
-  </div>
 
-  <a href="index.html" class="brand-bar">
-    <span class="brand">
-      <img src="assets/images/logo-gordo.webp" alt="Gordo GPS">
-    </span>
-  </a>
-
-  <div class="intro">
-    <span class="eyebrow">Pantalla inicial</span>
-    <h1>¿Qué quieres proteger?</h1>
-    <p>Elige dónde vas a instalar tu GPS</p>
-  </div>
-
-  <div class="menu-list">
-
-    <a class="menu-row" href="gps-portatiles.html">
-      <span class="menu-text">
-        <span class="menu-title">Vehículo personal</span>
-        <span class="menu-sub">GPS 4G, alertas en tiempo real y protección anti-jammer</span>
-      </span>
-      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-    </a>
-
-    <a class="menu-row" href="gps-portatiles.html">
-      <span class="menu-text">
-        <span class="menu-title">Motor / Pasola</span>
-        <span class="menu-sub">Rastreo compacto pensado para dos ruedas</span>
-      </span>
-      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-    </a>
-
-    <a class="menu-row" href="gps-portatiles.html">
-      <span class="menu-text">
-        <span class="menu-title">Flotillas</span>
-        <span class="menu-sub">Monitorea varios vehículos desde un solo panel</span>
-      </span>
-      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-    </a>
-
-    <a class="menu-row" href="gps-portatiles.html">
-      <span class="menu-text">
-        <span class="menu-title">Dashcam / Cámara vehicular</span>
-        <span class="menu-sub">Video en vivo y grabación ante cualquier incidente</span>
-      </span>
-      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-    </a>
-
-    <a class="menu-row" href="gps-portatiles.html">
-      <span class="menu-text">
-        <span class="menu-title">GPS Portátiles</span>
-        <span class="menu-sub">Rastrea personas, mascotas o cualquier objeto de valor</span>
-      </span>
-      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-    </a>
+    <div class="hero-right">
+      <div class="hero-map-loc">
+        <span class="loading-line">Cargando ubicación...</span>
+        <span class="loaded-line">Santiago de los Caballeros, RD</span>
+      </div>
+      <div class="hero-logo-group">
+        <div class="hero-icon-stack">
+          <img class="piece-plane" src="assets/images/piece-plane.webp" alt="">
+          <img class="piece-pin" src="assets/images/piece-pin.webp" alt="Gordo GPS">
+        </div>
+        <img class="piece-gordo" src="assets/images/piece-gordo.webp" alt="GORDO">
+        <div class="hero-gps-row">
+          <img class="piece-dash piece-dash--left" src="assets/images/piece-dash-left.webp" alt="">
+          <img class="piece-gps-text" src="assets/images/piece-gps-text.webp" alt="GPS">
+          <img class="piece-dash piece-dash--right" src="assets/images/piece-dash-right.webp" alt="">
+        </div>
+      </div>
+    </div>
 
   </div>
 
-  <a href="gps-portatiles.html" class="old-site-btn">
-    Web antigua
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-  </a>
+</div>
 
-  <script>
-    // Anillos concéntricos decorativos de la escena de entrada — 100% código.
-    (function () {
-      var svg = document.getElementById('introRingsSvg');
-      if (!svg) return;
-      var ns = 'http://www.w3.org/2000/svg';
-      var cx = 300, cy = 300;
-      var baseR = 40, baseAmp = 14, freq = 5, phase = 1.3;
-      var steps = 56;
-      var rings = 15;
+</div>
 
-      function blobPath(r, amp) {
-        var d = '';
-        for (var k = 0; k <= steps; k++) {
-          var theta = (k / steps) * Math.PI * 2;
-          var rr = r + amp * Math.sin(freq * theta + phase) + amp * 0.4 * Math.sin(freq * 2 * theta + phase * 1.7);
-          var x = cx + rr * Math.cos(theta);
-          var y = cy + rr * Math.sin(theta);
-          d += (k === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
-        }
-        return d.trim() + ' Z';
-      }
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // Mapa oscuro moderno (OpenStreetMap / CARTO Dark) detrás del logo — no interactivo, solo decorativo.
+  (function () {
+    var el = document.getElementById('heroMapEl');
+    if (!el || typeof L === 'undefined') return;
 
-      for (var i = 0; i < rings; i++) {
-        var t = i / (rings - 1);
-        var r = baseR + t * 230;
-        var amp = baseAmp + t * 34;
-        var lightness = 72 - t * 42;
-        var op = 0.75 - t * 0.35;
-        var path = document.createElementNS(ns, 'path');
-        path.setAttribute('d', blobPath(r, amp));
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke', 'hsl(352, 90%, ' + lightness.toFixed(0) + '%)');
-        path.setAttribute('stroke-opacity', op.toFixed(2));
-        path.setAttribute('stroke-width', '1.6');
-        svg.appendChild(path);
-      }
-    })();
+    var STORE_COORDS = [19.4517, -70.6970]; // C. Gral. Valverde, Santiago de los Caballeros 51000
 
-    // Al terminar la secuencia de entrada, se quita del flujo por completo.
-    (function () {
-      var stage = document.getElementById('introStage');
-      if (!stage) return;
-      setTimeout(function () {
-        stage.style.display = 'none';
-      }, 3000);
-    })();
-  </script>
+    var map = L.map('heroMapEl', {
+      center: STORE_COORDS,
+      zoom: 15,
+      zoomControl: false,
+      attributionControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      touchZoom: false,
+      boxZoom: false,
+      keyboard: false,
+      tap: false
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      subdomains: 'abcd',
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
+    }).addTo(map);
+
+    // Marcador tipo neón en la ubicación del local
+    var customIcon = L.divIcon({
+      className: 'custom-marker',
+      html: '<div class="marker-pin"></div>',
+      iconSize: [20, 20],
+      iconAnchor: [10, 10]
+    });
+    L.marker(STORE_COORDS, { icon: customIcon }).addTo(map);
+
+    function fixSize() { map.invalidateSize(); }
+    setTimeout(fixSize, 300);
+    window.addEventListener('resize', fixSize);
+    window.addEventListener('load', fixSize);
+  })();
+</script>
 
 </body>
 </html>
