@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bienvenido | Gordo GPS</title>
+<title>¿Qué quieres proteger? | Gordo GPS</title>
 <meta name="description" content="Elige dónde vas a instalar tu GPS: vehículo personal, moto, flotilla, dashcam o GPS portátil. Gordo GPS — protección vehicular con tecnología real.">
 <meta name="theme-color" content="#0C0C0E">
 <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   :root {
     --bg: #0C0C0E; --bg-2: #121214; --card: #18181B;
@@ -24,45 +23,28 @@
   body {
     margin: 0; min-height: 100vh; font-family: var(--font-body); font-size: 16px; color: var(--text);
     background: var(--bg);
-    background-image: radial-gradient(55% 45% at 82% 30%, rgba(220,38,38,.13), transparent 62%);
+    background-image: radial-gradient(55% 40% at 50% 0%, rgba(220,38,38,.13), transparent 62%);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 100px;
   }
   h1, h2 { font-family: var(--font-head); margin: 0; }
-  .shell { max-width: 1200px; margin: 0 auto; padding: 26px 24px 60px; }
+  .shell { width: 100%; max-width: 720px; }
 
-  /* ---- Cuerpo: dos columnas ---- */
-  .hero-grid {
-    margin-top: clamp(30px, 6vw, 70px);
-    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center;
+  .brand-bar { width: 100%; display: flex; justify-content: center; }
+  .brand-icon { height: 44px; width: auto; }
+  .intro { text-align: center; margin-top: 26px; }
+  .intro h1 {
+    font-size: clamp(2rem, 6vw, 2.7rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.01em;
   }
+  .intro h1 .accent { color: var(--accent); }
+  .intro p.lead { margin-top: 12px; color: var(--text-muted); font-size: 1.08rem; }
 
-  .hero-left .eyebrow {
-    display: inline-block; font-family: var(--font-head); font-size: 0.78rem; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--accent);
-    opacity: 0; animation: riseIn .6s ease-out .15s forwards;
-  }
-  .hero-left h1 {
-    margin-top: 10px; font-size: clamp(2.6rem, 6.2vw, 4.4rem); font-weight: 700; line-height: 0.98;
-    letter-spacing: -0.01em;
-    opacity: 0; animation: riseIn .7s ease-out .3s forwards;
-  }
-  .hero-left h1 .accent { color: var(--accent); }
-  .hero-left p.lead {
-    margin-top: 18px; max-width: 46ch; color: var(--text-muted); font-size: 1.12rem; line-height: 1.6;
-    opacity: 0; animation: riseIn .6s ease-out .5s forwards;
-  }
-
-  .menu-list { margin-top: 34px; width: 100%; border-top: 1px solid var(--card-border); }
+  .menu-list { margin-top: 10px; width: 100%; border-top: 1px solid var(--card-border); }
   .menu-row {
     position: relative; display: flex; align-items: center; gap: 20px;
     padding: 20px 6px; text-decoration: none; color: var(--text);
     border-bottom: 1px solid var(--card-border); overflow: hidden;
-    opacity: 0; transform: translateY(14px); animation: riseIn .55s ease-out forwards;
   }
-  .menu-row:nth-child(1) { animation-delay: .45s; }
-  .menu-row:nth-child(2) { animation-delay: .53s; }
-  .menu-row:nth-child(3) { animation-delay: .61s; }
-  .menu-row:nth-child(4) { animation-delay: .69s; }
-  .menu-row:nth-child(5) { animation-delay: .77s; }
   .menu-row::before {
     content: ""; position: absolute; inset: 0; left: -6%;
     background: var(--accent); transform: skewX(-12deg) translateX(-105%);
@@ -87,79 +69,53 @@
   .menu-row:hover .menu-arrow { border-color: #0A0A0A; color: #0A0A0A; background: rgba(10,10,10,.08); transform: translateX(4px); }
   .menu-arrow svg { width: 14px; height: 14px; }
 
-  /* ---- Fondo: mapa completo de la página, en baja opacidad ---- */
-  .page-map-wrap { position: relative; }
-  .page-map-bg {
-    position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-    -webkit-mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 92%);
-    mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 92%);
+  .old-site-btn {
+    position: fixed; right: 18px; bottom: 18px; z-index: 50;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--card); border: 1px solid var(--card-border-strong); color: var(--text-muted);
+    font-family: var(--font-body); font-weight: 600; font-size: 0.82rem;
+    padding: 10px 16px; border-radius: 999px; text-decoration: none;
+    box-shadow: 0 10px 24px -10px rgba(0,0,0,.6);
+    transition: color .2s ease, border-color .2s ease, transform .2s ease;
   }
-  #heroMapEl { position: absolute; inset: 0; width: 100%; height: 100%; background: #0d0d0f; }
-  #heroMapEl .leaflet-tile-pane { opacity: 0; animation: tileFadeIn 1.8s ease-out .1s forwards; }
-  #heroMapEl .leaflet-tile-container { filter: contrast(1.2) saturate(1.05); }
-  .leaflet-control-attribution { display: none !important; }
-  @keyframes tileFadeIn { to { opacity: 0.6; } }
+  .old-site-btn:hover { color: var(--text); border-color: var(--accent); transform: translateY(-2px); }
+  .old-site-btn svg { width: 14px; height: 14px; }
 
-  .shell { position: relative; z-index: 1; }
-
-  .hero-right { position: relative; display: flex; align-items: center; justify-content: center; min-height: 420px; }
-
-  .hero-map-loc {
-    position: absolute; bottom: 10px; left: 10px; z-index: 1000; pointer-events: none;
-    background: rgba(18,18,18,.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,.1); padding: 7px 13px; border-radius: 12px;
-    display: inline-grid;
+  /* ================= PANTALLA DE CARGA (logo animado) ================= */
+  .intro-loader {
+    position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+    background-image: radial-gradient(55% 40% at 50% 40%, rgba(220,38,38,.16), transparent 62%);
+    animation: loaderOut .5s ease 2.35s forwards;
   }
-  .hero-map-loc span { grid-area: 1 / 1; font-family: var(--font-body); font-size: 11px; color: #d4d4d8; white-space: nowrap; }
-  .hero-map-loc .loaded-line { opacity: 0; animation: locIn .5s ease 1.5s forwards; }
-  .hero-map-loc .loading-line { animation: locOut .5s ease 1.3s forwards; }
-  @keyframes locOut { to { opacity: 0; } }
-  @keyframes locIn { to { opacity: 1; } }
-
-  .custom-marker { display: flex; justify-content: center; align-items: center; }
-  .marker-pin {
-    width: 16px; height: 16px; background: var(--accent); border: 2px solid #fff; border-radius: 50%;
-    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
-    animation: markerPulse 2s infinite;
-  }
-  @keyframes markerPulse {
-    0% { transform: scale(.95); box-shadow: 0 0 0 0 rgba(220,38,38,.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(220,38,38,0); }
-    100% { transform: scale(.95); box-shadow: 0 0 0 0 rgba(220,38,38,0); }
+  @keyframes loaderOut {
+    0%  { opacity: 1; visibility: visible; }
+    99% { opacity: 0; visibility: visible; }
+    100% { opacity: 0; visibility: hidden; }
   }
 
-  /* ---- Logo: cada pieza por separado, animada individualmente ---- */
-  .hero-logo-group {
-    position: relative; z-index: 5;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-    pointer-events: none; padding: 60px 0;
-  }
-  .hero-icon-stack {
-    position: relative; width: min(28vw, 175px); aspect-ratio: 936/805;
+  .intro-logo-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .intro-icon-stack {
+    position: relative; width: min(30vw, 190px); aspect-ratio: 936/805;
     filter: drop-shadow(0 20px 40px rgba(220,38,38,.35));
   }
-  .hero-icon-stack img { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .piece-plane {
-    opacity: 0; animation: planeFly .75s cubic-bezier(.2,.75,.25,1) .2s forwards;
-  }
+  .intro-icon-stack img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .piece-plane { opacity: 0; animation: planeFly .75s cubic-bezier(.2,.75,.25,1) .2s forwards; }
   @keyframes planeFly {
     0%   { opacity: 0; transform: translate(-260px, -55px) rotate(-18deg) scale(.85); }
     58%  { opacity: 1; transform: translate(18px, 9px) rotate(5deg) scale(1.05); }
     78%  { opacity: 1; transform: translate(-6px, -6px) rotate(-2deg) scale(.99); }
     100% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
   }
-  .piece-pin {
-    opacity: 0; animation: pinDrop .55s cubic-bezier(.34,1.4,.4,1) 1.65s forwards;
-  }
+  .piece-pin { opacity: 0; animation: pinDrop .55s cubic-bezier(.34,1.4,.4,1) 1.65s forwards; }
   @keyframes pinDrop {
     0%   { opacity: 0; transform: translateY(-90px) scale(.9); }
     55%  { opacity: 1; transform: translateY(8px) scale(1.06); }
     75%  { transform: translateY(-4px) scale(.98); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
   }
-
-  .piece-gordo {
-    width: min(32vw, 220px); height: auto;
+  .intro-piece-gordo {
+    width: min(34vw, 235px); height: auto;
     opacity: 0; animation: gordoDrop .7s cubic-bezier(.2,.75,.25,1) .75s forwards;
   }
   @keyframes gordoDrop {
@@ -167,172 +123,110 @@
     68%  { opacity: 1; transform: translateY(11px); }
     100% { opacity: 1; transform: translateY(0); }
   }
-
-  .hero-gps-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 2px; }
-  .piece-dash { width: min(6.5vw, 46px); height: auto; opacity: 0; }
-  .piece-dash--left { animation: dashLeftIn .4s ease-out 1.2s forwards; }
-  .piece-dash--right { animation: dashRightIn .4s ease-out 1.2s forwards; }
+  .intro-gps-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 2px; }
+  .intro-piece-dash { width: min(7vw, 50px); height: auto; opacity: 0; }
+  .intro-piece-dash--left { animation: dashLeftIn .4s ease-out 1.2s forwards; }
+  .intro-piece-dash--right { animation: dashRightIn .4s ease-out 1.2s forwards; }
   @keyframes dashLeftIn { 0% { opacity: 0; transform: translateX(-36px); } 100% { opacity: 1; transform: translateX(0); } }
   @keyframes dashRightIn { 0% { opacity: 0; transform: translateX(36px); } 100% { opacity: 1; transform: translateX(0); } }
-
-  .piece-gps-text {
-    width: min(9.5vw, 68px); height: auto;
+  .intro-piece-gps-text {
+    width: min(10vw, 72px); height: auto;
     opacity: 0; transform: scale(.6);
     animation: gpsPop .35s cubic-bezier(.3,1.6,.4,1) 1.1s forwards;
   }
   @keyframes gpsPop { 0% { opacity: 0; transform: scale(.6); } 70% { opacity: 1; transform: scale(1.12); } 100% { opacity: 1; transform: scale(1); } }
 
-  @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
-  @keyframes riseIn { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
-
   @media (prefers-reduced-motion: reduce) {
-    .hero-left .eyebrow, .hero-left h1, .hero-left p.lead,
-    .menu-row, .page-map-bg, .piece-plane, .piece-pin, .piece-gordo, .piece-dash, .piece-gps-text
-    { opacity: 1; animation: none !important; transform: none; }
-    .page-map-bg { opacity: .26; }
+    .intro-loader { display: none; }
   }
 
-  @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-right { order: -1; min-height: 340px; margin-bottom: 8px; }
-    .hero-icon-stack { width: 130px; }
-    .piece-gordo { width: 165px; }
-    .piece-dash { width: 34px; }
-    .piece-gps-text { width: 50px; }
-  }
   @media (max-width: 560px) {
     .menu-row { gap: 14px; padding: 16px 4px; }
     .menu-sub { display: none; }
+    .old-site-btn { right: 12px; bottom: 12px; padding: 9px 13px; font-size: 0.76rem; }
   }
 </style>
 </head>
 <body>
 
-<div class="page-map-wrap">
-  <div class="page-map-bg" aria-hidden="true"><div id="heroMapEl"></div></div>
+<div class="intro-loader" id="introLoader" aria-hidden="true">
+  <div class="intro-logo-group">
+    <div class="intro-icon-stack">
+      <img class="piece-plane" src="../assets/images/piece-plane.webp" alt="">
+      <img class="piece-pin" src="../assets/images/piece-pin.webp" alt="">
+    </div>
+    <img class="intro-piece-gordo" src="../assets/images/piece-gordo.webp" alt="">
+    <div class="intro-gps-row">
+      <img class="intro-piece-dash intro-piece-dash--left" src="../assets/images/piece-dash-left.webp" alt="">
+      <img class="intro-piece-gps-text" src="../assets/images/piece-gps-text.webp" alt="">
+      <img class="intro-piece-dash intro-piece-dash--right" src="../assets/images/piece-dash-right.webp" alt="">
+    </div>
+  </div>
+</div>
 
 <div class="shell">
 
-  <div class="hero-grid">
+  <div class="brand-bar">
+    <a href="index.html" class="brand">
+      <img class="brand-icon" src="../assets/images/logo-gordo.webp" alt="Gordo GPS">
+    </a>
+  </div>
 
-    <div class="hero-left">
-      <h1>¿Qué quieres<br>proteger<span class="accent">?</span></h1>
-      <p class="lead">Selecciona el servicio que necesitas</p>
+  <div class="intro">
+    <h1>¿Qué quieres proteger<span class="accent">?</span></h1>
+    <p class="lead">Elige dónde vas a instalar tu GPS</p>
+  </div>
 
-      <div class="menu-list">
+  <div class="menu-list">
 
-        <a class="menu-row" href="gps-portatiles.html">
-          <span class="menu-text">
-            <span class="menu-title">Vehículo personal</span>
-            <span class="menu-sub">GPS 4G, alertas en tiempo real y protección anti-jammer</span>
-          </span>
-          <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
+    <a class="menu-row" href="gps-portatiles.html">
+      <span class="menu-text">
+        <span class="menu-title">Vehículo personal</span>
+        <span class="menu-sub">GPS 4G, alertas en tiempo real y protección anti-jammer</span>
+      </span>
+      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
-        <a class="menu-row" href="gps-portatiles.html">
-          <span class="menu-text">
-            <span class="menu-title">Motor / Pasola</span>
-            <span class="menu-sub">Rastreo compacto pensado para dos ruedas</span>
-          </span>
-          <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
+    <a class="menu-row" href="gps-portatiles.html">
+      <span class="menu-text">
+        <span class="menu-title">Motor / Pasola</span>
+        <span class="menu-sub">Rastreo compacto pensado para dos ruedas</span>
+      </span>
+      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
-        <a class="menu-row" href="gps-portatiles.html">
-          <span class="menu-text">
-            <span class="menu-title">Flotillas / empresas</span>
-            <span class="menu-sub">Monitorea varios vehículos desde un solo panel</span>
-          </span>
-          <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
+    <a class="menu-row" href="gps-portatiles.html">
+      <span class="menu-text">
+        <span class="menu-title">Flotillas / empresas</span>
+        <span class="menu-sub">Monitorea varios vehículos desde un solo panel</span>
+      </span>
+      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
-        <a class="menu-row" href="gps-portatiles.html">
-          <span class="menu-text">
-            <span class="menu-title">Dashcam / Cámara vehicular</span>
-            <span class="menu-sub">Video en vivo y grabación ante cualquier incidente</span>
-          </span>
-          <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
+    <a class="menu-row" href="gps-portatiles.html">
+      <span class="menu-text">
+        <span class="menu-title">Dashcam / Cámara vehicular</span>
+        <span class="menu-sub">Video en vivo y grabación ante cualquier incidente</span>
+      </span>
+      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
-        <a class="menu-row" href="gps-portatiles.html">
-          <span class="menu-text">
-            <span class="menu-title">GPS Portátiles</span>
-            <span class="menu-sub">Rastrea personas, mascotas o cualquier objeto de valor</span>
-          </span>
-          <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
-
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <div class="hero-map-loc">
-        <span class="loading-line">Cargando ubicación...</span>
-        <span class="loaded-line">Santiago de los Caballeros, RD</span>
-      </div>
-      <div class="hero-logo-group">
-        <div class="hero-icon-stack">
-          <img class="piece-plane" src="../assets/images/piece-plane.webp" alt="">
-          <img class="piece-pin" src="../assets/images/piece-pin.webp" alt="Gordo GPS">
-        </div>
-        <img class="piece-gordo" src="../assets/images/piece-gordo.webp" alt="GORDO">
-        <div class="hero-gps-row">
-          <img class="piece-dash piece-dash--left" src="../assets/images/piece-dash-left.webp" alt="">
-          <img class="piece-gps-text" src="../assets/images/piece-gps-text.webp" alt="GPS">
-          <img class="piece-dash piece-dash--right" src="../assets/images/piece-dash-right.webp" alt="">
-        </div>
-      </div>
-    </div>
+    <a class="menu-row" href="gps-portatiles.html">
+      <span class="menu-text">
+        <span class="menu-title">GPS Portátiles</span>
+        <span class="menu-sub">Rastrea personas, mascotas o cualquier objeto de valor</span>
+      </span>
+      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
   </div>
 
 </div>
 
-</div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-  // Mapa oscuro moderno (OpenStreetMap / CARTO Dark) detrás del logo — no interactivo, solo decorativo.
-  (function () {
-    var el = document.getElementById('heroMapEl');
-    if (!el || typeof L === 'undefined') return;
-
-    var STORE_COORDS = [19.4517, -70.6970]; // C. Gral. Valverde, Santiago de los Caballeros 51000
-
-    var map = L.map('heroMapEl', {
-      center: STORE_COORDS,
-      zoom: 15,
-      zoomControl: false,
-      attributionControl: false,
-      dragging: false,
-      scrollWheelZoom: false,
-      doubleClickZoom: false,
-      touchZoom: false,
-      boxZoom: false,
-      keyboard: false,
-      tap: false
-    });
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      subdomains: 'abcd',
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
-    }).addTo(map);
-
-    // Marcador tipo neón en la ubicación del local
-    var customIcon = L.divIcon({
-      className: 'custom-marker',
-      html: '<div class="marker-pin"></div>',
-      iconSize: [20, 20],
-      iconAnchor: [10, 10]
-    });
-    L.marker(STORE_COORDS, { icon: customIcon }).addTo(map);
-
-    function fixSize() { map.invalidateSize(); }
-    setTimeout(fixSize, 300);
-    window.addEventListener('resize', fixSize);
-    window.addEventListener('load', fixSize);
-  })();
-</script>
+<a href="gps-portatiles.html" class="old-site-btn">
+  Web antigua
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+</a>
 
 </body>
 </html>
