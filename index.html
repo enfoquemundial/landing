@@ -149,21 +149,20 @@ p { margin: 0; }
 .lp-video-copy h2 { margin-top: var(--sp-3); font-size: 1.9rem; }
 .lp-video-copy p { margin-top: var(--sp-4); color: var(--text-muted); line-height: 1.7; max-width: 46ch; }
 .lp-video-copy .btn { margin-top: var(--sp-7); }
-.lp-phone-mockup {
-  position: relative; width: 100%; max-width: 300px; margin: 0 auto; aspect-ratio: 9/16;
-  border-radius: calc(var(--radius-lg) * 1.6); padding: 10px; background: var(--dark);
-  border: var(--border-w) solid var(--card-border-strong); box-shadow: var(--shadow-card);
+.lp-phone-frame {
+  position: relative; width: 100%; max-width: 300px; margin: 0 auto; aspect-ratio: 480/990;
+  filter: drop-shadow(0 25px 45px rgba(0,0,0,.5));
 }
-.lp-phone-notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 84px; height: 18px; background: var(--dark-2); border-radius: 0 0 12px 12px; z-index: 3; }
-.yt-player { position: relative; width: 100%; height: 100%; border-radius: var(--radius-lg); overflow: hidden; background: #000; }
+.lp-phone-frame img.frame-img { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; user-select: none; }
+.yt-player { position: absolute; left: 4.4%; top: 1.6%; right: 4.4%; bottom: 3.9%; border-radius: 4.6% / 2.3%; overflow: hidden; background: #000; z-index: 1; }
 .yt-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .yt-poster { position: absolute; inset: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: var(--dark-2); }
 .yt-poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .4s; }
 .yt-poster.has-thumb img { opacity: 1; }
 .yt-poster.has-thumb::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.55)); }
-.yt-play-btn { position: relative; z-index: 2; width: 60px; height: 60px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-btn); }
-.yt-play-btn svg { width: 22px; height: 22px; color: var(--accent-contrast); margin-left: 3px; }
-.yt-pending-label { position: relative; z-index: 2; font-family: var(--font-mono); font-size: 0.75rem; color: var(--dark-text-muted); text-transform: uppercase; letter-spacing: 0.06em; text-align: center; padding: 0 var(--sp-5); }
+.yt-play-btn { position: relative; z-index: 2; width: 56px; height: 56px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-btn); }
+.yt-play-btn svg { width: 20px; height: 20px; color: var(--accent-contrast); margin-left: 3px; }
+.yt-pending-label { position: relative; z-index: 2; font-family: var(--font-mono); font-size: 0.72rem; color: var(--dark-text-muted); text-transform: uppercase; letter-spacing: 0.06em; text-align: center; padding: 0 var(--sp-6); }
 .yt-poster.has-thumb .yt-pending-label { display: none; }
 
 /* ---- Pasos ---- */
@@ -337,8 +336,8 @@ p { margin: 0; }
             Quiero el mío
           </a>
         </div>
-        <div class="lp-phone-mockup">
-          <div class="lp-phone-notch"></div>
+        <div class="lp-phone-frame">
+          <img class="frame-img" src="assets/images/mockups/phone-frame-naranja.webp" alt="" aria-hidden="true">
           <div class="yt-player" id="ytPlayer">
             <button type="button" class="yt-poster" id="ytPosterBtn" disabled aria-label="Reproducir video">
               <img src="" alt="" loading="lazy">
@@ -595,7 +594,7 @@ p { margin: 0; }
   <script>
     (function () {
       // GORDO GPS: pega aquí el ID del video de YouTube cuando lo tengas.
-      var YT_VIDEO_ID = "";
+      var YT_VIDEO_ID = "Te68bKma7Mw";
       var wrap = document.getElementById('ytPlayer');
       var posterBtn = document.getElementById('ytPosterBtn');
       if (!wrap || !posterBtn) return;
