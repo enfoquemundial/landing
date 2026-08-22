@@ -36,34 +36,52 @@
   .intro h1 { margin-top: 12px; font-size: clamp(1.7rem, 5vw, 2.3rem); text-transform: uppercase; letter-spacing: -0.01em; }
   .intro p { margin-top: 12px; color: var(--text-muted); font-size: 1.05rem; }
 
-  .options-grid {
-    margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
-    max-width: 980px; width: 100%;
+  .menu-list {
+    margin-top: 48px; width: 100%; max-width: 760px;
+    border-top: 1px solid var(--card-border);
   }
-  .option-card {
-    background: var(--card); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden;
-    text-decoration: none; color: var(--text); display: flex; flex-direction: column;
-    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  .menu-row {
+    position: relative; display: flex; align-items: center; gap: 24px;
+    padding: 26px 8px; text-decoration: none; color: var(--text);
+    border-bottom: 1px solid var(--card-border); overflow: hidden;
   }
-  .option-card:hover {
-    transform: translateY(-6px); border-color: var(--accent);
-    box-shadow: 0 20px 40px -18px rgba(220,38,38,.5);
+  .menu-row::before {
+    content: ""; position: absolute; inset: 0; left: -6%;
+    background: var(--accent); transform: skewX(-12deg) translateX(-105%);
+    transition: transform .38s cubic-bezier(.4,0,.2,1); z-index: 0;
   }
-  .option-card:active { transform: translateY(-2px); }
-  .option-media { aspect-ratio: 4/3; overflow: hidden; background: var(--bg-2); }
-  .option-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
-  .option-card:hover .option-media img { transform: scale(1.08); }
-  .option-body { padding: 16px 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  .option-body h2 { font-size: 1.02rem; text-transform: uppercase; line-height: 1.25; }
-  .option-body svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; transition: transform .25s ease; }
-  .option-card:hover .option-body svg { transform: translateX(4px); }
+  .menu-row:hover::before { transform: skewX(-12deg) translateX(0); }
+  .menu-num {
+    position: relative; z-index: 1; font-family: var(--font-head); font-weight: 600;
+    font-size: 1.1rem; color: var(--card-border-strong); width: 40px; flex-shrink: 0;
+    transition: color .3s ease;
+  }
+  .menu-row:hover .menu-num { color: rgba(0,0,0,.4); }
+  .menu-text { position: relative; z-index: 1; flex: 1; min-width: 0; }
+  .menu-title {
+    font-family: var(--font-head); font-weight: 600; font-size: clamp(1.05rem, 3vw, 1.4rem);
+    text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.2;
+    transition: color .3s ease;
+  }
+  .menu-row:hover .menu-title { color: #0A0A0A; }
+  .menu-sub {
+    display: block; margin-top: 4px; font-size: 0.86rem; color: var(--text-muted);
+    transition: color .3s ease;
+  }
+  .menu-row:hover .menu-sub { color: rgba(10,10,10,.7); }
+  .menu-arrow {
+    position: relative; z-index: 1; flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--card-border-strong); color: var(--text-muted);
+    transition: border-color .3s ease, color .3s ease, transform .3s ease, background .3s ease;
+  }
+  .menu-row:hover .menu-arrow { border-color: #0A0A0A; color: #0A0A0A; background: rgba(10,10,10,.08); transform: translateX(4px); }
+  .menu-arrow svg { width: 15px; height: 15px; }
 
-  @media (max-width: 860px) {
-    .options-grid { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
-  }
-  @media (max-width: 520px) {
-    .options-grid { grid-template-columns: 1fr; max-width: 380px; }
-    .option-media { aspect-ratio: 16/9; }
+  @media (max-width: 560px) {
+    .menu-row { gap: 14px; padding: 20px 4px; }
+    .menu-num { width: 28px; font-size: 0.9rem; }
+    .menu-sub { display: none; }
   }
 
   .old-site-btn {
@@ -95,56 +113,46 @@
     <p>Elige dónde vas a instalar tu GPS</p>
   </div>
 
-  <div class="options-grid">
+  <div class="menu-list">
 
-    <a class="option-card" href="gps-portatiles.html">
-      <div class="option-media">
-        <img src="https://images.unsplash.com/photo-1514861736016-646d83403e24?auto=format&fit=crop&w=800&q=75" alt="Vehículo personal" loading="lazy">
-      </div>
-      <div class="option-body">
-        <h2>Vehículo personal</h2>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
+    <a class="menu-row" href="gps-portatiles.html">
+      <span class="menu-text">
+        <span class="menu-title">Vehículo personal</span>
+        <span class="menu-sub">GPS 4G, alertas en tiempo real y protección anti-jammer</span>
+      </span>
+      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
 
-    <a class="option-card" href="gps-portatiles.html">
-      <div class="option-media">
-        <img src="https://images.unsplash.com/photo-1726717881965-645af57f64bf?auto=format&fit=crop&w=800&q=75" alt="Motor / Pasola" loading="lazy">
-      </div>
-      <div class="option-body">
-        <h2>Motor / Pasola</h2>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
+    <a class="menu-row" href="gps-portatiles.html">
+      <span class="menu-text">
+        <span class="menu-title">Motor / Pasola</span>
+        <span class="menu-sub">Rastreo compacto pensado para dos ruedas</span>
+      </span>
+      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
 
-    <a class="option-card" href="gps-portatiles.html">
-      <div class="option-media">
-        <img src="https://images.unsplash.com/photo-1587813369290-091c9d432daf?auto=format&fit=crop&w=800&q=75" alt="Flotillas" loading="lazy">
-      </div>
-      <div class="option-body">
-        <h2>Flotillas</h2>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
+    <a class="menu-row" href="gps-portatiles.html">
+      <span class="menu-text">
+        <span class="menu-title">Flotillas</span>
+        <span class="menu-sub">Monitorea varios vehículos desde un solo panel</span>
+      </span>
+      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
 
-    <a class="option-card" href="gps-portatiles.html">
-      <div class="option-media">
-        <img src="https://images.unsplash.com/photo-1765959106936-851735565c12?auto=format&fit=crop&w=800&q=75" alt="Dashcam / Cámara vehicular" loading="lazy">
-      </div>
-      <div class="option-body">
-        <h2>Dashcam / Cámara vehicular</h2>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
+    <a class="menu-row" href="gps-portatiles.html">
+      <span class="menu-text">
+        <span class="menu-title">Dashcam / Cámara vehicular</span>
+        <span class="menu-sub">Video en vivo y grabación ante cualquier incidente</span>
+      </span>
+      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
 
-    <a class="option-card" href="gps-portatiles.html">
-      <div class="option-media">
-        <img src="https://images.unsplash.com/photo-1754821305530-8e3c7b8deda2?auto=format&fit=crop&w=800&q=75" alt="GPS Portátiles" loading="lazy">
-      </div>
-      <div class="option-body">
-        <h2>GPS Portátiles</h2>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
+    <a class="menu-row" href="gps-portatiles.html">
+      <span class="menu-text">
+        <span class="menu-title">GPS Portátiles</span>
+        <span class="menu-sub">Rastrea personas, mascotas o cualquier objeto de valor</span>
+      </span>
+      <span class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
 
   </div>
