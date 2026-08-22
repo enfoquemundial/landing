@@ -236,14 +236,15 @@ p { margin: 0; }
 .lp-proof { padding: var(--sp-12) 0; background: var(--bg-2); }
 .lp-proof-head { text-align: center; max-width: 620px; margin: 0 auto var(--sp-8); }
 .lp-proof-note { margin-top: var(--sp-5); display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-faint); background: var(--card); border: 1px dashed var(--card-border-strong); border-radius: var(--radius-sm); padding: 8px 14px; font-family: var(--font-mono); }
-.lp-proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); max-width: 980px; margin: 0 auto; }
-.lp-proof-card { border-radius: var(--radius-lg); overflow: hidden; border: 1px dashed var(--card-border-strong); background: var(--card); }
+.lp-proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-7); max-width: 900px; margin: 0 auto; }
+.lp-proof-card { text-align: center; }
+.lp-proof-card .lp-phone-frame--sm { max-width: 210px; margin: 0 auto; }
 .lp-proof-media { aspect-ratio: 4/3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: var(--bg-2); color: var(--text-faint); padding: var(--sp-5); text-align: center; }
 .lp-proof-media svg { width: 28px; height: 28px; color: var(--text-faint); }
 .lp-proof-media span { font-size: 0.76rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.04em; }
-.lp-proof-body { padding: var(--sp-5); }
+.lp-proof-body { padding: var(--sp-5) 0 0; }
 .lp-proof-body p { color: var(--text-faint); font-size: 0.88rem; font-style: italic; line-height: 1.6; }
-.lp-proof-author { margin-top: var(--sp-4); display: flex; align-items: center; gap: 10px; }
+.lp-proof-author { display: flex; align-items: center; justify-content: center; gap: 10px; }
 .lp-proof-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--bg-2); border: 1px dashed var(--card-border-strong); flex-shrink: 0; }
 .lp-proof-author strong { display: block; font-size: 0.82rem; color: var(--text-faint); font-weight: 700; }
 .lp-proof-author small { font-size: 0.74rem; color: var(--text-faint); }
@@ -283,142 +284,7 @@ p { margin: 0; }
 .site-header { border-bottom: 1px solid var(--accent); }
 
 
-/* ==== Carrusel de opciones de diseño (temporal, para revisión del cliente) ==== */
-.cs-wrap { position: relative; padding: 0 56px; }
-.cs-slide { display: none; }
-.cs-slide.is-active { display: block; }
-.cs-arrow {
-  position: absolute; top: 50%; transform: translateY(-50%); z-index: 20; width: 42px; height: 42px;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  background: var(--card); border: 1px solid var(--card-border-strong); color: var(--text);
-  cursor: pointer; transition: all .2s;
-}
-.cs-arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-.cs-arrow svg { width: 19px; height: 19px; }
-.cs-arrow--prev { left: 0; }
-.cs-arrow--next { right: 0; }
-.cs-badge {
-  display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 26px;
-  font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em;
-}
-.cs-badge strong { color: var(--accent); }
-.cs-dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
-.cs-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--card-border-strong); border: none; padding: 0; cursor: pointer; }
-.cs-dot.is-active { background: var(--accent); width: 16px; border-radius: 3px; }
-@media (max-width: 720px) {
-  .cs-wrap { padding: 0 44px; }
-  .cs-arrow { width: 36px; height: 36px; }
-  .cs-arrow svg { width: 16px; height: 16px; }
-}
-
-.o1-trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 900px; margin: 0 auto; }
-.o1-trust-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 4px; padding: 22px 16px; text-align: center; }
-.o1-trust-item .icon { width: 24px; height: 24px; color: var(--accent); margin-bottom: 10px; }
-.o1-trust-item h3 { font-size: 0.86rem; margin: 0; font-family: var(--font-head); text-transform: uppercase; }
-.o1-trust-years { background: #0A0A0A; border-color: var(--accent); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.o1-trust-years strong { font-family: var(--font-head); font-size: 2rem; font-weight: 600; }
-.o1-trust-years span { font-size: 0.66rem; color: var(--text-muted); text-transform: uppercase; font-family: var(--font-mono); margin-top: 4px; }
-.o1-steps { list-style: none; margin: 0; padding: 0; max-width: 560px; margin: 0 auto; }
-.o1-step { display: grid; grid-template-columns: 40px 1fr; gap: 16px; position: relative; padding-bottom: 28px; }
-.o1-step:last-child { padding-bottom: 0; }
-.o1-step::before { content: ""; position: absolute; left: 19px; top: 40px; bottom: 0; width: 1px; background: var(--card-border); }
-.o1-step:last-child::before { display: none; }
-.o1-step-marker { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-2); border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; color: var(--accent); flex-shrink: 0; }
-.o1-step-body { display: flex; flex-direction: column; gap: 4px; }
-.o1-step-body .icon { width: 16px; height: 16px; color: var(--accent); display: none; }
-.o1-step-body h4 { font-family: var(--font-head); font-size: 1rem; text-transform: uppercase; margin: 0; }
-.o1-step-body p { margin: 0; color: var(--text-muted); font-size: 0.88rem; }
-
-
-.o2-trust-strip { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0; max-width: 1000px; margin: 0 auto; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
-.o2-trust-item { display: flex; align-items: center; gap: 10px; padding: 18px 22px; border-right: 1px solid var(--card-border); }
-.o2-trust-item:last-child { border-right: none; }
-.o2-trust-item .icon { width: 18px; height: 18px; color: var(--accent); }
-.o2-trust-item span { font-size: 0.82rem; font-family: var(--font-head); text-transform: uppercase; white-space: nowrap; }
-.o2-trust-years strong { color: var(--accent); }
-.o2-steps-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; max-width: 900px; margin: 0 auto; }
-.o2-step { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100px; }
-.o2-step-circle { width: 46px; height: 46px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 1.2rem; }
-.o2-step-cap h4 { font-size: 0.72rem; text-align: center; font-family: var(--font-body); font-weight: 600; text-transform: uppercase; margin: 0; line-height: 1.3; color: var(--text-muted); }
-.o2-arrow { color: var(--card-border); flex-shrink: 0; }
-.o2-arrow .icon { width: 20px; height: 20px; }
-@media (max-width: 720px) { .o2-arrow { display: none; } }
-
-
-.o3-trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 900px; margin: 0 auto; }
-.o3-trust-item { background: var(--card); border: 1px solid var(--card-border); border-bottom: 3px solid var(--card-border); border-radius: 2px; padding: 22px 16px; text-align: center; transition: border-color .2s; }
-.o3-trust-item:hover { border-bottom-color: var(--accent); }
-.o3-trust-item .icon { width: 24px; height: 24px; color: var(--accent); margin-bottom: 10px; }
-.o3-trust-item h3 { font-size: 0.86rem; margin: 0; font-family: var(--font-head); text-transform: uppercase; }
-.o3-trust-years { border-bottom-color: var(--accent); }
-.o3-trust-years strong { font-family: var(--font-head); font-size: 1.8rem; }
-.o3-trust-years span { display: block; font-size: 0.66rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 4px; }
-.o3-steps-zigzag { max-width: 640px; margin: 0 auto; position: relative; }
-.o3-steps-zigzag::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--card-border); transform: translateX(-50%); }
-.o3-step { display: flex; width: 50%; margin-bottom: 20px; position: relative; }
-.o3-step-l { justify-content: flex-end; padding-right: 24px; }
-.o3-step-r { margin-left: 50%; justify-content: flex-start; padding-left: 24px; }
-.o3-step-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 4px; padding: 16px; max-width: 260px; position: relative; }
-.o3-step-num { position: absolute; top: -10px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-family: var(--font-mono); font-size: 0.7rem; display: flex; align-items: center; justify-content: center; }
-.o3-step-l .o3-step-num { right: -11px; }
-.o3-step-r .o3-step-num { left: -11px; }
-.o3-step-card .icon { width: 18px; height: 18px; color: var(--accent); margin-bottom: 6px; }
-.o3-step-card h4 { font-family: var(--font-head); font-size: 0.9rem; text-transform: uppercase; margin: 0 0 4px; }
-.o3-step-card p { margin: 0; font-size: 0.78rem; color: var(--text-muted); }
-@media (max-width: 640px) { .o3-steps-zigzag::before { left: 20px; } .o3-step, .o3-step-r { width: 100%; margin-left: 0; padding-left: 44px; padding-right: 0; justify-content: flex-start; } .o3-step-l .o3-step-num, .o3-step-r .o3-step-num { left: 9px; right: auto; } }
-
-
-.o4-seals { display: flex; flex-wrap: wrap; justify-content: center; gap: 26px; max-width: 800px; margin: 0 auto; }
-.o4-seal { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 110px; }
-.o4-seal .icon { width: 26px; height: 26px; color: var(--accent); }
-.o4-seal > .icon, .o4-seal svg.icon { width: 26px; height: 26px; }
-.o4-seal { }
-.o4-seal-circle-wrap {}
-.o4-seal svg.icon { width: 26px; height: 26px; color: var(--accent); border: 1px solid var(--accent); border-radius: 50%; padding: 16px; box-sizing: content-box; }
-.o4-seal span { font-size: 0.72rem; text-align: center; font-family: var(--font-head); text-transform: uppercase; color: var(--text-muted); }
-.o4-seal-years svg.icon { display: none; }
-.o4-seal-years strong { font-family: var(--font-head); font-size: 1.6rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 50%; width: 58px; height: 58px; display: flex; align-items: center; justify-content: center; }
-.o4-accordion { max-width: 560px; margin: 0 auto; }
-.o4-acc-item { border-bottom: 1px solid var(--card-border); }
-.o4-acc-head { display: flex; align-items: center; gap: 14px; padding: 16px 4px; cursor: pointer; }
-.o4-acc-num { font-family: var(--font-mono); color: var(--accent); font-size: 0.85rem; width: 20px; }
-.o4-acc-head h4 { flex: 1; font-family: var(--font-head); font-size: 0.95rem; text-transform: uppercase; margin: 0; }
-.o4-acc-chevron .icon { width: 16px; height: 16px; color: var(--text-muted); transform: rotate(90deg); transition: transform .2s; }
-.o4-acc-item.is-open .o4-acc-chevron .icon { transform: rotate(-90deg); }
-.o4-acc-body { max-height: 0; overflow: hidden; transition: max-height .2s; padding: 0 4px; }
-.o4-acc-item.is-open .o4-acc-body { max-height: 100px; padding-bottom: 16px; }
-.o4-acc-body p { margin: 0; color: var(--text-muted); font-size: 0.86rem; padding-left: 34px; }
-
-
-.o5-list { display: flex; flex-direction: column; gap: 2px; max-width: 560px; margin: 0 auto; }
-.o5-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--card); border-left: 3px solid var(--accent); }
-.o5-row .icon { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
-.o5-row span { flex: 1; font-family: var(--font-head); font-size: 0.88rem; text-transform: uppercase; }
-.o5-row .check { width: 14px; height: 14px; color: var(--text-muted); }
-.o5-progress { display: flex; align-items: flex-start; justify-content: space-between; max-width: 900px; margin: 0 auto; position: relative; }
-.o5-progress::before { content: ""; position: absolute; top: 16px; left: 5%; right: 5%; height: 2px; background: var(--accent); }
-.o5-point { display: flex; flex-direction: column; align-items: center; text-align: center; width: 18%; position: relative; }
-.o5-dot { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; margin-bottom: 10px; position: relative; z-index: 1; }
-.o5-point h4 { font-size: 0.76rem; font-family: var(--font-head); text-transform: uppercase; margin: 0 0 4px; }
-.o5-point p { font-size: 0.7rem; color: var(--text-muted); margin: 0; display: none; }
-@media (max-width: 720px) { .o5-progress { flex-direction: column; align-items: stretch; gap: 20px; } .o5-progress::before { left: 16px; top: 0; bottom: 0; right: auto; width: 2px; height: auto; } .o5-point { flex-direction: row; text-align: left; width: 100%; gap: 14px; } .o5-point h4 { margin: 0; } }
-
-
-.o6-spec-panel { max-width: 640px; margin: 0 auto; border: 1px solid var(--card-border); border-radius: 4px; overflow: hidden; }
-.o6-spec-row { display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-bottom: 1px solid var(--card-border); }
-.o6-spec-row:last-child { border-bottom: none; }
-.o6-spec-row .icon { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
-.o6-spec-row span { font-family: var(--font-head); font-size: 0.88rem; text-transform: uppercase; }
-.o6-spec-years { background: rgba(220,38,38,.06); }
-.o6-cards-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 1000px; margin: 0 auto; }
-.o6-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 4px; padding: 20px 14px; position: relative; }
-.o6-card-num { position: absolute; top: 10px; right: 12px; font-family: var(--font-mono); color: var(--card-border-strong); font-size: 0.8rem; }
-.o6-card .icon { width: 20px; height: 20px; color: var(--accent); margin-bottom: 10px; }
-.o6-card h4 { font-family: var(--font-head); font-size: 0.82rem; text-transform: uppercase; margin: 0 0 6px; }
-.o6-card p { font-size: 0.74rem; color: var(--text-muted); margin: 0; }
-@media (max-width: 900px) { .o6-cards-row { grid-template-columns: repeat(2, 1fr); } }
-
-
+/* ---- Empresa: mosaico bento ---- */
 .o7-bento { display: grid; grid-template-columns: repeat(3, 1fr) 1.3fr; grid-template-rows: repeat(2, 1fr); gap: 12px; max-width: 900px; margin: 0 auto; height: 260px; }
 .o7-bento-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 6px; padding: 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
 .o7-bento-item .icon { width: 22px; height: 22px; color: var(--accent); margin-bottom: 8px; }
@@ -427,62 +293,8 @@ p { margin: 0; }
 .o7-bento-years strong { font-family: var(--font-head); font-size: 3.4rem; color: var(--accent); line-height: 1; }
 .o7-bento-years span { font-size: 0.76rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 8px; }
 @media (max-width: 720px) { .o7-bento { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, auto); height: auto; } .o7-bento-years { grid-column: auto; grid-row: auto; grid-column: 1 / 3; padding: 24px; } }
-.o7-steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; max-width: 1100px; margin: 0 auto; }
-.o7-step { background: var(--card); border: 1px solid var(--card-border); border-radius: 6px; padding: 26px 16px; text-align: center; position: relative; }
-.o7-step-icon-wrap { width: 52px; height: 52px; border-radius: 50%; background: rgba(220,38,38,.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
-.o7-step-icon-wrap .icon { width: 24px; height: 24px; color: var(--accent); }
-.o7-step-num { font-family: var(--font-mono); color: var(--card-border-strong); font-size: 0.72rem; margin-bottom: 8px; }
-.o7-step h4 { font-family: var(--font-head); font-size: 0.86rem; text-transform: uppercase; margin: 0 0 8px; }
-.o7-step p { font-size: 0.76rem; color: var(--text-muted); margin: 0; }
-@media (max-width: 900px) { .o7-steps-grid { grid-template-columns: repeat(2, 1fr); } }
 
-
-.o8-list { max-width: 520px; margin: 0 auto; }
-.o8-line { display: flex; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--card-border); }
-.o8-idx { font-family: var(--font-mono); color: var(--accent); font-size: 0.78rem; }
-.o8-line span:last-child { font-family: var(--font-head); font-size: 0.9rem; text-transform: uppercase; }
-.o8-steps { max-width: 540px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
-.o8-step { display: flex; gap: 18px; border-left: 2px solid var(--accent); padding-left: 18px; }
-.o8-step-n { font-family: var(--font-head); font-size: 1.6rem; color: var(--card-border-strong); flex-shrink: 0; width: 34px; }
-.o8-step h4 { font-family: var(--font-head); font-size: 0.94rem; text-transform: uppercase; margin: 0 0 4px; }
-.o8-step p { margin: 0; font-size: 0.84rem; color: var(--text-muted); }
-
-
-.o9-strip { display: flex; flex-wrap: wrap; justify-content: center; max-width: 1000px; margin: 0 auto; }
-.o9-item { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 10px 26px; border-right: 1px solid var(--card-border); }
-.o9-item:last-child { border-right: none; }
-.o9-item .icon { width: 30px; height: 30px; color: var(--accent); }
-.o9-item span { font-size: 0.76rem; font-family: var(--font-head); text-transform: uppercase; text-align: center; color: var(--text-muted); }
-.o9-item-years strong { font-family: var(--font-head); font-size: 1.6rem; color: var(--accent); }
-.o9-steps-row { display: flex; align-items: flex-start; justify-content: center; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; }
-.o9-step { width: 180px; text-align: center; padding: 10px; }
-.o9-step-num { font-family: var(--font-mono); color: var(--accent); font-size: 0.75rem; margin-bottom: 6px; }
-.o9-step .icon { width: 24px; height: 24px; color: var(--accent); margin-bottom: 10px; }
-.o9-step h4 { font-family: var(--font-head); font-size: 0.82rem; text-transform: uppercase; margin: 0 0 6px; }
-.o9-step p { font-size: 0.74rem; color: var(--text-muted); margin: 0; }
-.o9-connector { width: 30px; height: 3px; background: repeating-linear-gradient(-45deg, var(--accent) 0 5px, transparent 5px 10px); margin-top: 40px; flex-shrink: 0; }
-@media (max-width: 900px) { .o9-connector { display: none; } }
-
-
-.o10-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 900px; margin: 0 auto; }
-.o10-chip { display: flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--card-border); border-radius: 999px; padding: 9px 18px; }
-.o10-chip .icon { width: 15px; height: 15px; color: var(--accent); }
-.o10-chip span { font-size: 0.78rem; font-family: var(--font-head); text-transform: uppercase; }
-.o10-chip-years { border-color: var(--accent); background: rgba(220,38,38,.08); }
-.o10-carousel { display: flex; gap: 14px; overflow-x: auto; max-width: 1000px; margin: 0 auto; padding: 6px 4px 14px; scroll-snap-type: x mandatory; }
-.o10-card { flex: 0 0 220px; scroll-snap-align: start; background: var(--card); border: 1px solid var(--card-border); border-radius: 6px; padding: 20px 16px; position: relative; }
-.o10-card-num { position: absolute; top: 12px; right: 14px; font-family: var(--font-mono); color: var(--card-border-strong); font-size: 0.75rem; }
-.o10-card .icon { width: 22px; height: 22px; color: var(--accent); margin-bottom: 12px; }
-.o10-card h4 { font-family: var(--font-head); font-size: 0.86rem; text-transform: uppercase; margin: 0 0 6px; }
-.o10-card p { font-size: 0.76rem; color: var(--text-muted); margin: 0; }
-
-.o1-trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 900px; margin: 0 auto; }
-.o1-trust-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 4px; padding: 22px 16px; text-align: center; }
-.o1-trust-item .icon { width: 24px; height: 24px; color: var(--accent); margin-bottom: 10px; }
-.o1-trust-item h3 { font-size: 0.86rem; margin: 0; font-family: var(--font-head); text-transform: uppercase; }
-.o1-trust-years { background: #0A0A0A; border-color: var(--accent); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.o1-trust-years strong { font-family: var(--font-head); font-size: 2rem; font-weight: 600; }
-.o1-trust-years span { font-size: 0.66rem; color: var(--text-muted); text-transform: uppercase; font-family: var(--font-mono); margin-top: 4px; }
+/* ---- Cómo funciona: línea de tiempo ---- */
 .o1-steps { list-style: none; margin: 0; padding: 0; max-width: 560px; margin: 0 auto; }
 .o1-step { display: grid; grid-template-columns: 40px 1fr; gap: 16px; position: relative; padding-bottom: 28px; }
 .o1-step:last-child { padding-bottom: 0; }
@@ -490,156 +302,8 @@ p { margin: 0; }
 .o1-step:last-child::before { display: none; }
 .o1-step-marker { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-2); border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; color: var(--accent); flex-shrink: 0; }
 .o1-step-body { display: flex; flex-direction: column; gap: 4px; }
-.o1-step-body .icon { width: 16px; height: 16px; color: var(--accent); display: none; }
 .o1-step-body h4 { font-family: var(--font-head); font-size: 1rem; text-transform: uppercase; margin: 0; }
 .o1-step-body p { margin: 0; color: var(--text-muted); font-size: 0.88rem; }
-
-
-.o2-trust-strip { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0; max-width: 1000px; margin: 0 auto; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
-.o2-trust-item { display: flex; align-items: center; gap: 10px; padding: 18px 22px; border-right: 1px solid var(--card-border); }
-.o2-trust-item:last-child { border-right: none; }
-.o2-trust-item .icon { width: 18px; height: 18px; color: var(--accent); }
-.o2-trust-item span { font-size: 0.82rem; font-family: var(--font-head); text-transform: uppercase; white-space: nowrap; }
-.o2-trust-years strong { color: var(--accent); }
-.o2-steps-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; max-width: 900px; margin: 0 auto; }
-.o2-step { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100px; }
-.o2-step-circle { width: 46px; height: 46px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 1.2rem; }
-.o2-step-cap h4 { font-size: 0.72rem; text-align: center; font-family: var(--font-body); font-weight: 600; text-transform: uppercase; margin: 0; line-height: 1.3; color: var(--text-muted); }
-.o2-arrow { color: var(--card-border); flex-shrink: 0; }
-.o2-arrow .icon { width: 20px; height: 20px; }
-@media (max-width: 720px) { .o2-arrow { display: none; } }
-
-
-.o3-trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 900px; margin: 0 auto; }
-.o3-trust-item { background: var(--card); border: 1px solid var(--card-border); border-bottom: 3px solid var(--card-border); border-radius: 2px; padding: 22px 16px; text-align: center; transition: border-color .2s; }
-.o3-trust-item:hover { border-bottom-color: var(--accent); }
-.o3-trust-item .icon { width: 24px; height: 24px; color: var(--accent); margin-bottom: 10px; }
-.o3-trust-item h3 { font-size: 0.86rem; margin: 0; font-family: var(--font-head); text-transform: uppercase; }
-.o3-trust-years { border-bottom-color: var(--accent); }
-.o3-trust-years strong { font-family: var(--font-head); font-size: 1.8rem; }
-.o3-trust-years span { display: block; font-size: 0.66rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 4px; }
-.o3-steps-zigzag { max-width: 640px; margin: 0 auto; position: relative; }
-.o3-steps-zigzag::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--card-border); transform: translateX(-50%); }
-.o3-step { display: flex; width: 50%; margin-bottom: 20px; position: relative; }
-.o3-step-l { justify-content: flex-end; padding-right: 24px; }
-.o3-step-r { margin-left: 50%; justify-content: flex-start; padding-left: 24px; }
-.o3-step-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 4px; padding: 16px; max-width: 260px; position: relative; }
-.o3-step-num { position: absolute; top: -10px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-family: var(--font-mono); font-size: 0.7rem; display: flex; align-items: center; justify-content: center; }
-.o3-step-l .o3-step-num { right: -11px; }
-.o3-step-r .o3-step-num { left: -11px; }
-.o3-step-card .icon { width: 18px; height: 18px; color: var(--accent); margin-bottom: 6px; }
-.o3-step-card h4 { font-family: var(--font-head); font-size: 0.9rem; text-transform: uppercase; margin: 0 0 4px; }
-.o3-step-card p { margin: 0; font-size: 0.78rem; color: var(--text-muted); }
-@media (max-width: 640px) { .o3-steps-zigzag::before { left: 20px; } .o3-step, .o3-step-r { width: 100%; margin-left: 0; padding-left: 44px; padding-right: 0; justify-content: flex-start; } .o3-step-l .o3-step-num, .o3-step-r .o3-step-num { left: 9px; right: auto; } }
-
-
-.o4-seals { display: flex; flex-wrap: wrap; justify-content: center; gap: 26px; max-width: 800px; margin: 0 auto; }
-.o4-seal { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 110px; }
-.o4-seal .icon { width: 26px; height: 26px; color: var(--accent); }
-.o4-seal > .icon, .o4-seal svg.icon { width: 26px; height: 26px; }
-.o4-seal { }
-.o4-seal-circle-wrap {}
-.o4-seal svg.icon { width: 26px; height: 26px; color: var(--accent); border: 1px solid var(--accent); border-radius: 50%; padding: 16px; box-sizing: content-box; }
-.o4-seal span { font-size: 0.72rem; text-align: center; font-family: var(--font-head); text-transform: uppercase; color: var(--text-muted); }
-.o4-seal-years svg.icon { display: none; }
-.o4-seal-years strong { font-family: var(--font-head); font-size: 1.6rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 50%; width: 58px; height: 58px; display: flex; align-items: center; justify-content: center; }
-.o4-accordion { max-width: 560px; margin: 0 auto; }
-.o4-acc-item { border-bottom: 1px solid var(--card-border); }
-.o4-acc-head { display: flex; align-items: center; gap: 14px; padding: 16px 4px; cursor: pointer; }
-.o4-acc-num { font-family: var(--font-mono); color: var(--accent); font-size: 0.85rem; width: 20px; }
-.o4-acc-head h4 { flex: 1; font-family: var(--font-head); font-size: 0.95rem; text-transform: uppercase; margin: 0; }
-.o4-acc-chevron .icon { width: 16px; height: 16px; color: var(--text-muted); transform: rotate(90deg); transition: transform .2s; }
-.o4-acc-item.is-open .o4-acc-chevron .icon { transform: rotate(-90deg); }
-.o4-acc-body { max-height: 0; overflow: hidden; transition: max-height .2s; padding: 0 4px; }
-.o4-acc-item.is-open .o4-acc-body { max-height: 100px; padding-bottom: 16px; }
-.o4-acc-body p { margin: 0; color: var(--text-muted); font-size: 0.86rem; padding-left: 34px; }
-
-
-.o5-list { display: flex; flex-direction: column; gap: 2px; max-width: 560px; margin: 0 auto; }
-.o5-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--card); border-left: 3px solid var(--accent); }
-.o5-row .icon { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
-.o5-row span { flex: 1; font-family: var(--font-head); font-size: 0.88rem; text-transform: uppercase; }
-.o5-row .check { width: 14px; height: 14px; color: var(--text-muted); }
-.o5-progress { display: flex; align-items: flex-start; justify-content: space-between; max-width: 900px; margin: 0 auto; position: relative; }
-.o5-progress::before { content: ""; position: absolute; top: 16px; left: 5%; right: 5%; height: 2px; background: var(--accent); }
-.o5-point { display: flex; flex-direction: column; align-items: center; text-align: center; width: 18%; position: relative; }
-.o5-dot { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; margin-bottom: 10px; position: relative; z-index: 1; }
-.o5-point h4 { font-size: 0.76rem; font-family: var(--font-head); text-transform: uppercase; margin: 0 0 4px; }
-.o5-point p { font-size: 0.7rem; color: var(--text-muted); margin: 0; display: none; }
-@media (max-width: 720px) { .o5-progress { flex-direction: column; align-items: stretch; gap: 20px; } .o5-progress::before { left: 16px; top: 0; bottom: 0; right: auto; width: 2px; height: auto; } .o5-point { flex-direction: row; text-align: left; width: 100%; gap: 14px; } .o5-point h4 { margin: 0; } }
-
-
-.o6-spec-panel { max-width: 640px; margin: 0 auto; border: 1px solid var(--card-border); border-radius: 4px; overflow: hidden; }
-.o6-spec-row { display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-bottom: 1px solid var(--card-border); }
-.o6-spec-row:last-child { border-bottom: none; }
-.o6-spec-row .icon { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
-.o6-spec-row span { font-family: var(--font-head); font-size: 0.88rem; text-transform: uppercase; }
-.o6-spec-years { background: rgba(220,38,38,.06); }
-.o6-cards-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 1000px; margin: 0 auto; }
-.o6-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 4px; padding: 20px 14px; position: relative; }
-.o6-card-num { position: absolute; top: 10px; right: 12px; font-family: var(--font-mono); color: var(--card-border-strong); font-size: 0.8rem; }
-.o6-card .icon { width: 20px; height: 20px; color: var(--accent); margin-bottom: 10px; }
-.o6-card h4 { font-family: var(--font-head); font-size: 0.82rem; text-transform: uppercase; margin: 0 0 6px; }
-.o6-card p { font-size: 0.74rem; color: var(--text-muted); margin: 0; }
-@media (max-width: 900px) { .o6-cards-row { grid-template-columns: repeat(2, 1fr); } }
-
-
-.o7-bento { display: grid; grid-template-columns: repeat(3, 1fr) 1.3fr; grid-template-rows: repeat(2, 1fr); gap: 12px; max-width: 900px; margin: 0 auto; height: 260px; }
-.o7-bento-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 6px; padding: 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-.o7-bento-item .icon { width: 22px; height: 22px; color: var(--accent); margin-bottom: 8px; }
-.o7-bento-item h3 { font-size: 0.78rem; font-family: var(--font-head); text-transform: uppercase; margin: 0; }
-.o7-bento-years { grid-column: 4; grid-row: 1 / 3; background: #0A0A0A; border-color: var(--accent); }
-.o7-bento-years strong { font-family: var(--font-head); font-size: 3.4rem; color: var(--accent); line-height: 1; }
-.o7-bento-years span { font-size: 0.76rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 8px; }
-@media (max-width: 720px) { .o7-bento { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, auto); height: auto; } .o7-bento-years { grid-column: auto; grid-row: auto; grid-column: 1 / 3; padding: 24px; } }
-.o7-steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; max-width: 1100px; margin: 0 auto; }
-.o7-step { background: var(--card); border: 1px solid var(--card-border); border-radius: 6px; padding: 26px 16px; text-align: center; position: relative; }
-.o7-step-icon-wrap { width: 52px; height: 52px; border-radius: 50%; background: rgba(220,38,38,.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
-.o7-step-icon-wrap .icon { width: 24px; height: 24px; color: var(--accent); }
-.o7-step-num { font-family: var(--font-mono); color: var(--card-border-strong); font-size: 0.72rem; margin-bottom: 8px; }
-.o7-step h4 { font-family: var(--font-head); font-size: 0.86rem; text-transform: uppercase; margin: 0 0 8px; }
-.o7-step p { font-size: 0.76rem; color: var(--text-muted); margin: 0; }
-@media (max-width: 900px) { .o7-steps-grid { grid-template-columns: repeat(2, 1fr); } }
-
-
-.o8-list { max-width: 520px; margin: 0 auto; }
-.o8-line { display: flex; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--card-border); }
-.o8-idx { font-family: var(--font-mono); color: var(--accent); font-size: 0.78rem; }
-.o8-line span:last-child { font-family: var(--font-head); font-size: 0.9rem; text-transform: uppercase; }
-.o8-steps { max-width: 540px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
-.o8-step { display: flex; gap: 18px; border-left: 2px solid var(--accent); padding-left: 18px; }
-.o8-step-n { font-family: var(--font-head); font-size: 1.6rem; color: var(--card-border-strong); flex-shrink: 0; width: 34px; }
-.o8-step h4 { font-family: var(--font-head); font-size: 0.94rem; text-transform: uppercase; margin: 0 0 4px; }
-.o8-step p { margin: 0; font-size: 0.84rem; color: var(--text-muted); }
-
-
-.o9-strip { display: flex; flex-wrap: wrap; justify-content: center; max-width: 1000px; margin: 0 auto; }
-.o9-item { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 10px 26px; border-right: 1px solid var(--card-border); }
-.o9-item:last-child { border-right: none; }
-.o9-item .icon { width: 30px; height: 30px; color: var(--accent); }
-.o9-item span { font-size: 0.76rem; font-family: var(--font-head); text-transform: uppercase; text-align: center; color: var(--text-muted); }
-.o9-item-years strong { font-family: var(--font-head); font-size: 1.6rem; color: var(--accent); }
-.o9-steps-row { display: flex; align-items: flex-start; justify-content: center; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; }
-.o9-step { width: 180px; text-align: center; padding: 10px; }
-.o9-step-num { font-family: var(--font-mono); color: var(--accent); font-size: 0.75rem; margin-bottom: 6px; }
-.o9-step .icon { width: 24px; height: 24px; color: var(--accent); margin-bottom: 10px; }
-.o9-step h4 { font-family: var(--font-head); font-size: 0.82rem; text-transform: uppercase; margin: 0 0 6px; }
-.o9-step p { font-size: 0.74rem; color: var(--text-muted); margin: 0; }
-.o9-connector { width: 30px; height: 3px; background: repeating-linear-gradient(-45deg, var(--accent) 0 5px, transparent 5px 10px); margin-top: 40px; flex-shrink: 0; }
-@media (max-width: 900px) { .o9-connector { display: none; } }
-
-
-.o10-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 900px; margin: 0 auto; }
-.o10-chip { display: flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--card-border); border-radius: 999px; padding: 9px 18px; }
-.o10-chip .icon { width: 15px; height: 15px; color: var(--accent); }
-.o10-chip span { font-size: 0.78rem; font-family: var(--font-head); text-transform: uppercase; }
-.o10-chip-years { border-color: var(--accent); background: rgba(220,38,38,.08); }
-.o10-carousel { display: flex; gap: 14px; overflow-x: auto; max-width: 1000px; margin: 0 auto; padding: 6px 4px 14px; scroll-snap-type: x mandatory; }
-.o10-card { flex: 0 0 220px; scroll-snap-align: start; background: var(--card); border: 1px solid var(--card-border); border-radius: 6px; padding: 20px 16px; position: relative; }
-.o10-card-num { position: absolute; top: 12px; right: 14px; font-family: var(--font-mono); color: var(--card-border-strong); font-size: 0.75rem; }
-.o10-card .icon { width: 22px; height: 22px; color: var(--accent); margin-bottom: 12px; }
-.o10-card h4 { font-family: var(--font-head); font-size: 0.86rem; text-transform: uppercase; margin: 0 0 6px; }
-.o10-card p { font-size: 0.76rem; color: var(--text-muted); margin: 0; }
 
 </style>
 </head>
@@ -724,30 +388,11 @@ p { margin: 0; }
           <h2>Cómo funciona la instalación</h2>
           <p>Cinco pasos, sin complicaciones. Nosotros nos encargamos de todo, tú solo agendas.</p>
         </div>
-        <div class="cs-wrap" id="csSteps">
-          <button type="button" class="cs-arrow cs-arrow--prev" aria-label="Estilo anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
-          </button>
-          <button type="button" class="cs-arrow cs-arrow--next" aria-label="Siguiente estilo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-          </button>
-          <div class="cs-slide is-active" data-idx="1"><div class="o1-steps"><li class="o1-step"><div class="o1-step-marker"><span>1</span></div><div class="o1-step-body"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-select"></use></svg><h4>Selecciona tu plan</h4><p>Premium o VIP — el que mejor se adapte al nivel de seguridad que buscas.</p></div></li>
-<li class="o1-step"><div class="o1-step-marker"><span>2</span></div><div class="o1-step-body"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg><h4>Agenda tu instalación</h4><p>Nos indicas ubicación, vehículo y disponibilidad — coordinamos el día y la hora.</p></div></li>
-<li class="o1-step"><div class="o1-step-marker"><span>3</span></div><div class="o1-step-body"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><h4>Un técnico realiza la instalación</h4><p>Instalación profesional, discreta y sin dejar rastro visible en tu vehículo.</p></div></li>
-<li class="o1-step"><div class="o1-step-marker"><span>4</span></div><div class="o1-step-body"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-gear"></use></svg><h4>Configuramos tu aplicación</h4><p>Te entregamos el acceso funcionando, listo para monitorear desde tu celular.</p></div></li>
-<li class="o1-step"><div class="o1-step-marker"><span>5</span></div><div class="o1-step-body"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><h4>Tu vehículo queda protegido</h4><p>Puedes monitorearlo desde donde estés, con alertas al instante.</p></div></li></div></div>
-<div class="cs-slide" data-idx="2"><div class="o2-steps-row"><div class="o2-step"><div class="o2-step-circle">1</div><div class="o2-step-cap"><h4>Selecciona tu plan</h4></div></div><div class="o2-arrow"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-r"></use></svg></div><div class="o2-step"><div class="o2-step-circle">2</div><div class="o2-step-cap"><h4>Agenda tu instalación</h4></div></div><div class="o2-arrow"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-r"></use></svg></div><div class="o2-step"><div class="o2-step-circle">3</div><div class="o2-step-cap"><h4>Un técnico realiza la instalación</h4></div></div><div class="o2-arrow"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-r"></use></svg></div><div class="o2-step"><div class="o2-step-circle">4</div><div class="o2-step-cap"><h4>Configuramos tu aplicación</h4></div></div><div class="o2-arrow"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-r"></use></svg></div><div class="o2-step"><div class="o2-step-circle">5</div><div class="o2-step-cap"><h4>Tu vehículo queda protegido</h4></div></div></div></div>
-<div class="cs-slide" data-idx="3"><div class="o3-steps-zigzag"><div class="o3-step o3-step-l"><div class="o3-step-card"><div class="o3-step-num">1</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-select"></use></svg><h4>Selecciona tu plan</h4><p>Premium o VIP — el que mejor se adapte al nivel de seguridad que buscas.</p></div></div><div class="o3-step o3-step-r"><div class="o3-step-card"><div class="o3-step-num">2</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg><h4>Agenda tu instalación</h4><p>Nos indicas ubicación, vehículo y disponibilidad — coordinamos el día y la hora.</p></div></div><div class="o3-step o3-step-l"><div class="o3-step-card"><div class="o3-step-num">3</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><h4>Un técnico realiza la instalación</h4><p>Instalación profesional, discreta y sin dejar rastro visible en tu vehículo.</p></div></div><div class="o3-step o3-step-r"><div class="o3-step-card"><div class="o3-step-num">4</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-gear"></use></svg><h4>Configuramos tu aplicación</h4><p>Te entregamos el acceso funcionando, listo para monitorear desde tu celular.</p></div></div><div class="o3-step o3-step-l"><div class="o3-step-card"><div class="o3-step-num">5</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><h4>Tu vehículo queda protegido</h4><p>Puedes monitorearlo desde donde estés, con alertas al instante.</p></div></div></div></div>
-<div class="cs-slide" data-idx="4"><div class="o4-accordion"><div class="o4-acc-item is-open"><div class="o4-acc-head"><span class="o4-acc-num">1</span><h4>Selecciona tu plan</h4><span class="o4-acc-chevron"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-r"></use></svg></span></div><div class="o4-acc-body"><p>Premium o VIP — el que mejor se adapte al nivel de seguridad que buscas.</p></div></div><div class="o4-acc-item"><div class="o4-acc-head"><span class="o4-acc-num">2</span><h4>Agenda tu instalación</h4><span class="o4-acc-chevron"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-r"></use></svg></span></div><div class="o4-acc-body"><p>Nos indicas ubicación, vehículo y disponibilidad — coordinamos el día y la hora.</p></div></div><div class="o4-acc-item"><div class="o4-acc-head"><span class="o4-acc-num">3</span><h4>Un técnico realiza la instalación</h4><span class="o4-acc-chevron"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-r"></use></svg></span></div><div class="o4-acc-body"><p>Instalación profesional, discreta y sin dejar rastro visible en tu vehículo.</p></div></div><div class="o4-acc-item"><div class="o4-acc-head"><span class="o4-acc-num">4</span><h4>Configuramos tu aplicación</h4><span class="o4-acc-chevron"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-r"></use></svg></span></div><div class="o4-acc-body"><p>Te entregamos el acceso funcionando, listo para monitorear desde tu celular.</p></div></div><div class="o4-acc-item"><div class="o4-acc-head"><span class="o4-acc-num">5</span><h4>Tu vehículo queda protegido</h4><span class="o4-acc-chevron"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-r"></use></svg></span></div><div class="o4-acc-body"><p>Puedes monitorearlo desde donde estés, con alertas al instante.</p></div></div></div></div>
-<div class="cs-slide" data-idx="5"><div class="o5-progress"><div class="o5-point"><div class="o5-dot">1</div><h4>Selecciona tu plan</h4><p>Premium o VIP — el que mejor se adapte al nivel de seguridad que buscas.</p></div><div class="o5-point"><div class="o5-dot">2</div><h4>Agenda tu instalación</h4><p>Nos indicas ubicación, vehículo y disponibilidad — coordinamos el día y la hora.</p></div><div class="o5-point"><div class="o5-dot">3</div><h4>Un técnico realiza la instalación</h4><p>Instalación profesional, discreta y sin dejar rastro visible en tu vehículo.</p></div><div class="o5-point"><div class="o5-dot">4</div><h4>Configuramos tu aplicación</h4><p>Te entregamos el acceso funcionando, listo para monitorear desde tu celular.</p></div><div class="o5-point"><div class="o5-dot">5</div><h4>Tu vehículo queda protegido</h4><p>Puedes monitorearlo desde donde estés, con alertas al instante.</p></div></div></div>
-<div class="cs-slide" data-idx="6"><div class="o6-cards-row"><div class="o6-card"><div class="o6-card-num">1</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-select"></use></svg><h4>Selecciona tu plan</h4><p>Premium o VIP — el que mejor se adapte al nivel de seguridad que buscas.</p></div><div class="o6-card"><div class="o6-card-num">2</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg><h4>Agenda tu instalación</h4><p>Nos indicas ubicación, vehículo y disponibilidad — coordinamos el día y la hora.</p></div><div class="o6-card"><div class="o6-card-num">3</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><h4>Un técnico realiza la instalación</h4><p>Instalación profesional, discreta y sin dejar rastro visible en tu vehículo.</p></div><div class="o6-card"><div class="o6-card-num">4</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-gear"></use></svg><h4>Configuramos tu aplicación</h4><p>Te entregamos el acceso funcionando, listo para monitorear desde tu celular.</p></div><div class="o6-card"><div class="o6-card-num">5</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><h4>Tu vehículo queda protegido</h4><p>Puedes monitorearlo desde donde estés, con alertas al instante.</p></div></div></div>
-<div class="cs-slide" data-idx="7"><div class="o7-steps-grid"><div class="o7-step"><div class="o7-step-icon-wrap"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-select"></use></svg></div><div class="o7-step-num">1</div><h4>Selecciona tu plan</h4><p>Premium o VIP — el que mejor se adapte al nivel de seguridad que buscas.</p></div><div class="o7-step"><div class="o7-step-icon-wrap"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg></div><div class="o7-step-num">2</div><h4>Agenda tu instalación</h4><p>Nos indicas ubicación, vehículo y disponibilidad — coordinamos el día y la hora.</p></div><div class="o7-step"><div class="o7-step-icon-wrap"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg></div><div class="o7-step-num">3</div><h4>Un técnico realiza la instalación</h4><p>Instalación profesional, discreta y sin dejar rastro visible en tu vehículo.</p></div><div class="o7-step"><div class="o7-step-icon-wrap"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-gear"></use></svg></div><div class="o7-step-num">4</div><h4>Configuramos tu aplicación</h4><p>Te entregamos el acceso funcionando, listo para monitorear desde tu celular.</p></div><div class="o7-step"><div class="o7-step-icon-wrap"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg></div><div class="o7-step-num">5</div><h4>Tu vehículo queda protegido</h4><p>Puedes monitorearlo desde donde estés, con alertas al instante.</p></div></div></div>
-<div class="cs-slide" data-idx="8"><div class="o8-steps"><div class="o8-step"><span class="o8-step-n">1</span><div><h4>Selecciona tu plan</h4><p>Premium o VIP — el que mejor se adapte al nivel de seguridad que buscas.</p></div></div><div class="o8-step"><span class="o8-step-n">2</span><div><h4>Agenda tu instalación</h4><p>Nos indicas ubicación, vehículo y disponibilidad — coordinamos el día y la hora.</p></div></div><div class="o8-step"><span class="o8-step-n">3</span><div><h4>Un técnico realiza la instalación</h4><p>Instalación profesional, discreta y sin dejar rastro visible en tu vehículo.</p></div></div><div class="o8-step"><span class="o8-step-n">4</span><div><h4>Configuramos tu aplicación</h4><p>Te entregamos el acceso funcionando, listo para monitorear desde tu celular.</p></div></div><div class="o8-step"><span class="o8-step-n">5</span><div><h4>Tu vehículo queda protegido</h4><p>Puedes monitorearlo desde donde estés, con alertas al instante.</p></div></div></div></div>
-<div class="cs-slide" data-idx="9"><div class="o9-steps-row"><div class="o9-step"><div class="o9-step-num">1</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-select"></use></svg><h4>Selecciona tu plan</h4><p>Premium o VIP — el que mejor se adapte al nivel de seguridad que buscas.</p></div><div class="o9-connector"></div><div class="o9-step"><div class="o9-step-num">2</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg><h4>Agenda tu instalación</h4><p>Nos indicas ubicación, vehículo y disponibilidad — coordinamos el día y la hora.</p></div><div class="o9-connector"></div><div class="o9-step"><div class="o9-step-num">3</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><h4>Un técnico realiza la instalación</h4><p>Instalación profesional, discreta y sin dejar rastro visible en tu vehículo.</p></div><div class="o9-connector"></div><div class="o9-step"><div class="o9-step-num">4</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-gear"></use></svg><h4>Configuramos tu aplicación</h4><p>Te entregamos el acceso funcionando, listo para monitorear desde tu celular.</p></div><div class="o9-connector"></div><div class="o9-step"><div class="o9-step-num">5</div><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><h4>Tu vehículo queda protegido</h4><p>Puedes monitorearlo desde donde estés, con alertas al instante.</p></div></div></div>
-<div class="cs-slide" data-idx="10"><div class="o10-carousel"><div class="o10-card"><span class="o10-card-num">1</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-select"></use></svg><h4>Selecciona tu plan</h4><p>Premium o VIP — el que mejor se adapte al nivel de seguridad que buscas.</p></div><div class="o10-card"><span class="o10-card-num">2</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg><h4>Agenda tu instalación</h4><p>Nos indicas ubicación, vehículo y disponibilidad — coordinamos el día y la hora.</p></div><div class="o10-card"><span class="o10-card-num">3</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><h4>Un técnico realiza la instalación</h4><p>Instalación profesional, discreta y sin dejar rastro visible en tu vehículo.</p></div><div class="o10-card"><span class="o10-card-num">4</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-gear"></use></svg><h4>Configuramos tu aplicación</h4><p>Te entregamos el acceso funcionando, listo para monitorear desde tu celular.</p></div><div class="o10-card"><span class="o10-card-num">5</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><h4>Tu vehículo queda protegido</h4><p>Puedes monitorearlo desde donde estés, con alertas al instante.</p></div></div></div>
-          <div class="cs-badge">Estilo <strong class="cs-current-num">1</strong> de 10 — usa las flechas para comparar</div>
-          <div class="cs-dots"><button type="button" class="cs-dot is-active" data-goto="1" aria-label="Opción 1"></button><button type="button" class="cs-dot" data-goto="2" aria-label="Opción 2"></button><button type="button" class="cs-dot" data-goto="3" aria-label="Opción 3"></button><button type="button" class="cs-dot" data-goto="4" aria-label="Opción 4"></button><button type="button" class="cs-dot" data-goto="5" aria-label="Opción 5"></button><button type="button" class="cs-dot" data-goto="6" aria-label="Opción 6"></button><button type="button" class="cs-dot" data-goto="7" aria-label="Opción 7"></button><button type="button" class="cs-dot" data-goto="8" aria-label="Opción 8"></button><button type="button" class="cs-dot" data-goto="9" aria-label="Opción 9"></button><button type="button" class="cs-dot" data-goto="10" aria-label="Opción 10"></button></div>
-        </div>
+        <div class="o1-steps"><li class="o1-step"><div class="o1-step-marker"><span>1</span></div><div class="o1-step-body"><h4>Selecciona tu plan</h4><p>Premium o VIP — el que mejor se adapte al nivel de seguridad que buscas.</p></div></li>
+<li class="o1-step"><div class="o1-step-marker"><span>2</span></div><div class="o1-step-body"><h4>Agenda tu instalación</h4><p>Nos indicas ubicación, vehículo y disponibilidad — coordinamos el día y la hora.</p></div></li>
+<li class="o1-step"><div class="o1-step-marker"><span>3</span></div><div class="o1-step-body"><h4>Un técnico realiza la instalación</h4><p>Instalación profesional, discreta y sin dejar rastro visible en tu vehículo.</p></div></li>
+<li class="o1-step"><div class="o1-step-marker"><span>4</span></div><div class="o1-step-body"><h4>Configuramos tu aplicación</h4><p>Te entregamos el acceso funcionando, listo para monitorear desde tu celular.</p></div></li>
+<li class="o1-step"><div class="o1-step-marker"><span>5</span></div><div class="o1-step-body"><h4>Tu vehículo queda protegido</h4><p>Puedes monitorearlo desde donde estés, con alertas al instante.</p></div></li></div>
       </div>
     </section>
 
@@ -821,86 +466,13 @@ p { margin: 0; }
           <h2>Una empresa en la que puedes confiar</h2>
           <p>GPS Portátiles forma parte de <strong>KnoxTrack S.R.L.</strong>, especializada en soluciones de rastreo y tecnología GPS.</p>
         </div>
-        <div class="cs-wrap" id="csTrust">
-          <button type="button" class="cs-arrow cs-arrow--prev" aria-label="Estilo anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
-          </button>
-          <button type="button" class="cs-arrow cs-arrow--next" aria-label="Siguiente estilo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-          </button>
-          <div class="cs-slide is-active" data-idx="1"><div class="o1-trust-grid"><div class="o1-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-building"></use></svg><h3>Empresa registrada</h3></div>
-<div class="o1-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg><h3>Oficina física</h3></div>
-<div class="o1-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><h3>Técnicos capacitados</h3></div>
-<div class="o1-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg><h3>Soporte</h3></div>
-<div class="o1-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><h3>Garantía</h3></div>
-<div class="o1-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-globe"></use></svg><h3>Cobertura internacional</h3></div>
-<div class="o1-trust-item o1-trust-years"><strong>10</strong><span>Años de experiencia</span></div></div></div>
-<div class="cs-slide" data-idx="2"><div class="o2-trust-strip"><div class="o2-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-building"></use></svg><span>Empresa registrada</span></div>
-<div class="o2-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg><span>Oficina física</span></div>
-<div class="o2-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><span>Técnicos capacitados</span></div>
-<div class="o2-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg><span>Soporte</span></div>
-<div class="o2-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><span>Garantía</span></div>
-<div class="o2-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-globe"></use></svg><span>Cobertura internacional</span></div>
-<div class="o2-trust-item o2-trust-years"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><span><strong>10</strong> años de experiencia</span></div></div></div>
-<div class="cs-slide" data-idx="3"><div class="o3-trust-grid"><div class="o3-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-building"></use></svg><h3>Empresa registrada</h3></div>
-<div class="o3-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg><h3>Oficina física</h3></div>
-<div class="o3-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><h3>Técnicos capacitados</h3></div>
-<div class="o3-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg><h3>Soporte</h3></div>
-<div class="o3-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><h3>Garantía</h3></div>
-<div class="o3-trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-globe"></use></svg><h3>Cobertura internacional</h3></div>
-<div class="o3-trust-item o3-trust-years"><strong>10</strong><span>Años de experiencia</span></div></div></div>
-<div class="cs-slide" data-idx="4"><div class="o4-seals"><div class="o4-seal"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-building"></use></svg><span>Empresa registrada</span></div>
-<div class="o4-seal"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg><span>Oficina física</span></div>
-<div class="o4-seal"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><span>Técnicos capacitados</span></div>
-<div class="o4-seal"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg><span>Soporte</span></div>
-<div class="o4-seal"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><span>Garantía</span></div>
-<div class="o4-seal"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-globe"></use></svg><span>Cobertura internacional</span></div>
-<div class="o4-seal o4-seal-years"><strong>10</strong><span>años de experiencia</span></div></div></div>
-<div class="cs-slide" data-idx="5"><div class="o5-list"><div class="o5-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-building"></use></svg><span>Empresa registrada</span><svg class="icon check" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></div>
-<div class="o5-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg><span>Oficina física</span><svg class="icon check" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></div>
-<div class="o5-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><span>Técnicos capacitados</span><svg class="icon check" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></div>
-<div class="o5-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg><span>Soporte</span><svg class="icon check" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></div>
-<div class="o5-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><span>Garantía</span><svg class="icon check" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></div>
-<div class="o5-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-globe"></use></svg><span>Cobertura internacional</span><svg class="icon check" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></div>
-<div class="o5-row o5-row-years"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><span><strong>10 años</strong> de experiencia</span><svg class="icon check" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></div></div></div>
-<div class="cs-slide" data-idx="6"><div class="o6-spec-panel"><div class="o6-spec-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-building"></use></svg><span>Empresa registrada</span></div>
-<div class="o6-spec-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg><span>Oficina física</span></div>
-<div class="o6-spec-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><span>Técnicos capacitados</span></div>
-<div class="o6-spec-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg><span>Soporte</span></div>
-<div class="o6-spec-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><span>Garantía</span></div>
-<div class="o6-spec-row"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-globe"></use></svg><span>Cobertura internacional</span></div>
-<div class="o6-spec-row o6-spec-years"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><span>10 años de experiencia</span></div></div></div>
-<div class="cs-slide" data-idx="7"><div class="o7-bento"><div class="o7-bento-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-building"></use></svg><h3>Empresa registrada</h3></div>
+        <div class="o7-bento"><div class="o7-bento-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-building"></use></svg><h3>Empresa registrada</h3></div>
 <div class="o7-bento-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg><h3>Oficina física</h3></div>
 <div class="o7-bento-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><h3>Técnicos capacitados</h3></div>
 <div class="o7-bento-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg><h3>Soporte</h3></div>
 <div class="o7-bento-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><h3>Garantía</h3></div>
 <div class="o7-bento-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-globe"></use></svg><h3>Cobertura internacional</h3></div>
-<div class="o7-bento-item o7-bento-years"><strong>10</strong><span>Años de<br>experiencia</span></div></div></div>
-<div class="cs-slide" data-idx="8"><div class="o8-list"><div class="o8-line"><span class="o8-idx">01</span><span>Empresa registrada</span></div>
-<div class="o8-line"><span class="o8-idx">02</span><span>Oficina física</span></div>
-<div class="o8-line"><span class="o8-idx">03</span><span>Técnicos capacitados</span></div>
-<div class="o8-line"><span class="o8-idx">04</span><span>Soporte</span></div>
-<div class="o8-line"><span class="o8-idx">05</span><span>Garantía</span></div>
-<div class="o8-line"><span class="o8-idx">06</span><span>Cobertura internacional</span></div>
-<div class="o8-line"><span class="o8-idx">07</span><span>10 años de experiencia</span></div></div></div>
-<div class="cs-slide" data-idx="9"><div class="o9-strip"><div class="o9-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-building"></use></svg><span>Empresa registrada</span></div>
-<div class="o9-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg><span>Oficina física</span></div>
-<div class="o9-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><span>Técnicos capacitados</span></div>
-<div class="o9-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg><span>Soporte</span></div>
-<div class="o9-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><span>Garantía</span></div>
-<div class="o9-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-globe"></use></svg><span>Cobertura internacional</span></div>
-<div class="o9-item o9-item-years"><strong>10</strong><span>Años de experiencia</span></div></div></div>
-<div class="cs-slide" data-idx="10"><div class="o10-chips"><div class="o10-chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-building"></use></svg><span>Empresa registrada</span></div>
-<div class="o10-chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg><span>Oficina física</span></div>
-<div class="o10-chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wrench"></use></svg><span>Técnicos capacitados</span></div>
-<div class="o10-chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg><span>Soporte</span></div>
-<div class="o10-chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><span>Garantía</span></div>
-<div class="o10-chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-globe"></use></svg><span>Cobertura internacional</span></div>
-<div class="o10-chip o10-chip-years"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg><span><strong>10 años</strong> de experiencia</span></div></div></div>
-          <div class="cs-badge">Estilo <strong class="cs-current-num">1</strong> de 10 — usa las flechas para comparar</div>
-          <div class="cs-dots"><button type="button" class="cs-dot is-active" data-goto="1" aria-label="Opción 1"></button><button type="button" class="cs-dot" data-goto="2" aria-label="Opción 2"></button><button type="button" class="cs-dot" data-goto="3" aria-label="Opción 3"></button><button type="button" class="cs-dot" data-goto="4" aria-label="Opción 4"></button><button type="button" class="cs-dot" data-goto="5" aria-label="Opción 5"></button><button type="button" class="cs-dot" data-goto="6" aria-label="Opción 6"></button><button type="button" class="cs-dot" data-goto="7" aria-label="Opción 7"></button><button type="button" class="cs-dot" data-goto="8" aria-label="Opción 8"></button><button type="button" class="cs-dot" data-goto="9" aria-label="Opción 9"></button><button type="button" class="cs-dot" data-goto="10" aria-label="Opción 10"></button></div>
-        </div>
+<div class="o7-bento-item o7-bento-years"><strong>10</strong><span>Años de<br>experiencia</span></div></div>
       </div>
     </section>
 
@@ -920,20 +492,53 @@ p { margin: 0; }
         <div class="lp-proof-head">
           <span class="eyebrow">Clientes reales, resultados reales</span>
           <h2>Instalaciones y testimonios</h2>
-          <span class="lp-proof-note">🛠️ Sección lista — pendiente de fotos, videos y testimonios reales</span>
+          <span class="lp-proof-note">🛠️ Testimonios en video ya cargados — falta el nombre y vehículo de cada cliente</span>
         </div>
         <div class="lp-proof-grid">
           <article class="lp-proof-card">
-            <div class="lp-proof-media"><svg aria-hidden="true" focusable="false"><use href="#icon-camera"></use></svg><span>Foto de instalación real</span></div>
-            <div class="lp-proof-body"><p>Aquí va el testimonio escrito de un cliente real.</p><div class="lp-proof-author"><span class="lp-proof-avatar"></span><div><strong>Nombre del cliente</strong><small>Modelo del vehículo</small></div></div></div>
+            <div class="lp-phone-frame lp-phone-frame--sm">
+              <img class="frame-img" src="assets/images/mockups/phone-frame-naranja.webp" alt="" aria-hidden="true">
+              <div class="yt-player" id="ytPlayerT1">
+                <button type="button" class="yt-poster" id="ytPosterT1" disabled aria-label="Reproducir testimonio">
+                  <img src="" alt="" loading="lazy">
+                  <span class="yt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
+                  <span class="yt-pending-label">Video próximamente</span>
+                </button>
+              </div>
+            </div>
+            <div class="lp-proof-body">
+              <div class="lp-proof-author"><span class="lp-proof-avatar"></span><div><strong>Nombre del cliente</strong><small>Modelo del vehículo</small></div></div>
+            </div>
           </article>
           <article class="lp-proof-card">
-            <div class="lp-proof-media"><svg aria-hidden="true" focusable="false"><use href="#icon-video"></use></svg><span>Video corto de instalación</span></div>
-            <div class="lp-proof-body"><p>Aquí va el testimonio en video de un cliente real.</p><div class="lp-proof-author"><span class="lp-proof-avatar"></span><div><strong>Nombre del cliente</strong><small>Modelo del vehículo</small></div></div></div>
+            <div class="lp-phone-frame lp-phone-frame--sm">
+              <img class="frame-img" src="assets/images/mockups/phone-frame-naranja.webp" alt="" aria-hidden="true">
+              <div class="yt-player" id="ytPlayerT2">
+                <button type="button" class="yt-poster" id="ytPosterT2" disabled aria-label="Reproducir testimonio">
+                  <img src="" alt="" loading="lazy">
+                  <span class="yt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
+                  <span class="yt-pending-label">Video próximamente</span>
+                </button>
+              </div>
+            </div>
+            <div class="lp-proof-body">
+              <div class="lp-proof-author"><span class="lp-proof-avatar"></span><div><strong>Nombre del cliente</strong><small>Modelo del vehículo</small></div></div>
+            </div>
           </article>
           <article class="lp-proof-card">
-            <div class="lp-proof-media"><svg aria-hidden="true" focusable="false"><use href="#icon-screenshot"></use></svg><span>Captura de la app en uso</span></div>
-            <div class="lp-proof-body"><p>Aquí va el testimonio de un cliente sobre la app.</p><div class="lp-proof-author"><span class="lp-proof-avatar"></span><div><strong>Nombre del cliente</strong><small>Modelo del vehículo</small></div></div></div>
+            <div class="lp-phone-frame lp-phone-frame--sm">
+              <img class="frame-img" src="assets/images/mockups/phone-frame-naranja.webp" alt="" aria-hidden="true">
+              <div class="yt-player" id="ytPlayerT3">
+                <button type="button" class="yt-poster" id="ytPosterT3" disabled aria-label="Reproducir testimonio">
+                  <img src="" alt="" loading="lazy">
+                  <span class="yt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
+                  <span class="yt-pending-label">Video próximamente</span>
+                </button>
+              </div>
+            </div>
+            <div class="lp-proof-body">
+              <div class="lp-proof-author"><span class="lp-proof-avatar"></span><div><strong>Nombre del cliente</strong><small>Modelo del vehículo</small></div></div>
+            </div>
           </article>
         </div>
         <div class="lp-proof-logos">
@@ -995,48 +600,29 @@ p { margin: 0; }
 
   <script>
     (function () {
-      // GORDO GPS: pega aquí el ID del video de YouTube cuando lo tengas.
-      var YT_VIDEO_ID = "Te68bKma7Mw";
-      var wrap = document.getElementById('ytPlayer');
-      var posterBtn = document.getElementById('ytPosterBtn');
-      if (!wrap || !posterBtn) return;
-      if (YT_VIDEO_ID) {
+      // GORDO GPS: pega aquí el ID de cada video de YouTube.
+      var VIDEOS = [
+        { wrapId: 'ytPlayer',   btnId: 'ytPosterBtn', id: 'Te68bKma7Mw', label: 'Video de instalación GPS Portátiles' },
+        { wrapId: 'ytPlayerT1', btnId: 'ytPosterT1',  id: 'Y5n1WYn7orw', label: 'Testimonio de cliente 1' },
+        { wrapId: 'ytPlayerT2', btnId: 'ytPosterT2',  id: 'vO4aus1M-Ro', label: 'Testimonio de cliente 2' },
+        { wrapId: 'ytPlayerT3', btnId: 'ytPosterT3',  id: 'GDIFMt_GHeQ', label: 'Testimonio de cliente 3' }
+      ];
+
+      VIDEOS.forEach(function (v) {
+        var wrap = document.getElementById(v.wrapId);
+        var posterBtn = document.getElementById(v.btnId);
+        if (!wrap || !posterBtn || !v.id) return;
         var img = posterBtn.querySelector('img');
-        img.src = 'https://i.ytimg.com/vi/' + YT_VIDEO_ID + '/hqdefault.jpg';
-        img.alt = 'Video de instalación GPS Portátiles';
+        img.src = 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg';
+        img.alt = v.label;
         posterBtn.classList.add('has-thumb');
         posterBtn.disabled = false;
         posterBtn.addEventListener('click', function () {
-          wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + YT_VIDEO_ID + '?autoplay=1&rel=0&playsinline=1" title="Video GPS Portátiles" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+          wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + v.id + '?autoplay=1&rel=0&playsinline=1" title="' + v.label + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
         });
-      }
+      });
     })();
   </script>
-
-
-<script>
-(function () {
-  function initCarousel(root) {
-    var slides = root.querySelectorAll('.cs-slide');
-    var dots = root.querySelectorAll('.cs-dot');
-    var label = root.querySelector('.cs-current-num');
-    var total = slides.length;
-    var current = 1;
-    function show(n) {
-      current = ((n - 1 + total) % total) + 1;
-      slides.forEach(function (s) { s.classList.toggle('is-active', parseInt(s.dataset.idx) === current); });
-      dots.forEach(function (d) { d.classList.toggle('is-active', parseInt(d.dataset.goto) === current); });
-      if (label) label.textContent = current;
-    }
-    var prev = root.querySelector('.cs-arrow--prev');
-    var next = root.querySelector('.cs-arrow--next');
-    if (prev) prev.addEventListener('click', function () { show(current - 1); });
-    if (next) next.addEventListener('click', function () { show(current + 1); });
-    dots.forEach(function (d) { d.addEventListener('click', function () { show(parseInt(d.dataset.goto)); }); });
-  }
-  document.querySelectorAll('.cs-wrap').forEach(initCarousel);
-})();
-</script>
 
 </body>
 </html>
