@@ -331,6 +331,21 @@ p { margin: 0; }
   .header-actions .btn span.btn-label-full { display: none; }
 }
 
+/* ---- Espaciado más compacto entre secciones en móvil ---- */
+@media (max-width: 720px) {
+  .lp-hero { padding: var(--sp-9) 0 var(--sp-6); }
+  .lp-alert-strip { padding: var(--sp-6) 0; }
+  .lp-video { padding: var(--sp-8) 0; }
+  .lp-steps { padding: var(--sp-8) 0; }
+  .lp-plans { padding: var(--sp-8) 0; }
+  .lp-jammer { padding: var(--sp-8) 0; }
+  .lp-trust { padding: var(--sp-8) 0; }
+  .lp-proof { padding: var(--sp-8) 0; }
+  .lp-final-cta { padding: var(--sp-8) 0; }
+  .lp-appointment { padding: var(--sp-8) 0; }
+  .site-footer { padding: var(--sp-7) 0 var(--sp-6); }
+}
+
 .lp-final-cta::before, .lp-alert-strip::before { content: ""; display: block; height: 4px; width: 64px; margin: 0 auto var(--sp-6); background: var(--accent); }
 
 /* ---- Agendar cita ---- */

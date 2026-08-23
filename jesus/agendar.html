@@ -120,6 +120,38 @@ a { color: inherit; text-decoration: none; }
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A3A3A8' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
   background-repeat: no-repeat; background-position: right 12px center; background-size: 16px;
 }
+
+/* ---- Mini calendario propio para "Día" ---- */
+.appt-date-wrap { position: relative; }
+.appt-date-wrap input { width: 100%; cursor: pointer; }
+.appt-calendar {
+  display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 50;
+  width: 280px; max-width: 90vw; background: var(--bg-2); border: 1px solid var(--card-border-strong);
+  border-radius: 14px; padding: 14px; box-shadow: 0 20px 45px -15px rgba(0,0,0,.7);
+}
+.appt-calendar.is-open { display: block; }
+.appt-cal-head { display: flex; align-items: center; justify-content: space-between; }
+.appt-cal-title { font-family: var(--font-head); font-weight: 600; font-size: 0.95rem; text-transform: uppercase; letter-spacing: .02em; }
+.appt-cal-nav {
+  width: 30px; height: 30px; border-radius: 8px; background: var(--card); border: 1px solid var(--card-border);
+  color: var(--text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: color .2s ease, border-color .2s ease;
+}
+.appt-cal-nav:hover { color: var(--text); border-color: var(--accent); }
+.appt-cal-nav svg { width: 16px; height: 16px; }
+.appt-cal-weekdays, .appt-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+.appt-cal-weekdays { margin-top: 12px; }
+.appt-cal-weekdays span { text-align: center; font-size: 0.7rem; color: var(--text-faint); font-weight: 600; padding-bottom: 6px; }
+.appt-cal-grid { gap: 3px; margin-top: 2px; }
+.appt-cal-day {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 8px;
+  font-size: 0.86rem; color: var(--text); cursor: pointer; background: transparent; border: none;
+  font-family: var(--font-body); transition: background .15s ease, color .15s ease;
+}
+.appt-cal-day:hover { background: rgba(220,38,38,.15); }
+.appt-cal-day.is-outside { color: var(--text-faint); opacity: .4; }
+.appt-cal-day.is-today { border: 1px solid var(--card-border-strong); }
+.appt-cal-day.is-selected { background: var(--accent); color: #fff; font-weight: 700; }
 .appt-submit {
   margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 10px;
   width: 100%; height: 54px; border-radius: 999px; border: none; cursor: pointer;
@@ -239,7 +271,7 @@ a { color: inherit; text-decoration: none; }
 
       <label>
         <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path stroke-linejoin="miter" d="M4.5 20c0-4.1 3.4-6.8 7.5-6.8s7.5 2.7 7.5 6.8"/></svg>Nombre</span>
-        <input type="text" name="nombre" required>
+        <input type="text" name="nombre" placeholder="Ej: Carlos Pérez" required>
       </label>
 
       <label>
@@ -249,12 +281,29 @@ a { color: inherit; text-decoration: none; }
 
       <label>
         <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="3" y="5" width="18" height="14" stroke-linejoin="miter"/><path stroke-width="1.8" stroke-linejoin="miter" d="M3.5 5.8l8.5 7 8.5-7"/></svg>Correo</span>
-        <input type="email" name="correo">
+        <input type="email" name="correo" placeholder="ejemplo@correo.com">
       </label>
 
       <label>
         <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="3" y="5" width="18" height="16" stroke-linejoin="miter"/><path stroke-width="2.1" stroke-linecap="square" d="M8 3v4M16 3v4M3 10h18"/><path fill="currentColor" stroke="none" d="M12 14l3 1.4-3 1.4z"/><path stroke-width="1.6" d="M12 14v5"/></svg>Día</span>
-        <input type="text" name="dia" placeholder="DD/MM/AAAA" required>
+        <div class="appt-date-wrap">
+          <input type="text" name="dia" id="diaInput" placeholder="DD/MM/AAAA" autocomplete="off" required>
+          <div class="appt-calendar" id="apptCalendar">
+            <div class="appt-cal-head">
+              <button type="button" class="appt-cal-nav" id="calPrev" aria-label="Mes anterior">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+              </button>
+              <span class="appt-cal-title" id="calTitle"></span>
+              <button type="button" class="appt-cal-nav" id="calNext" aria-label="Mes siguiente">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+            <div class="appt-cal-weekdays">
+              <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
+            </div>
+            <div class="appt-cal-grid" id="calGrid"></div>
+          </div>
+        </div>
       </label>
 
       <label>
@@ -360,6 +409,79 @@ a { color: inherit; text-decoration: none; }
       requestAnimationFrame(animateDots);
     }
     animateDots();
+  })();
+
+  // Mini calendario propio para el campo "Día" — 100% código, sin el selector nativo.
+  (function () {
+    var input = document.getElementById('diaInput');
+    var cal = document.getElementById('apptCalendar');
+    var title = document.getElementById('calTitle');
+    var grid = document.getElementById('calGrid');
+    var btnPrev = document.getElementById('calPrev');
+    var btnNext = document.getElementById('calNext');
+    if (!input || !cal) return;
+
+    var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    var today = new Date();
+    var viewYear = today.getFullYear();
+    var viewMonth = today.getMonth();
+    var selected = null;
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+    function render() {
+      title.textContent = MESES[viewMonth] + ' ' + viewYear;
+      grid.innerHTML = '';
+      var firstDay = new Date(viewYear, viewMonth, 1).getDay();
+      var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+      var daysInPrevMonth = new Date(viewYear, viewMonth, 0).getDate();
+
+      for (var i = firstDay - 1; i >= 0; i--) {
+        grid.appendChild(makeDay(daysInPrevMonth - i, true, false));
+      }
+      for (var d = 1; d <= daysInMonth; d++) {
+        var isToday = d === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear();
+        var isSelected = selected && selected.d === d && selected.m === viewMonth && selected.y === viewYear;
+        grid.appendChild(makeDay(d, false, isToday, isSelected, viewMonth, viewYear));
+      }
+      var totalCells = firstDay + daysInMonth;
+      var remaining = (7 - (totalCells % 7)) % 7;
+      for (var n = 1; n <= remaining; n++) {
+        grid.appendChild(makeDay(n, true, false));
+      }
+    }
+
+    function makeDay(num, outside, isToday, isSelected, m, y) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'appt-cal-day' + (outside ? ' is-outside' : '') + (isToday ? ' is-today' : '') + (isSelected ? ' is-selected' : '');
+      btn.textContent = num;
+      if (!outside) {
+        btn.addEventListener('click', function () {
+          selected = { d: num, m: m, y: y };
+          input.value = pad(num) + '/' + pad(m + 1) + '/' + y;
+          closeCal();
+        });
+      }
+      return btn;
+    }
+
+    function openCal() { cal.classList.add('is-open'); render(); }
+    function closeCal() { cal.classList.remove('is-open'); }
+
+    input.addEventListener('click', function (e) { e.stopPropagation(); openCal(); });
+    input.addEventListener('focus', openCal);
+    btnPrev.addEventListener('click', function () {
+      viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      render();
+    });
+    btnNext.addEventListener('click', function () {
+      viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      render();
+    });
+    document.addEventListener('click', function (e) {
+      if (!cal.contains(e.target) && e.target !== input) closeCal();
+    });
   })();
 
   // Botón "Enviar ubicación" -> pide el GPS real del navegador y lo agrega al campo
