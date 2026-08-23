@@ -69,21 +69,30 @@ html { scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg-2); }
 body {
   margin: 0; font-family: var(--font-body); font-size: 16px; color: var(--text);
   background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased;
-  background-image: radial-gradient(50% 35% at 85% 0%, rgba(220,38,38,.10), transparent 60%);
 }
 
-/* ---- Fondo generativo de toda la página (una sola pasada, sin repetir) ---- */
-.page-mesh-wrap { position: relative; }
-.site-bg-mesh {
-  position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.7; overflow: hidden;
-  -webkit-mask-image: linear-gradient(180deg, black 0%, black 97%, transparent 100%);
-  mask-image: linear-gradient(180deg, black 0%, black 97%, transparent 100%);
+/* ---- Fondo animado: puntos + líneas onduladas + resplandor rojo (fijo, 100% código) ---- */
+.bg-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+.red-laser-glow {
+  position: absolute; top: -20%; right: -10%; width: 75vw; height: 140vh;
+  background: radial-gradient(ellipse at center, rgba(235,20,20,.32) 0%, rgba(180,0,0,.12) 45%, rgba(0,0,0,0) 75%);
+  filter: blur(60px); transform: rotate(-15deg);
 }
-.site-bg-mesh svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.page-mesh-wrap > .site-header,
-.page-mesh-wrap > main,
-.page-mesh-wrap > .site-footer { position: relative; z-index: 1; }
-@media (max-width: 720px) { .site-bg-mesh { opacity: 0.45; } }
+#dotsCanvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bg-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; }
+.svg-line-group { transform-origin: center; animation: waveMotion 12s ease-in-out infinite alternate; }
+.svg-line-group-reverse { transform-origin: center; animation: waveMotionAlt 16s ease-in-out infinite alternate; }
+@keyframes waveMotion {
+  0% { transform: translateY(0) scaleY(1) rotate(0deg); }
+  50% { transform: translateY(-25px) scaleY(1.05) rotate(.8deg); }
+  100% { transform: translateY(20px) scaleY(.95) rotate(-.5deg); }
+}
+@keyframes waveMotionAlt {
+  0% { transform: translateY(0) scaleX(1) rotate(0deg); }
+  50% { transform: translateY(20px) scaleX(1.03) rotate(-.8deg); }
+  100% { transform: translateY(-18px) scaleX(.97) rotate(.6deg); }
+}
+.site-header, main, .site-footer { position: relative; z-index: 1; }
 
 img, svg { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -131,12 +140,16 @@ p { margin: 0; }
 .btn-block { width: 100%; }
 
 /* ---- Header ---- */
-.site-header { position: sticky; top: 0; z-index: 500; background: var(--nav-bg); backdrop-filter: blur(10px); border-bottom: var(--border-w) solid var(--card-border); }
+.site-header { position: sticky; top: 0; z-index: 500; background: transparent; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-6); height: 76px; }
-.brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
-.brand-icon { height: 44px; width: auto; }
-.brand-name { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; color: var(--text); white-space: nowrap; }
-.brand-name strong { color: var(--accent); font-weight: 900; }
+.brand-fa { display: flex; align-items: center; gap: 8px; min-width: 0; text-decoration: none; }
+.brand-fa-icon-wrap { position: relative; display: flex; align-items: center; justify-content: center; width: 30px; aspect-ratio: 936/805; }
+.brand-fa-icon-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.brand-fa-glow { position: absolute; bottom: -4px; width: 22px; height: 4px; background: rgba(220,38,38,.5); filter: blur(3px); border-radius: 999px; }
+.brand-fa-text { display: inline-block; line-height: 1; margin-left: 2px; }
+.brand-fa-text .gordo { color: #fff; font-size: 1.3rem; font-weight: 900; letter-spacing: -0.02em; font-family: var(--font-head); }
+.brand-fa-text .gps { color: var(--accent); font-size: 1.3rem; font-weight: 300; letter-spacing: -0.02em; font-family: var(--font-head); margin-left: 5px; }
+.brand-fa-underline { display: block; height: 2px; width: 100%; background: linear-gradient(to right, var(--accent), transparent); margin-top: 3px; }
 .header-actions { display: flex; align-items: center; gap: 10px; }
 
 /* ---- Hero ---- */
@@ -158,7 +171,7 @@ p { margin: 0; }
 .lp-alert-inner strong { color: var(--dark-text); }
 
 /* ---- Video ---- */
-.lp-video { padding: var(--sp-12) 0; background: rgba(18,18,20,.55); }
+.lp-video { padding: var(--sp-12) 0; background: transparent; }
 .lp-video-inner { display: grid; grid-template-columns: 1fr 340px; gap: var(--sp-11); align-items: center; max-width: 980px; margin: 0 auto; }
 .lp-video-copy h2 { margin-top: var(--sp-3); font-size: 1.9rem; }
 .lp-video-copy p { margin-top: var(--sp-4); color: var(--text-muted); line-height: 1.7; max-width: 46ch; }
@@ -166,6 +179,11 @@ p { margin: 0; }
 .lp-phone-frame {
   position: relative; width: 100%; max-width: 300px; margin: 0 auto; aspect-ratio: 480/990;
   filter: drop-shadow(0 25px 45px rgba(0,0,0,.5));
+}
+.lp-phone-frame:not(.lp-phone-frame--sm)::after {
+  content: ""; position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%);
+  width: 72%; height: 30px; background: radial-gradient(ellipse at center, rgba(0,0,0,.6) 0%, transparent 75%);
+  filter: blur(8px); z-index: 0; pointer-events: none;
 }
 .lp-phone-frame img.frame-img { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; user-select: none; }
 .yt-player { position: absolute; left: 4.4%; top: 1.6%; right: 4.4%; bottom: 3.9%; border-radius: 4.6% / 2.3%; overflow: hidden; background: #000; z-index: 1; }
@@ -313,8 +331,22 @@ p { margin: 0; }
 }
 
 .lp-final-cta::before, .lp-alert-strip::before { content: ""; display: block; height: 4px; width: 64px; margin: 0 auto var(--sp-6); background: var(--accent); }
+
+/* ---- Agendar cita ---- */
+.lp-appointment { background: rgba(18,18,20,.55); padding: var(--sp-12) 0; text-align: center; }
+.lp-appointment h2 { margin-top: var(--sp-3); font-size: 1.9rem; }
+.lp-appointment p { margin-top: var(--sp-4); color: var(--text-muted); max-width: 52ch; margin-left: auto; margin-right: auto; }
+.lp-appointment-actions { margin-top: var(--sp-7); display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.btn-outline-appt {
+  display: inline-flex; align-items: center; gap: 10px; background: transparent;
+  border: 1px solid var(--card-border-strong); color: var(--text);
+  font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
+  padding: 0 28px; height: 50px; border-radius: 999px; cursor: pointer;
+  transition: border-color .2s ease, transform .2s ease, background .2s ease;
+}
+.btn-outline-appt:hover { border-color: var(--accent); background: rgba(220,38,38,.08); transform: translateY(-2px); }
+.btn-outline-appt svg { width: 18px; height: 18px; color: var(--accent); }
 .lp-plan-badge { clip-path: polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%); }
-.site-header { border-bottom: 1px solid var(--accent); }
 
 
 /* ---- Empresa: mosaico bento ---- */
@@ -360,16 +392,51 @@ p { margin: 0; }
 </head>
 <body>
 
-  <div class="page-mesh-wrap">
-  <div class="site-bg-mesh" aria-hidden="true"><svg id="siteMesh" viewBox="0 0 1000 4000" preserveAspectRatio="none"></svg></div>
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="red-laser-glow"></div>
+    <canvas id="dotsCanvas"></canvas>
+    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+      <defs>
+        <linearGradient id="redGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ff1e1e" stop-opacity="0.8" />
+          <stop offset="50%" stop-color="#b91c1c" stop-opacity="0.3" />
+          <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="thinLine" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.05" />
+          <stop offset="50%" stop-color="#ef4444" stop-opacity="0.4" />
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+        </linearGradient>
+      </defs>
+      <g class="svg-line-group">
+        <path d="M -100 200 C 300 600, 800 -100, 1600 500" stroke="url(#redGlow)" stroke-width="4" fill="none" filter="drop-shadow(0 0 12px #ff0000)" />
+        <path d="M -50 250 C 350 650, 850 -50, 1650 550" stroke="url(#redGlow)" stroke-width="1.5" fill="none" />
+      </g>
+      <g class="svg-line-group-reverse">
+        <path d="M -200 900 C 400 400, 900 1100, 1800 200" stroke="url(#thinLine)" stroke-width="1" fill="none" />
+        <path d="M -200 850 C 400 350, 900 1050, 1800 150" stroke="url(#thinLine)" stroke-width="1" fill="none" />
+        <path d="M -200 800 C 400 300, 900 1000, 1800 100" stroke="url(#thinLine)" stroke-width="0.75" fill="none" />
+        <path d="M -200 750 C 400 250, 900 950, 1800 50" stroke="url(#thinLine)" stroke-width="0.5" fill="none" />
+        <path d="M -100 100 C 500 800, 1100 300, 1900 900" stroke="url(#thinLine)" stroke-width="0.8" fill="none" />
+        <path d="M -100 150 C 500 850, 1100 350, 1900 950" stroke="url(#thinLine)" stroke-width="0.5" fill="none" />
+      </g>
+    </svg>
+  </div>
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand">
-        <img class="brand-icon" src="assets/images/logo-gordo.webp" alt="Gordo GPS">
+      <a href="index.html" class="brand-fa">
+        <span class="brand-fa-icon-wrap">
+          <img src="assets/images/piece-plane.webp" alt="">
+          <img src="assets/images/piece-pin.webp" alt="">
+        </span>
+        <span class="brand-fa-text">
+          <span class="gordo">GORDO</span><span class="gps">GPS</span>
+          <span class="brand-fa-underline"></span>
+        </span>
       </a>
       <div class="header-actions">
-        <a class="btn btn-whatsapp" href="https://wa.me/18097526329?text=Hola%2C%20quiero%20proteger%20mi%20veh%C3%ADculo%2C%20me%20interesa%20el%20plan%20Premium%20o%20VIP." target="_blank" rel="noopener">
+        <a class="btn btn-whatsapp" href="https://wa.me/18495646329?text=Hola%2C%20quiero%20proteger%20mi%20veh%C3%ADculo%2C%20me%20interesa%20el%20plan%20Premium%20o%20VIP." target="_blank" rel="noopener">
           <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
           WhatsApp
         </a>
@@ -388,7 +455,7 @@ p { margin: 0; }
         <p class="lead">Por eso creamos dos planes de protección real: rastreo GPS 4G, alertas al instante y tecnología que se adelanta al ladrón — incluso cuando intenta bloquear la señal.</p>
         <div class="lp-hero-cta">
           <a class="btn btn-primary btn-lg" href="#planes">Ver los planes <svg aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg></a>
-          <a class="btn btn-outline btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20tengo%20una%20duda%20sobre%20los%20planes%20de%20protecci%C3%B3n%20vehicular." target="_blank" rel="noopener">
+          <a class="btn btn-outline btn-lg" href="https://wa.me/18495646329?text=Hola%2C%20tengo%20una%20duda%20sobre%20los%20planes%20de%20protecci%C3%B3n%20vehicular." target="_blank" rel="noopener">
             <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
             Hacer una pregunta
           </a>
@@ -408,7 +475,7 @@ p { margin: 0; }
           <span class="eyebrow">Míralo en acción</span>
           <h2>Así se ve la instalación y la app funcionando</h2>
           <p>Un video corto y directo: la instalación real en el vehículo, la app en el celular y cómo llegan las alertas al instante.</p>
-          <a class="btn btn-whatsapp btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20vi%20el%20video%20y%20quiero%20proteger%20mi%20veh%C3%ADculo." target="_blank" rel="noopener">
+          <a class="btn btn-whatsapp btn-lg" href="https://wa.me/18495646329?text=Hola%2C%20vi%20el%20video%20y%20quiero%20proteger%20mi%20veh%C3%ADculo." target="_blank" rel="noopener">
             <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
             Quiero el mío
           </a>
@@ -469,7 +536,7 @@ p { margin: 0; }
               <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span>Acceso a <strong>plataforma privada</strong> con ubicación en tiempo real</span></li>
               <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span>Soporte de nuestro equipo en todo momento</span></li>
             </ul>
-            <a class="btn btn-whatsapp btn-block btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20quiero%20el%20plan%20PREMIUM%20de%20protecci%C3%B3n%20vehicular%20(RD%247%2C990)." target="_blank" rel="noopener">
+            <a class="btn btn-whatsapp btn-block btn-lg" href="https://wa.me/18495646329?text=Hola%2C%20quiero%20el%20plan%20PREMIUM%20de%20protecci%C3%B3n%20vehicular%20(RD%247%2C990)." target="_blank" rel="noopener">
               <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
               Elegir plan Premium
             </a>
@@ -486,7 +553,7 @@ p { margin: 0; }
               <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span><strong>Detección anti-jammer:</strong> si detectan el bloqueador de señal que usan los ladrones, el sistema avisa y bloquea el vehículo automáticamente, antes de que puedan actuar</span></li>
               <li><svg aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg><span><strong>Micrófono en tiempo real</strong> para escuchar lo que pasa dentro del vehículo</span></li>
             </ul>
-            <a class="btn btn-whatsapp btn-block btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20quiero%20el%20plan%20VIP%20de%20protecci%C3%B3n%20vehicular%20(RD%2413%2C990)." target="_blank" rel="noopener">
+            <a class="btn btn-whatsapp btn-block btn-lg" href="https://wa.me/18495646329?text=Hola%2C%20quiero%20el%20plan%20VIP%20de%20protecci%C3%B3n%20vehicular%20(RD%2413%2C990)." target="_blank" rel="noopener">
               <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
               Elegir plan VIP
             </a>
@@ -607,9 +674,28 @@ p { margin: 0; }
         <h2>¿Te vas con el Premium o prefieres el VIP?</h2>
         <p>Escríbenos ahora y te ayudamos a elegir el plan que mejor protege tu vehículo. Tenemos facilidades de pago disponibles.</p>
         <div class="lp-final-cta-actions">
-          <a class="btn btn-whatsapp btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20me%20interesa%20proteger%20mi%20veh%C3%ADculo%2C%20quiero%20saber%20m%C3%A1s%20de%20los%20planes%20Premium%20y%20VIP." target="_blank" rel="noopener">
+          <a class="btn btn-whatsapp btn-lg" href="https://wa.me/18495646329?text=Hola%2C%20me%20interesa%20proteger%20mi%20veh%C3%ADculo%2C%20quiero%20saber%20m%C3%A1s%20de%20los%20planes%20Premium%20y%20VIP." target="_blank" rel="noopener">
             <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
             Hablar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENDAR CITA -->
+    <section class="lp-appointment" id="agendar">
+      <div class="container">
+        <span class="eyebrow" style="justify-content:center;">Reserva tu instalación</span>
+        <h2>Agenda tu cita</h2>
+        <p>Dinos cuándo te queda mejor y coordinamos todo — o si prefieres, habla directo con un asesor.</p>
+        <div class="lp-appointment-actions">
+          <a class="btn btn-whatsapp btn-lg" href="agendar.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+            Agendar cita
+          </a>
+          <a class="btn-outline-appt" href="https://wa.me/18495646329?text=Hola%2C%20quisiera%20hablar%20con%20un%20asesor%20sobre%20la%20protecci%C3%B3n%20de%20mi%20veh%C3%ADculo." target="_blank" rel="noopener">
+            <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
+            Hablar con un asesor
           </a>
         </div>
       </div>
@@ -624,8 +710,6 @@ p { margin: 0; }
       <p class="footer-copy">© 2026 GPS Portátiles · Santiago de los Caballeros, República Dominicana</p>
     </div>
   </footer>
-
-  </div><!-- /.page-mesh-wrap -->
 
 
   <svg style="display:none" aria-hidden="true">
@@ -704,58 +788,56 @@ p { margin: 0; }
   </script>
 
   <script>
-    // Malla de ondas generativa para toda la página — un solo trazo continuo
-    // de arriba hacia abajo, curveando en todo el ancho. 100% código.
+    // Puntos rojos flotando sutilmente sobre el fondo — 100% código, sin imágenes.
     (function () {
-      var svg = document.getElementById('siteMesh');
-      var wrap = document.querySelector('.page-mesh-wrap');
-      if (!svg || !wrap) return;
+      var canvas = document.getElementById('dotsCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
 
-      function build() {
-        svg.innerHTML = '';
-        var ns = 'http://www.w3.org/2000/svg';
-        var W = 1000;
-        var H = Math.max(wrap.scrollHeight, wrap.offsetHeight, 1800);
-        svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
 
-        var spacing = 18;
-        var N = Math.max(90, Math.min(520, Math.round(H / spacing)));
-        for (var i = 0; i < N; i++) {
-          var t = i / (N - 1);
-          var baseY = -40 + t * (H + 80);
-          var cyc = baseY / 480;                 // avance continuo que hace que las curvas
-                                                   // sigan variando en todo el largo de la página
-          var amp = 55 + 70 * Math.sin(cyc * 1.4 + 0.4);
-          var amp2 = 25 * Math.cos(cyc * 2.6);
-          var freq = 1.1 + 0.4 * Math.sin(cyc * 0.9);
-          var phase = cyc * 3.0;
-
-          var d = '';
-          for (var x = 0; x <= W; x += 14) {
-            var u = (x / W) * Math.PI * 2;
-            var y = baseY + amp * Math.sin(freq * u + phase) + amp2 * Math.sin(2 * freq * u + phase * 1.4);
-            d += (x === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
-          }
-
-          var op = 0.08 + 0.28 * Math.abs(Math.sin(cyc * 1.7 + 1));
-          var lightness = 24 + 34 * Math.abs(Math.sin(cyc * 1.3));
-          var path = document.createElementNS(ns, 'path');
-          path.setAttribute('d', d.trim());
-          path.setAttribute('stroke', 'hsl(355, 85%, ' + lightness.toFixed(0) + '%)');
-          path.setAttribute('stroke-opacity', op.toFixed(2));
-          path.setAttribute('stroke-width', '1.1');
-          path.setAttribute('fill', 'none');
-          svg.appendChild(path);
-        }
+      var dotsCount = 50;
+      var dots = [];
+      for (var i = 0; i < dotsCount; i++) {
+        dots.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.8 + 0.6,
+          vx: (Math.random() - 0.5) * 0.12,
+          vy: (Math.random() - 0.5) * 0.12,
+          alpha: Math.random() * 0.6 + 0.2,
+          pulse: Math.random() * 0.01 + 0.003
+        });
       }
 
-      build();
-      var resizeTimer;
-      window.addEventListener('resize', function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(build, 250);
-      });
-      window.addEventListener('load', build);
+      function animateDots() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        dots.forEach(function (dot) {
+          dot.x += dot.vx;
+          dot.y += dot.vy;
+          if (dot.x < 0) dot.x = canvas.width;
+          if (dot.x > canvas.width) dot.x = 0;
+          if (dot.y < 0) dot.y = canvas.height;
+          if (dot.y > canvas.height) dot.y = 0;
+
+          dot.alpha += Math.sin(Date.now() * dot.pulse * 0.05) * 0.002;
+          var currentAlpha = Math.max(0.15, Math.min(0.85, dot.alpha));
+
+          ctx.beginPath();
+          ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(239, 68, 68, ' + currentAlpha + ')';
+          ctx.shadowColor = '#ef4444';
+          ctx.shadowBlur = 6;
+          ctx.fill();
+        });
+        requestAnimationFrame(animateDots);
+      }
+      animateDots();
     })();
   </script>
 
