@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Descargar la app | Gordo GPS</title>
-<meta name="description" content="Descarga la app de Gordo GPS (Knox Track) para iPhone y Android, y monitorea tu vehículo desde tu celular.">
+<meta name="description" content="Descarga la app de Gordo GPS para iPhone y Android, o úsala desde la web, y monitorea tu vehículo desde donde estés.">
 <meta name="theme-color" content="#0C0C0E">
 <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,46 +67,48 @@ a { color: inherit; text-decoration: none; }
 .back-link:hover { color: var(--text); }
 .back-link svg { width: 15px; height: 15px; }
 
-/* ---- Página: dos columnas ---- */
-.shell { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 30px 24px 100px; }
-.dl-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; margin-top: 40px; }
-.dl-left .accent-bar { display: block; height: 4px; width: 56px; background: var(--accent); margin-bottom: 22px; }
-.dl-left .eyebrow {
+/* ---- Página: una columna centrada, sin mockups ---- */
+.shell { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; padding: 30px 24px 100px; }
+.dl-shell-centered { text-align: center; }
+.dl-intro-centered { margin-top: 20px; }
+.dl-intro-centered .accent-bar { display: block; height: 4px; width: 56px; background: var(--accent); margin: 0 auto 22px; }
+.dl-intro-centered .eyebrow {
   display: inline-block; font-family: var(--font-head); font-size: 0.85rem; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--accent); font-weight: 600;
 }
-.dl-left h1 {
-  margin-top: 16px; font-size: clamp(2.6rem, 4.6vw, 3.6rem); font-weight: 700;
-  line-height: 1; letter-spacing: -0.015em; color: var(--text);
+.dl-intro-centered h1 {
+  margin-top: 16px; font-size: clamp(2.2rem, 4.6vw, 3rem); font-weight: 700;
+  line-height: 1.05; letter-spacing: -0.015em; color: var(--text);
 }
-.dl-left h1 .accent { color: var(--accent); }
-.dl-left p { margin-top: 22px; color: var(--text-muted); font-size: 1.14rem; max-width: 42ch; line-height: 1.7; }
-.dl-features { margin-top: 30px; display: flex; flex-direction: column; gap: 14px; }
+.dl-intro-centered h1 .accent { color: var(--accent); }
+.dl-intro-centered p { margin-top: 18px; color: var(--text-muted); font-size: 1.08rem; max-width: 46ch; line-height: 1.7; margin-left: auto; margin-right: auto; }
+
+.dl-features-centered {
+  margin-top: 34px; display: flex; flex-direction: column; gap: 14px; align-items: center;
+}
 .dl-feature { display: flex; align-items: center; gap: 12px; color: var(--text-muted); font-size: 0.98rem; }
 .dl-feature svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
 
-.dl-phones { display: flex; justify-content: center; gap: 22px; }
-.dl-phone-col { display: flex; flex-direction: column; align-items: center; gap: 20px; flex: 1; max-width: 240px; }
-.dl-phone-shot {
-  width: 100%; border-radius: 22px; overflow: hidden;
-  box-shadow: 0 25px 50px -18px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06);
-}
-.dl-phone-shot img { width: 100%; height: auto; display: block; }
-.dl-badge { display: block; width: 100%; transition: transform .2s ease, filter .2s ease; }
+.dl-badges-centered { margin-top: 38px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.dl-badge { display: block; width: 200px; transition: transform .2s ease, filter .2s ease; }
 .dl-badge:hover { transform: translateY(-3px); filter: drop-shadow(0 10px 20px rgba(0,0,0,.4)); }
 .dl-badge img { width: 100%; height: auto; }
 
-@media (max-width: 900px) {
-  .dl-grid { grid-template-columns: 1fr; gap: 6px; margin-top: 14px; }
-  .dl-left { order: -1; text-align: left; }
-  .dl-left .accent-bar { display: none; }
-  .dl-left .eyebrow { display: none; }
-  .dl-left h1 { margin-top: 0; font-size: 1.35rem; }
-  .dl-left p { display: none; }
-  .dl-features { display: none; }
+.dl-web-btn {
+  margin-top: 22px; display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 26px; border-radius: 999px; border: 1px solid var(--card-border-strong);
+  color: var(--text); font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.dl-web-btn:hover { border-color: var(--accent); background: rgba(220,38,38,.08); transform: translateY(-2px); }
+.dl-web-btn svg { width: 18px; height: 18px; color: var(--accent); }
+
+@media (max-width: 560px) {
   .shell { padding-top: 18px; }
   .topbar { padding-top: 16px; }
-  .dl-phones { margin-top: 18px; gap: 14px; }
+  .dl-intro-centered h1 { font-size: 1.7rem; }
+  .dl-features-centered { margin-top: 26px; }
+  .dl-badge { width: 165px; }
 }
 
 </style>
@@ -161,55 +163,43 @@ a { color: inherit; text-decoration: none; }
   </a>
 </div>
 
-<div class="shell">
+<div class="shell dl-shell-centered">
 
-  <div class="dl-grid">
-
-    <div class="dl-left">
-      <span class="accent-bar"></span>
-      <span class="eyebrow">App móvil</span>
-      <h1>Descargar la <span class="accent">app</span></h1>
-      <p>Monitorea tu vehículo en tiempo real, recibe alertas al instante y controla tu GPS desde tu celular — disponible para iPhone y Android.</p>
-
-      <div class="dl-features">
-        <div class="dl-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path stroke-width="1.8" stroke-linecap="square" d="M12 7v5.2l3.6 2"/></svg>
-          Ubicación y alertas en tiempo real
-        </div>
-        <div class="dl-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M6 5L12 2L18 5V12C18 17 15.5 20 12 22C8.5 20 6 17 6 12Z"/><circle cx="12" cy="11.5" r="1.4" fill="currentColor"/><path stroke-width="1.5" d="M9 11.5a3 3 0 016 0"/></svg>
-          Protección anti-jammer incluida
-        </div>
-        <div class="dl-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="5" y="11" width="14" height="8" stroke-linejoin="miter"/><path stroke-width="2.1" d="M7.5 11V7.5a4.5 4.5 0 019 0V11"/></svg>
-          Acceso privado, solo tú lo ves
-        </div>
-      </div>
-    </div>
-
-    <div class="dl-phones">
-
-      <div class="dl-phone-col">
-        <div class="dl-phone-shot">
-          <img src="../assets/images/iphone_full.webp" alt="App Knox Track en iPhone">
-        </div>
-        <a class="dl-badge" href="https://apps.apple.com/us/app/knox-track/id6466385571?l=es-MX" target="_blank" rel="noopener">
-          <img src="../assets/images/aps_badge.webp" alt="Descargar en App Store">
-        </a>
-      </div>
-
-      <div class="dl-phone-col">
-        <div class="dl-phone-shot">
-          <img src="../assets/images/android_full.webp" alt="App Knox Track en Android">
-        </div>
-        <a class="dl-badge" href="https://play.google.com/store/apps/details?id=com.knoxgps.app" target="_blank" rel="noopener">
-          <img src="../assets/images/gp_badge.webp" alt="Descargar en Google Play">
-        </a>
-      </div>
-
-    </div>
-
+  <div class="dl-intro-centered">
+    <span class="accent-bar"></span>
+    <span class="eyebrow">App móvil y web</span>
+    <h1>Descargar la <span class="accent">app</span></h1>
+    <p>Monitorea tu vehículo en tiempo real, recibe alertas al instante y controla tu GPS desde tu celular o desde cualquier navegador.</p>
   </div>
+
+  <div class="dl-features dl-features-centered">
+    <div class="dl-feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path stroke-width="1.8" stroke-linecap="square" d="M12 7v5.2l3.6 2"/></svg>
+      Ubicación y alertas en tiempo real
+    </div>
+    <div class="dl-feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M6 5L12 2L18 5V12C18 17 15.5 20 12 22C8.5 20 6 17 6 12Z"/><circle cx="12" cy="11.5" r="1.4" fill="currentColor"/><path stroke-width="1.5" d="M9 11.5a3 3 0 016 0"/></svg>
+      Protección anti-jammer incluida
+    </div>
+    <div class="dl-feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="5" y="11" width="14" height="8" stroke-linejoin="miter"/><path stroke-width="2.1" d="M7.5 11V7.5a4.5 4.5 0 019 0V11"/></svg>
+      Acceso privado, solo tú lo ves
+    </div>
+  </div>
+
+  <div class="dl-badges-centered">
+    <a class="dl-badge" href="https://apps.apple.com/do/app/gordo-gps/id6742783640" target="_blank" rel="noopener">
+      <img src="../assets/images/aps_badge.webp" alt="Descargar en App Store">
+    </a>
+    <a class="dl-badge" href="https://play.google.com/store/apps/details?id=com.gordogps.app" target="_blank" rel="noopener">
+      <img src="../assets/images/gp_badge.webp" alt="Descargar en Google Play">
+    </a>
+  </div>
+
+  <a class="dl-web-btn" href="https://aplicaciongps.com/login" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg>
+    Usar la plataforma desde la web
+  </a>
 
 </div>
 
