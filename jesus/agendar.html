@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agenda tu cita | Gordo GPS</title>
-<meta name="description" content="Agenda la instalación de tu GPS: cuéntanos tu vehículo, el plan que quieres y cuándo te queda mejor.">
+<title>Solicitar cita | Gordo GPS</title>
+<meta name="description" content="Solicita tu cita para instalar el GPS: vehículo, plan y cuándo te queda mejor.">
 <meta name="theme-color" content="#0C0C0E">
 <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,6 @@ h1, h2, h3 { font-family: var(--font-head); margin: 0; }
 img, svg { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
-/* ---- Fondo animado (igual al resto del sitio) ---- */
 .bg-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
 .red-laser-glow {
   position: absolute; top: -20%; right: -10%; width: 75vw; height: 140vh;
@@ -51,8 +50,7 @@ a { color: inherit; text-decoration: none; }
   100% { transform: translateY(-18px) scaleX(.97) rotate(.6deg); }
 }
 
-/* ---- Header ---- */
-.topbar { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 26px 24px 0; display: flex; align-items: center; justify-content: space-between; }
+.topbar { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; padding: 26px 24px 0; display: flex; align-items: center; justify-content: space-between; }
 .brand-fa { display: flex; align-items: center; gap: 8px; }
 .brand-fa-icon-wrap { position: relative; width: 28px; aspect-ratio: 936/805; }
 .brand-fa-icon-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -67,39 +65,20 @@ a { color: inherit; text-decoration: none; }
 .back-link:hover { color: var(--text); }
 .back-link svg { width: 15px; height: 15px; }
 
-/* ---- Página: dos columnas, como el inicio ---- */
-.shell { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 30px 24px 90px; }
-.agenda-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: start; margin-top: 30px; }
-.agenda-left { position: sticky; top: 26px; }
-.agenda-left .accent-bar { display: block; height: 4px; width: 56px; background: var(--accent); margin-bottom: 22px; }
-.agenda-left .eyebrow {
+.shell { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; padding: 30px 24px 90px; }
+.page-intro { text-align: center; margin-top: 24px; }
+.page-intro .eyebrow {
   display: inline-block; font-family: var(--font-head); font-size: 0.85rem; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--accent); font-weight: 600;
 }
-.agenda-left h1 {
-  margin-top: 16px; font-size: clamp(2.8rem, 5vw, 3.8rem); font-weight: 700;
-  line-height: 1; letter-spacing: -0.015em; color: var(--text);
+.page-intro h1 {
+  margin-top: 12px; font-size: clamp(1.9rem, 5vw, 2.5rem); font-weight: 700;
+  letter-spacing: -0.01em; color: var(--text);
 }
-.agenda-left h1 .accent { color: var(--accent); }
-.agenda-left p { margin-top: 22px; color: var(--text-muted); font-size: 1.18rem; max-width: 40ch; line-height: 1.7; font-weight: 400; }
-
-.agenda-store-photo {
-  position: relative; margin-top: 38px; width: 100%; max-width: 380px; aspect-ratio: 3/4;
-  -webkit-mask-image: radial-gradient(120% 100% at 30% 25%, black 42%, transparent 78%);
-  mask-image: radial-gradient(120% 100% at 30% 25%, black 42%, transparent 78%);
-}
-.agenda-store-photo img {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 22px;
-  filter: saturate(1.05) contrast(1.03);
-}
-.agenda-store-photo::after {
-  content: ""; position: absolute; inset: 0; border-radius: 22px;
-  background: linear-gradient(160deg, rgba(220,38,38,.16), transparent 55%, rgba(4,4,5,.5));
-  pointer-events: none;
-}
+.page-intro p { margin-top: 10px; color: var(--text-muted); font-size: 1rem; }
 
 .appt-card {
-  background: rgba(18,18,20,.7); backdrop-filter: blur(8px);
+  margin-top: 30px; background: rgba(18,18,20,.7); backdrop-filter: blur(8px);
   border: 1px solid var(--card-border-strong); border-radius: 18px; padding: 30px 26px;
 }
 .appt-form { display: flex; flex-direction: column; gap: 18px; }
@@ -120,13 +99,13 @@ a { color: inherit; text-decoration: none; }
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A3A3A8' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
   background-repeat: no-repeat; background-position: right 12px center; background-size: 16px;
 }
+.appt-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-/* ---- Mini calendario propio para "Día" ---- */
 .appt-date-wrap { position: relative; }
 .appt-date-wrap input { width: 100%; cursor: pointer; }
 .appt-calendar {
   display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 50;
-  width: 280px; max-width: 90vw; background: var(--bg-2); border: 1px solid var(--card-border-strong);
+  width: 280px; max-width: 85vw; background: var(--bg-2); border: 1px solid var(--card-border-strong);
   border-radius: 14px; padding: 14px; box-shadow: 0 20px 45px -15px rgba(0,0,0,.7);
 }
 .appt-calendar.is-open { display: block; }
@@ -152,6 +131,7 @@ a { color: inherit; text-decoration: none; }
 .appt-cal-day.is-outside { color: var(--text-faint); opacity: .4; }
 .appt-cal-day.is-today { border: 1px solid var(--card-border-strong); }
 .appt-cal-day.is-selected { background: var(--accent); color: #fff; font-weight: 700; }
+
 .appt-submit {
   margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 10px;
   width: 100%; height: 54px; border-radius: 999px; border: none; cursor: pointer;
@@ -159,8 +139,11 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 10px 24px -10px rgba(31,168,85,.55); transition: transform .2s ease, box-shadow .2s ease;
 }
 .appt-submit:hover { transform: translateY(-2px); }
+.appt-submit:disabled { opacity: .7; cursor: default; transform: none; }
 .appt-submit svg { width: 22px; height: 22px; }
 
+.appt-domicilio-wrap { display: none; flex-direction: column; gap: 10px; margin-top: 4px; }
+.appt-domicilio-wrap.is-open { display: flex; }
 .appt-location-row { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 .appt-location-row input { width: 100%; }
 .appt-geo-btn {
@@ -180,24 +163,15 @@ a { color: inherit; text-decoration: none; }
 .appt-geo-btn.is-done .geo-icon-pin { display: none; }
 .appt-geo-btn.is-done .geo-icon-check { display: block; }
 @keyframes geoSpin { to { transform: rotate(360deg); } }
-.appt-geo-status { display: block; margin-top: 6px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); min-height: 1em; }
+.appt-geo-status { display: block; margin-top: 2px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); min-height: 1em; }
 .appt-geo-status.is-ok { color: #1FA855; }
 .appt-geo-status.is-error { color: var(--accent); }
 
-@media (max-width: 900px) {
-  .agenda-grid { grid-template-columns: 1fr; gap: 4px; margin-top: 14px; }
-  .agenda-left { order: -1; text-align: left; position: static; }
-  .agenda-left .accent-bar { display: none; }
-  .agenda-left .eyebrow { display: none; }
-  .agenda-left h1 { margin-top: 0; font-size: 1.35rem; }
-  .agenda-left p { display: none; }
-  .agenda-store-photo { display: none; }
-  .appt-card { margin-top: 14px; }
+@media (max-width: 560px) {
+  .appt-card { padding: 22px 16px; margin-top: 20px; }
+  .appt-row2 { grid-template-columns: 1fr; }
   .shell { padding-top: 18px; }
   .topbar { padding-top: 16px; }
-}
-@media (max-width: 560px) {
-  .appt-card { padding: 22px 16px; }
 }
 
 </style>
@@ -254,19 +228,13 @@ a { color: inherit; text-decoration: none; }
 
 <div class="shell">
 
-  <div class="agenda-grid">
+  <div class="page-intro">
+    <span class="eyebrow">Reserva tu instalación</span>
+    <h1>Solicitar cita</h1>
+    <p>Completa tus datos y te confirmamos por WhatsApp.</p>
+  </div>
 
-    <div class="agenda-left">
-      <span class="accent-bar"></span>
-      <span class="eyebrow">Reserva tu instalación</span>
-      <h1>Agenda tu <span class="accent">cita</span></h1>
-      <p>Completa tus datos y te confirmamos por WhatsApp. Elegimos contigo el día, la hora y el plan que más te convenga.</p>
-      <div class="agenda-store-photo">
-        <img src="../assets/images/local-dueno.webp" alt="Local físico de Gordo GPS">
-      </div>
-    </div>
-
-    <div class="appt-card">
+  <div class="appt-card">
     <form class="appt-form" id="appointmentForm">
 
       <label>
@@ -285,95 +253,79 @@ a { color: inherit; text-decoration: none; }
       </label>
 
       <label>
-        <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="3" y="5" width="18" height="16" stroke-linejoin="miter"/><path stroke-width="2.1" stroke-linecap="square" d="M8 3v4M16 3v4M3 10h18"/><path fill="currentColor" stroke="none" d="M12 14l3 1.4-3 1.4z"/><path stroke-width="1.6" d="M12 14v5"/></svg>Día</span>
-        <div class="appt-date-wrap">
-          <input type="text" name="dia" id="diaInput" placeholder="DD/MM/AAAA" autocomplete="off" required>
-          <div class="appt-calendar" id="apptCalendar">
-            <div class="appt-cal-head">
-              <button type="button" class="appt-cal-nav" id="calPrev" aria-label="Mes anterior">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
-              </button>
-              <span class="appt-cal-title" id="calTitle"></span>
-              <button type="button" class="appt-cal-nav" id="calNext" aria-label="Mes siguiente">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-              </button>
-            </div>
-            <div class="appt-cal-weekdays">
-              <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
-            </div>
-            <div class="appt-cal-grid" id="calGrid"></div>
-          </div>
-        </div>
-      </label>
-
-      <label>
-        <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path stroke-width="1.8" stroke-linecap="square" d="M12 7v5.2l3.6 2"/></svg>Hora</span>
-        <input type="text" name="hora" placeholder="Ej: 3:00 pm" required>
-      </label>
-
-      <label>
         <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M3 16l1.6-5A2 2 0 016.5 9.5h11a2 2 0 011.9 1.5L21 16"/><path stroke-linecap="square" d="M2.5 16h19"/><circle cx="6.5" cy="17.3" r="1.7"/><circle cx="17.5" cy="17.3" r="1.7"/></svg>Vehículo</span>
         <input type="text" name="vehiculo" placeholder="Marca, modelo y año" required>
       </label>
 
       <label>
-        <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="7" cy="12" r="4"/><path stroke-linecap="square" d="M10.5 12H21M17.5 12v3M21 12v3"/></svg>Encendido (Botón o llave)</span>
-        <select name="encendido">
-          <option value="Botón">Botón</option>
-          <option value="Llave">Llave</option>
-        </select>
-      </label>
-
-      <label>
         <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M12 3l8 4.2v9.6L12 21l-8-4.2V7.2z"/><path stroke-width="1.6" stroke-linejoin="miter" d="M4 7.2L12 11l8-3.8M12 11v10"/></svg>Plan</span>
-        <select name="plan">
-          <option value="Premium">Premium</option>
-          <option value="VIP">VIP</option>
+        <select name="plan" id="planSelect">
+          <option value="Premium (RD$7,990)">Premium — RD$7,990</option>
+          <option value="VIP (RD$13,990)">VIP — RD$13,990</option>
         </select>
       </label>
 
-      <label>
-        <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M12 2L22 20H2z"/><path stroke-width="2" stroke-linecap="square" d="M12 9v5"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>Contacto de emergencia</span>
-        <input type="text" name="emergencia" placeholder="Nombre y teléfono">
-      </label>
+      <div class="appt-row2">
+        <label>
+          <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="3" y="5" width="18" height="16" stroke-linejoin="miter"/><path stroke-width="2.1" stroke-linecap="square" d="M8 3v4M16 3v4M3 10h18"/><path fill="currentColor" stroke="none" d="M12 14l3 1.4-3 1.4z"/><path stroke-width="1.6" d="M12 14v5"/></svg>Fecha</span>
+          <div class="appt-date-wrap">
+            <input type="text" name="dia" id="diaInput" placeholder="DD/MM/AAAA" autocomplete="off" required>
+            <div class="appt-calendar" id="apptCalendar">
+              <div class="appt-cal-head">
+                <button type="button" class="appt-cal-nav" id="calPrev" aria-label="Mes anterior">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+                </button>
+                <span class="appt-cal-title" id="calTitle"></span>
+                <button type="button" class="appt-cal-nav" id="calNext" aria-label="Mes siguiente">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+                </button>
+              </div>
+              <div class="appt-cal-weekdays">
+                <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
+              </div>
+              <div class="appt-cal-grid" id="calGrid"></div>
+            </div>
+          </div>
+        </label>
 
-      <label>
-        <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" stroke-linejoin="miter"/><path stroke-linecap="square" d="M2.5 9.8h19"/><path stroke-width="1.8" stroke-linecap="square" d="M5.5 14.5h5"/></svg>Método de pago</span>
-        <select name="pago">
-          <option value="Efectivo">Efectivo</option>
-          <option value="Transferencia">Transferencia</option>
-          <option value="Tarjeta">Tarjeta</option>
-        </select>
-      </label>
+        <label>
+          <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path stroke-width="1.8" stroke-linecap="square" d="M12 7v5.2l3.6 2"/></svg>Hora</span>
+          <input type="text" name="hora" placeholder="Ej: 3:00 pm" required>
+        </label>
+      </div>
 
       <label>
         <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M7 6H17L19 10L12 22L5 10Z"/><path stroke-width="1.5" d="M9 10.5H15M12 7.5V13.5"/></svg>Ubicación</span>
-        <div class="appt-location-row">
-          <input type="text" name="ubicacion" id="ubicacionInput" placeholder="Dirección de instalación" required>
-          <button type="button" class="appt-geo-btn" id="geoBtn" aria-label="Enviar ubicación real" title="Enviar ubicación real">
-            <svg class="geo-icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linejoin="miter" d="M7 6H17L19 10L12 22L5 10Z"/><path stroke-width="1.6" d="M9 10.5H15M12 7.5V13.5"/></svg>
-            <svg class="geo-icon-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" d="M12 3a9 9 0 019 9"/></svg>
-            <svg class="geo-icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Enviar ubicación real</span>
-          </button>
+        <select name="ubicacion_tipo" id="ubicacionTipo">
+          <option value="Sucursal Santiago">Sucursal Santiago</option>
+          <option value="Domicilio">Domicilio</option>
+        </select>
+
+        <div class="appt-domicilio-wrap" id="domicilioWrap">
+          <div class="appt-location-row">
+            <input type="text" name="ubicacion" id="ubicacionInput" placeholder="Dirección de instalación">
+            <button type="button" class="appt-geo-btn" id="geoBtn" aria-label="Enviar ubicación real" title="Enviar ubicación real">
+              <svg class="geo-icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linejoin="miter" d="M7 6H17L19 10L12 22L5 10Z"/><path stroke-width="1.6" d="M9 10.5H15M12 7.5V13.5"/></svg>
+              <svg class="geo-icon-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" d="M12 3a9 9 0 019 9"/></svg>
+              <svg class="geo-icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Enviar ubicación real</span>
+            </button>
+          </div>
+          <span class="appt-geo-status" id="geoStatus"></span>
         </div>
-        <span class="appt-geo-status" id="geoStatus"></span>
       </label>
 
-      <button type="submit" class="appt-submit">
+      <button type="submit" class="appt-submit" id="submitBtn">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
-        Enviar por WhatsApp
+        <span id="submitBtnLabel">Enviar cita por WhatsApp</span>
       </button>
 
     </form>
-    </div>
-
   </div>
 
 </div>
 
 <script>
-  // Puntos rojos flotando sutilmente sobre el fondo — 100% código.
   (function () {
     var canvas = document.getElementById('dotsCanvas');
     if (!canvas) return;
@@ -411,7 +363,20 @@ a { color: inherit; text-decoration: none; }
     animateDots();
   })();
 
-  // Mini calendario propio para el campo "Día" — 100% código, sin el selector nativo.
+  (function () {
+    var select = document.getElementById('ubicacionTipo');
+    var wrap = document.getElementById('domicilioWrap');
+    var input = document.getElementById('ubicacionInput');
+    if (!select || !wrap) return;
+    function sync() {
+      var isDomicilio = select.value === 'Domicilio';
+      wrap.classList.toggle('is-open', isDomicilio);
+      input.required = isDomicilio;
+    }
+    select.addEventListener('change', sync);
+    sync();
+  })();
+
   (function () {
     var input = document.getElementById('diaInput');
     var cal = document.getElementById('apptCalendar');
@@ -484,7 +449,6 @@ a { color: inherit; text-decoration: none; }
     });
   })();
 
-  // Botón "Enviar ubicación" -> pide el GPS real del navegador y lo agrega al campo
   (function () {
     var btn = document.getElementById('geoBtn');
     var input = document.getElementById('ubicacionInput');
@@ -528,15 +492,16 @@ a { color: inherit; text-decoration: none; }
     });
   })();
 
-  // Envío del formulario -> arma el mensaje (con enlace a Google Calendar) y abre WhatsApp
   (function () {
     var WHATSAPP_NUMBER = '18494416329';
+    var COUNTER_OFFSET = 2004;
     var form = document.getElementById('appointmentForm');
+    var submitBtn = document.getElementById('submitBtn');
+    var submitBtnLabel = document.getElementById('submitBtnLabel');
     if (!form) return;
 
     function pad(n) { return (n < 10 ? '0' : '') + n; }
 
-    // Interpreta "25/12/2026", "25-12-2026" o "2026-12-25"
     function parseDateFlexible(str) {
       str = (str || '').trim();
       var m = str.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/);
@@ -546,7 +511,6 @@ a { color: inherit; text-decoration: none; }
       return null;
     }
 
-    // Interpreta "3:00 pm", "3pm", "15:00", "03:00 PM"
     function parseTimeFlexible(str) {
       str = (str || '').trim().toLowerCase();
       var m = str.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/);
@@ -560,7 +524,7 @@ a { color: inherit; text-decoration: none; }
       return { h: h, m: min };
     }
 
-    function buildCalendarLink(d) {
+    function buildCalendarLink(d, ubicacionTexto) {
       var dateObj = parseDateFlexible(d.get('dia'));
       var timeObj = parseTimeFlexible(d.get('hora'));
       var datesParam = '';
@@ -573,40 +537,57 @@ a { color: inherit; text-decoration: none; }
         datesParam = '&dates=' + fmt(start) + '/' + fmt(end);
       }
       var title = 'Instalación GPS — ' + (d.get('nombre') || 'Cliente');
-      var details =
-        'Vehículo: ' + d.get('vehiculo') + '\n' +
-        'Plan: ' + d.get('plan') + '\n' +
-        'Encendido: ' + d.get('encendido') + '\n' +
-        'WhatsApp del cliente: ' + d.get('whatsapp');
+      var details = 'Vehículo: ' + d.get('vehiculo') + '\nPlan: ' + d.get('plan') + '\nWhatsApp del cliente: ' + d.get('whatsapp');
       var params =
         'action=TEMPLATE' +
         '&text=' + encodeURIComponent(title) +
         '&details=' + encodeURIComponent(details) +
-        '&location=' + encodeURIComponent(d.get('ubicacion') || '') +
+        '&location=' + encodeURIComponent(ubicacionTexto || '') +
         datesParam;
       return 'https://calendar.google.com/calendar/render?' + params;
     }
 
+    function nextTicketNumber() {
+      return fetch('https://api.countapi.xyz/hit/gordogps-citas/agendar')
+        .then(function (r) { return r.json(); })
+        .then(function (data) { return COUNTER_OFFSET + data.value; })
+        .catch(function () { return null; });
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtnLabel.textContent = 'Enviando...';
+
       var d = new FormData(form);
-      var calendarLink = buildCalendarLink(d);
-      var msg =
-        '📋 Formulario para citas\n' +
-        '🧑 Nombre: ' + d.get('nombre') + '\n' +
-        '📞 WhatsApp: ' + d.get('whatsapp') + '\n' +
-        '📧 Correo: ' + (d.get('correo') || '-') + '\n' +
-        '📅 Día: ' + d.get('dia') + '\n' +
-        '🕒 Hora: ' + d.get('hora') + '\n' +
-        '🚘 Vehículo: ' + d.get('vehiculo') + '\n' +
-        '🔑 Encendido (Botón o Llave): ' + d.get('encendido') + '\n' +
-        '📦 Plan: ' + d.get('plan') + '\n' +
-        '🆘 Contacto de emergencia: ' + (d.get('emergencia') || '-') + '\n' +
-        '💳 Método de pago: ' + d.get('pago') + '\n' +
-        '📍 Ubicación: ' + d.get('ubicacion') + '\n\n' +
-        '📆 Agregar al calendario: ' + calendarLink;
-      var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
-      window.open(url, '_blank');
+      var ubicacionTipo = d.get('ubicacion_tipo');
+      var ubicacionTexto = ubicacionTipo === 'Domicilio'
+        ? (d.get('ubicacion') || 'Domicilio (sin especificar)')
+        : 'Sucursal Santiago';
+
+      nextTicketNumber().then(function (ticket) {
+        var calendarLink = buildCalendarLink(d, ubicacionTexto);
+        var msg =
+          '📋 Formulario para citas\n' +
+          '🧑 Nombre: ' + d.get('nombre') + '\n' +
+          '📞 WhatsApp: ' + d.get('whatsapp') + '\n' +
+          '📧 Correo: ' + (d.get('correo') || '-') + '\n' +
+          '🚘 Vehículo: ' + d.get('vehiculo') + '\n' +
+          '📦 Plan: ' + d.get('plan') + '\n' +
+          '📅 Día: ' + d.get('dia') + '\n' +
+          '🕒 Hora: ' + d.get('hora') + '\n' +
+          '📍 Ubicación: ' + ubicacionTexto + '\n\n' +
+          '📆 Agregar al calendario: ' + calendarLink + '\n\n' +
+          'Acabo de realizar una cita' +
+          (ticket ? '\nCita #' + ticket : '') +
+          '\nNombre: ' + d.get('nombre') +
+          '\nNúmero: ' + d.get('whatsapp');
+
+        var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+        window.open(url, '_blank');
+        submitBtn.disabled = false;
+        submitBtnLabel.textContent = 'Enviar cita por WhatsApp';
+      });
     });
   })();
 </script>
