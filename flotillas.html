@@ -81,11 +81,17 @@ a { color: inherit; text-decoration: none; }
 /* ---- Planes ---- */
 .fl-plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; max-width: 900px; margin: 44px auto 0; align-items: stretch; }
 .fl-plan {
-  position: relative; background: rgba(18,18,20,.7); backdrop-filter: blur(8px);
-  border: 1px solid var(--card-border); border-radius: 18px; padding: 32px 28px;
-  display: flex; flex-direction: column;
+  position: relative; background: linear-gradient(165deg, rgba(255,255,255,.035) 0%, rgba(255,255,255,0) 45%);
+  padding: 34px 28px 28px; display: flex; flex-direction: column;
 }
-.fl-plan--vip { border-color: var(--card-border-strong); box-shadow: 0 0 0 1px rgba(220,38,38,.15); }
+.fl-plan::before, .fl-plan::after, .fl-plan .corner-bl, .fl-plan .corner-br {
+  content: ""; position: absolute; width: 22px; height: 22px; pointer-events: none;
+}
+.fl-plan::before { top: 0; left: 0; border-top: 2px solid var(--card-border-strong); border-left: 2px solid var(--card-border-strong); }
+.fl-plan::after { top: 0; right: 0; border-top: 2px solid var(--card-border-strong); border-right: 2px solid var(--card-border-strong); }
+.fl-plan .corner-bl { bottom: 0; left: 0; border-bottom: 2px solid rgba(255,255,255,.18); border-left: 2px solid rgba(255,255,255,.18); }
+.fl-plan .corner-br { bottom: 0; right: 0; border-bottom: 2px solid rgba(255,255,255,.18); border-right: 2px solid rgba(255,255,255,.18); }
+.fl-plan--vip::before, .fl-plan--vip::after { border-color: var(--accent); }
 .fl-plan-badge {
   position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
   background: var(--accent); color: #fff; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em;
@@ -107,13 +113,6 @@ a { color: inherit; text-decoration: none; }
 }
 .fl-quote-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
 .fl-quote-btn svg { width: 19px; height: 19px; }
-
-/* ---- Beneficios ---- */
-.fl-features { margin-top: 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.fl-feature { background: rgba(18,18,20,.55); border: 1px solid var(--card-border); border-radius: 14px; padding: 22px 20px; }
-.fl-feature svg { width: 24px; height: 24px; color: var(--accent); }
-.fl-feature h3 { margin-top: 14px; font-size: 1.02rem; }
-.fl-feature p { margin-top: 8px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.55; }
 
 /* ---- Modal de cotización ---- */
 .fl-modal-overlay {
@@ -165,7 +164,6 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 760px) {
   .fl-plans-grid { grid-template-columns: 1fr; max-width: 420px; }
-  .fl-features { grid-template-columns: 1fr; margin-top: 36px; }
   .fl-plan-desc { min-height: 0; }
 }
 @media (max-width: 480px) {
@@ -235,6 +233,7 @@ a { color: inherit; text-decoration: none; }
   <div class="fl-plans-grid">
 
     <article class="fl-plan" id="planPremium">
+      <span class="corner-bl"></span><span class="corner-br"></span>
       <h3 class="fl-plan-name">Flotillas Premium</h3>
       <p class="fl-plan-desc">Cobertura confiable para toda tu flota, con visibilidad total desde un solo panel.</p>
       <ul class="fl-plan-features">
@@ -253,6 +252,7 @@ a { color: inherit; text-decoration: none; }
     </article>
 
     <article class="fl-plan fl-plan--vip" id="planVip">
+      <span class="corner-bl"></span><span class="corner-br"></span>
       <span class="fl-plan-badge">Máxima seguridad</span>
       <h3 class="fl-plan-name">Flotillas VIP</h3>
       <p class="fl-plan-desc">Todo lo del Premium, con protección redundante para proteger la inversión completa de tu flota.</p>
@@ -271,24 +271,6 @@ a { color: inherit; text-decoration: none; }
       </button>
     </article>
 
-  </div>
-
-  <div class="fl-features">
-    <div class="fl-feature">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1" stroke-linejoin="miter"/><path stroke-width="2" stroke-linecap="square" d="M8 20h8M12 17v3"/></svg>
-      <h3>Un solo panel para toda la flota</h3>
-      <p>Administradores y supervisores ven todos los vehículos de la empresa desde una sola plataforma.</p>
-    </div>
-    <div class="fl-feature">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M3 16l1.6-5A2 2 0 016.5 9.5h11a2 2 0 011.9 1.5L21 16"/><path stroke-linecap="square" d="M2.5 16h19"/><circle cx="6.5" cy="17.3" r="1.7"/><circle cx="17.5" cy="17.3" r="1.7"/></svg>
-      <h3>Escala con tu flota</h3>
-      <p>Agrega o quita vehículos cuando tu operación lo necesite, sin complicaciones.</p>
-    </div>
-    <div class="fl-feature">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M12 2l7 3v6c0 5-3 8.5-7 11-4-2.5-7-6-7-11V5z"/><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
-      <h3>Protege la inversión de tu empresa</h3>
-      <p>Menos pérdidas por robo o mal uso de vehículos — control real sobre los activos de tu negocio.</p>
-    </div>
   </div>
 
 </div>
