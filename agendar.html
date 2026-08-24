@@ -495,6 +495,8 @@ a { color: inherit; text-decoration: none; }
   (function () {
     var WHATSAPP_NUMBER = '18495646329';
     var COUNTER_OFFSET = 2004;
+    // URL que te da Google al desplegar el Apps Script (paso 5 de las instrucciones)
+    var CALENDAR_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyMgbMXicfL4asXu1CjD4H0vlTcJz5VgXEYKBLiLJmOHyzZhSs20tAQwEwFLHX2N4rP6A/exec';
     var form = document.getElementById('appointmentForm');
     var submitBtn = document.getElementById('submitBtn');
     var submitBtnLabel = document.getElementById('submitBtnLabel');
@@ -547,6 +549,30 @@ a { color: inherit; text-decoration: none; }
       return 'https://calendar.google.com/calendar/render?' + params;
     }
 
+    function addToGoogleCalendar(d, ubicacionTexto) {
+      if (!CALENDAR_WEBHOOK_URL || CALENDAR_WEBHOOK_URL.indexOf('PEGA_AQUI') === 0) return;
+      var dateObj = parseDateFlexible(d.get('dia'));
+      var timeObj = parseTimeFlexible(d.get('hora'));
+      if (!dateObj || !timeObj) return;
+      var start = new Date(dateObj.y, dateObj.mo - 1, dateObj.d, timeObj.h, timeObj.m);
+      var end = new Date(start.getTime() + 60 * 60 * 1000);
+      var payload = {
+        title: 'Instalación GPS — ' + (d.get('nombre') || 'Cliente'),
+        details: 'Vehículo: ' + d.get('vehiculo') + '\nPlan: ' + d.get('plan') +
+          '\nWhatsApp del cliente: ' + d.get('whatsapp') + '\nCorreo: ' + (d.get('correo') || '-'),
+        location: ubicacionTexto || '',
+        start: start.toISOString(),
+        end: end.toISOString()
+      };
+      // no-cors: no podemos leer la respuesta, pero el evento sí se crea del lado de Google
+      fetch(CALENDAR_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      }).catch(function () {});
+    }
+
     function nextTicketNumber() {
       return fetch('https://api.countapi.xyz/hit/gordogps-citas/agendar')
         .then(function (r) { return r.json(); })
@@ -565,8 +591,9 @@ a { color: inherit; text-decoration: none; }
         ? (d.get('ubicacion') || 'Domicilio (sin especificar)')
         : 'Sucursal Santiago';
 
+      addToGoogleCalendar(d, ubicacionTexto);
+
       nextTicketNumber().then(function (ticket) {
-        var calendarLink = buildCalendarLink(d, ubicacionTexto);
         var msg =
           '📋 Formulario para citas\n' +
           '🧑 Nombre: ' + d.get('nombre') + '\n' +
@@ -577,7 +604,6 @@ a { color: inherit; text-decoration: none; }
           '📅 Día: ' + d.get('dia') + '\n' +
           '🕒 Hora: ' + d.get('hora') + '\n' +
           '📍 Ubicación: ' + ubicacionTexto + '\n\n' +
-          '📆 Agregar al calendario: ' + calendarLink + '\n\n' +
           'Acabo de realizar una cita' +
           (ticket ? '\nCita #' + ticket : '') +
           '\nNombre: ' + d.get('nombre') +
