@@ -86,7 +86,8 @@ a { color: inherit; text-decoration: none; }
   display: flex; flex-direction: column; gap: 7px;
   font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; color: var(--text);
 }
-.appt-label-row { display: flex; align-items: center; gap: 8px; }
+.appt-label-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.appt-field-hint { font-weight: 500; font-size: 0.78rem; color: var(--text-faint); }
 .appt-label-row svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
 .appt-form input, .appt-form select {
   font-family: var(--font-body); font-size: 0.98rem; color: var(--text);
@@ -248,7 +249,7 @@ a { color: inherit; text-decoration: none; }
       </label>
 
       <label>
-        <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="3" y="5" width="18" height="14" stroke-linejoin="miter"/><path stroke-width="1.8" stroke-linejoin="miter" d="M3.5 5.8l8.5 7 8.5-7"/></svg>Correo</span>
+        <span class="appt-label-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="3" y="5" width="18" height="14" stroke-linejoin="miter"/><path stroke-width="1.8" stroke-linejoin="miter" d="M3.5 5.8l8.5 7 8.5-7"/></svg>Correo <span class="appt-field-hint">(se usará para registrarte en la plataforma)</span></span>
         <input type="email" name="correo" placeholder="ejemplo@correo.com">
       </label>
 
@@ -317,7 +318,7 @@ a { color: inherit; text-decoration: none; }
 
       <button type="submit" class="appt-submit" id="submitBtn">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
-        <span id="submitBtnLabel">Enviar cita por WhatsApp</span>
+        <span id="submitBtnLabel">Solicitar mi cita</span>
       </button>
 
     </form>
@@ -612,7 +613,7 @@ a { color: inherit; text-decoration: none; }
         var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
         window.open(url, '_blank');
         submitBtn.disabled = false;
-        submitBtnLabel.textContent = 'Enviar cita por WhatsApp';
+        submitBtnLabel.textContent = 'Solicitar mi cita';
       });
     });
   })();
