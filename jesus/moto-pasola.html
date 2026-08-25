@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plan Motor y Pasola | Gordo GPS</title>
-<meta name="description" content="Protección GPS para motor y pasola: RD$6,990 pago único, renovación anual RD$2,490. Rastreo compacto pensado para dos ruedas.">
+<meta name="description" content="Protección GPS para motor y pasola, con opción de dashcam Premium, VIP o ADAS + DMS. Rastreo compacto pensado para dos ruedas.">
 <meta name="theme-color" content="#0C0C0E">
 <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,10 +77,11 @@ a { color: inherit; text-decoration: none; }
 .mp-hero h1 { margin-top: 14px; font-size: clamp(2.2rem, 5.5vw, 3.4rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.015em; }
 .mp-hero h1 .accent { color: var(--accent); }
 .mp-hero p { margin-top: 16px; color: var(--text-muted); font-size: 1.1rem; max-width: 52ch; margin-left: auto; margin-right: auto; line-height: 1.6; }
+.mp-hero-btn { margin-top: 26px; }
 
 /* ---- Precio ---- */
 .mp-price-card {
-  margin: 34px auto 0; max-width: 420px; background: rgba(18,18,20,.7); backdrop-filter: blur(8px);
+  margin: 34px auto 0; max-width: 420px; background: rgba(18,18,20,.28); backdrop-filter: blur(8px);
   border: 1px solid var(--card-border-strong); border-radius: 18px; padding: 28px 30px; text-align: center;
 }
 .mp-price-card .price { font-family: var(--font-head); font-size: 2.6rem; font-weight: 700; color: var(--text); }
@@ -147,7 +148,6 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 760px) {
   .mp-stage { height: 240px; margin-top: 40px; }
   .mp-vehicle { width: 52%; }
-  .mp-features { grid-template-columns: 1fr; margin-top: 36px; }
   .mp-price-card { margin-top: 26px; padding: 24px 22px; }
   .mp-price-card .price { font-size: 2.4rem; }
 }
@@ -160,9 +160,105 @@ a { color: inherit; text-decoration: none; }
 .mp-feature {
   background: rgba(18,18,20,.55); border: 1px solid var(--card-border); border-radius: 14px; padding: 22px 20px;
 }
-.mp-feature svg { width: 24px; height: 24px; color: var(--accent); }
-.mp-feature h3 { margin-top: 14px; font-size: 1.05rem; }
-.mp-feature p { margin-top: 8px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.55; }
+.mp-feature-icon { display: inline-flex; }
+.mp-feature-icon svg { width: 28px; height: 28px; color: var(--accent); }
+.mp-feature h3 { margin-top: 14px; font-size: 1.02rem; }
+.mp-feature p { margin-top: 8px; color: var(--text-muted); font-size: 0.88rem; line-height: 1.55; }
+@media (max-width: 760px) {
+  .mp-features { grid-template-columns: 1fr; margin-top: 36px; }
+}
+
+/* ---- Plan (tematica flotilla) ---- */
+.mp-plans { margin-top: 64px; }
+.mp-plans-head { text-align: center; max-width: 640px; margin: 0 auto; }
+.mp-plans-head .eyebrow {
+  display: inline-block; font-family: var(--font-head); font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); font-weight: 600;
+}
+.mp-plans-head h2 { margin-top: 12px; font-size: clamp(1.6rem, 3.6vw, 2.1rem); line-height: 1.1; }
+.mp-plans-head p { margin-top: 14px; color: var(--text-muted); font-size: 1rem; line-height: 1.6; }
+.mp-plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 40px auto 0; align-items: stretch; }
+.mp-plan {
+  position: relative; background: linear-gradient(165deg, rgba(255,255,255,.035) 0%, rgba(255,255,255,0) 45%);
+  padding: 32px 24px 26px; display: flex; flex-direction: column;
+}
+.mp-plan::before, .mp-plan::after, .mp-plan .corner-bl, .mp-plan .corner-br {
+  content: ""; position: absolute; width: 20px; height: 20px; pointer-events: none;
+}
+.mp-plan::before { top: 0; left: 0; border-top: 2px solid var(--card-border-strong); border-left: 2px solid var(--card-border-strong); }
+.mp-plan::after { top: 0; right: 0; border-top: 2px solid var(--card-border-strong); border-right: 2px solid var(--card-border-strong); }
+.mp-plan .corner-bl { bottom: 0; left: 0; border-bottom: 2px solid rgba(255,255,255,.18); border-left: 2px solid rgba(255,255,255,.18); }
+.mp-plan .corner-br { bottom: 0; right: 0; border-bottom: 2px solid rgba(255,255,255,.18); border-right: 2px solid rgba(255,255,255,.18); }
+.mp-plan--featured::before, .mp-plan--featured::after { border-color: var(--accent); }
+.mp-plan-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #fff; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.04em;
+  padding: 6px 14px; border-radius: 999px; text-transform: uppercase; white-space: nowrap;
+}
+.mp-plan-name { font-size: 1.25rem; }
+.mp-plan-desc { margin-top: 8px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; min-height: 2.7em; }
+.mp-plan-price { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--card-border); font-family: var(--font-head); font-size: 1.6rem; font-weight: 700; color: var(--text); }
+.mp-plan-price span { display: block; font-size: 0.78rem; font-weight: 500; color: var(--text-muted); margin-top: 2px; }
+.mp-plan-renew { margin-top: 6px; font-size: 0.85rem; color: var(--text-muted); }
+.mp-plan-renew strong { color: var(--accent); }
+.mp-plan-features { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+.mp-plan-features li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.86rem; color: var(--text-muted); line-height: 1.45; }
+.mp-plan-features li svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.mp-plan-features li strong { color: var(--text); font-weight: 600; }
+.mp-plan-btn {
+  margin-top: 22px; display: flex; align-items: center; justify-content: center; gap: 9px;
+  width: 100%; height: 50px; border-radius: 999px; border: none; cursor: pointer;
+  background: var(--accent); color: #fff; font-family: var(--font-body); font-weight: 700; font-size: 0.92rem;
+  transition: background .2s ease, transform .2s ease;
+}
+.mp-plan-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+.mp-plan-btn svg { width: 18px; height: 18px; }
+@media (max-width: 860px) {
+  .mp-plans-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .mp-plan-desc { min-height: 0; }
+}
+
+/* ---- Promo agenda hoy ---- */
+.mp-promo { margin-top: 48px; }
+.mp-promo-card {
+  position: relative; max-width: 560px; margin: 0 auto; background: rgba(18,18,20,.28); backdrop-filter: blur(8px);
+  border: 1px solid var(--card-border-strong); border-radius: 18px; padding: 32px 30px 28px; text-align: center;
+}
+.mp-promo-ribbon {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #fff; font-family: var(--font-head); font-size: 0.72rem; font-weight: 800;
+  letter-spacing: .05em; text-transform: uppercase; padding: 6px 20px; border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.35); white-space: nowrap;
+}
+.mp-promo-card h3 {
+  font-family: var(--font-head); font-size: 1.1rem; text-transform: uppercase; letter-spacing: .03em; color: var(--accent);
+}
+.mp-promo-steps { list-style: none; margin: 22px 0 0; padding: 0; max-width: 420px; margin-left: auto; margin-right: auto; text-align: left; }
+.mp-promo-step { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: center; position: relative; padding-bottom: 22px; }
+.mp-promo-step:last-child { padding-bottom: 0; }
+.mp-promo-step::before { content: ""; position: absolute; left: 19px; top: 40px; bottom: 0; width: 1px; background: var(--card-border); }
+.mp-promo-step:last-child::before { display: none; }
+.mp-promo-step-marker {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--accent); border: 1px solid var(--accent);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.mp-promo-step-marker svg { width: 19px; height: 19px; color: #fff; flex-shrink: 0; }
+.mp-promo-step-body h4 {
+  font-family: var(--font-head); font-size: 0.92rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .01em; margin: 0; color: var(--text);
+}
+@media (max-width: 760px) {
+  .mp-promo { margin-top: 36px; }
+  .mp-promo-card { padding: 28px 22px 24px; }
+  .mp-promo-step-body h4 { font-size: 0.88rem; }
+}
+
+/* ---- Plan único motor/pasola ---- */
+.mp-plans-grid--single { grid-template-columns: 1fr; max-width: 460px; }
+.mp-plan-breakdown { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--card-border); display: flex; flex-direction: column; gap: 8px; }
+.mp-plan-breakdown-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted); }
+.mp-plan-breakdown-row strong { color: var(--text); font-weight: 600; }
+.mp-plan-price--total { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--card-border); font-size: 1.9rem; }
 
 /* ---- Video / mockup ---- */
 .mp-video { margin-top: 64px; }
@@ -198,6 +294,22 @@ a { color: inherit; text-decoration: none; }
   .mp-video-inner { grid-template-columns: 1fr; text-align: center; }
   .mp-video-copy p { margin-left: auto; margin-right: auto; }
   .mp-video { margin-top: 44px; }
+}
+
+/* ---- Testimonios ---- */
+.mp-proof { margin-top: 64px; }
+.mp-proof-head { text-align: center; max-width: 620px; margin: 0 auto; }
+.mp-proof-head .eyebrow {
+  display: inline-block; font-family: var(--font-head); font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); font-weight: 600;
+}
+.mp-proof-head h2 { margin-top: 12px; font-size: clamp(1.6rem, 3.6vw, 2.1rem); line-height: 1.1; }
+.mp-proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 900px; margin: 40px auto 0; }
+.mp-proof-card { text-align: center; }
+.mp-phone-frame--sm { max-width: 210px; }
+@media (max-width: 760px) {
+  .mp-proof-grid { grid-template-columns: 1fr; max-width: 260px; margin-left: auto; margin-right: auto; gap: 36px; }
+  .mp-proof { margin-top: 44px; }
 }
 
 </style>
@@ -256,23 +368,12 @@ a { color: inherit; text-decoration: none; }
 
   <div class="mp-hero">
     <span class="eyebrow">Protección para dos ruedas</span>
-    <h1>Plan Motor <span class="accent">y</span> Pasola</h1>
-    <p>Rastreo GPS compacto, pensado para motores y pasolas — instalación discreta y alertas al instante si tu vehículo se mueve sin ti.</p>
-  </div>
-
-  <div class="mp-price-card">
-    <div class="price">RD$6,990 <span>pago único + instalación</span></div>
-    <div class="renew">Renovación anual: solo <strong>RD$2,490</strong></div>
-    <div class="mp-cta">
-      <a class="btn btn-whatsapp" href="https://wa.me/18494416329?text=Hola%2C%20me%20interesa%20el%20plan%20de%20Motor%20%2F%20Pasola%20(RD%246%2C990)." target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
-        Elegir este plan
-      </a>
-      <a class="btn btn-outline" href="agendar.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
-        Agendar cita
-      </a>
-    </div>
+    <h1>MIRA CÓMO FUNCIONA TU GPS PARA MOTOR</h1>
+    <p>En menos de 1 minuto conoce cómo se instala, cómo rastreas tu motor y cómo recibes alertas desde tu celular.</p>
+    <a class="btn btn-outline mp-hero-btn" href="agendar.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+      Agendar cita
+    </a>
   </div>
 
   <div class="mp-stage" aria-hidden="true">
@@ -288,19 +389,49 @@ a { color: inherit; text-decoration: none; }
 
   <div class="mp-features">
     <div class="mp-feature">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path stroke-width="1.8" stroke-linecap="square" d="M12 7v5.2l3.6 2"/></svg>
-      <h3>Alertas al instante</h3>
-      <p>Encendido, apagado, exceso de velocidad y salida de zona segura — directo a tu WhatsApp.</p>
+      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5c-.5 1.8-1.8 3.2-3.3 4.4C7 8.4 6 10.3 6 12.5A6 6 0 0018 12.5c0-2.2-1-4.1-2.7-5.6-1.5-1.2-2.8-2.6-3.3-4.4z"/><path d="M9 12.5a3 3 0 106 0" stroke="var(--bg-2)" stroke-width="2" fill="none"/></svg></span>
+      <h3>Apagado remoto</h3>
+      <p>Apaga el vehículo a distancia si detectas un movimiento sospechoso.</p>
     </div>
     <div class="mp-feature">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M7 6H17L19 10L12 22L5 10Z"/><path stroke-width="1.5" d="M9 10.5H15M12 7.5V13.5"/></svg>
-      <h3>Ubicación en tiempo real</h3>
-      <p>Encuentra tu motor o pasola en segundos desde la app, estés donde estés.</p>
+      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2v20"/><path d="M6 3.5l11 3-11 3.5z" fill="var(--accent)"/><circle cx="6" cy="20" r="2"/></svg></span>
+      <h3>Historial de recorrido</h3>
+      <p>Revisa dónde ha estado tu motor o pasola, cuando quieras.</p>
     </div>
     <div class="mp-feature">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><rect x="5" y="11" width="14" height="8" stroke-linejoin="miter"/><path stroke-width="2.1" d="M7.5 11V7.5a4.5 4.5 0 019 0V11"/></svg>
-      <h3>Instalación discreta</h3>
-      <p>Compacto y bien oculto, sin afectar el manejo ni la estética de tu vehículo.</p>
+      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7.8 2 4.5 5.4 4.5 9.5c0 6 7.5 12.5 7.5 12.5s7.5-6.5 7.5-12.5C19.5 5.4 16.2 2 12 2z"/><circle cx="12" cy="9.5" r="3" fill="var(--bg-2)"/></svg></span>
+      <h3>Ubicación en vivo</h3>
+      <p>Mira la posición exacta de tu vehículo en tiempo real.</p>
+    </div>
+    <div class="mp-feature">
+      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="1.5"/><rect x="9" y="19" width="6" height="1.8" fill="currentColor"/><rect x="4.3" y="6" width="15.4" height="8.5" fill="var(--bg-2)"/></svg></span>
+      <h3>Plataforma premium</h3>
+      <p>Panel completo desde tu celular o computadora.</p>
+    </div>
+    <div class="mp-feature">
+      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="10" r="8"/><path d="M6 10a6 6 0 0012 0c0-3.3-2.7-8-6-8" stroke="var(--bg-2)" stroke-width="1.6" fill="none"/><circle cx="12" cy="20" r="1.6"/></svg></span>
+      <h3>Cobertura en Haití</h3>
+      <p>Funciona incluso si tu vehículo cruza la frontera.</p>
+    </div>
+    <div class="mp-feature">
+      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a6 6 0 00-6 6v4l-2 4h16l-2-4V8a6 6 0 00-6-6z"/><path d="M9.5 18a2.5 2.5 0 005 0z"/></svg></span>
+      <h3>Alertas por WhatsApp y Telegram</h3>
+      <p>Recibe notificaciones al instante en la app que prefieras.</p>
+    </div>
+    <div class="mp-feature">
+      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2.5" y="7" width="17" height="10" rx="1.5"/><rect x="20.3" y="9.5" width="2" height="5" rx="1"/><rect x="10.5" y="9.5" width="3" height="5" fill="var(--bg-2)"/></svg></span>
+      <h3>Alerta de batería</h3>
+      <p>Te avisamos si el dispositivo se está quedando sin energía.</p>
+    </div>
+    <div class="mp-feature">
+      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="7" cy="12" r="5"/><rect x="11.5" y="10.7" width="10" height="2.6" rx="1"/><rect x="17" y="13.3" width="2.3" height="3.4" rx="1"/></svg></span>
+      <h3>Alerta de encendido</h3>
+      <p>Sabes al momento si alguien enciende tu vehículo sin permiso.</p>
+    </div>
+    <div class="mp-feature">
+      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="3" width="12" height="18" rx="2"/><path d="M4 6l3-3h9l-3 3z" fill="var(--bg-2)"/><rect x="6.5" y="9" width="7" height="5" fill="var(--bg-2)"/><path d="M15 16a6.5 6.5 0 010 5M18 14.5a9.5 9.5 0 010 8M21 13a12.5 12.5 0 010 11"/></svg></span>
+      <h3>SIM internacional 4G</h3>
+      <p>Cobertura real, incluso donde hay poca señal o si el vehículo sale del país.</p>
     </div>
   </div>
 
@@ -325,6 +456,103 @@ a { color: inherit; text-decoration: none; }
           </button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="mp-promo">
+    <div class="mp-promo-card">
+      <span class="mp-promo-ribbon">Gratis</span>
+      <h3>Agenda hoy y recibe beneficios exclusivos</h3>
+      <ul class="mp-promo-steps">
+        <li class="mp-promo-step">
+          <div class="mp-promo-step-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></div>
+          <div class="mp-promo-step-body"><h4>1 año de garantía certificada</h4></div>
+        </li>
+        <li class="mp-promo-step">
+          <div class="mp-promo-step-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <div class="mp-promo-step-body"><h4>1 rastreo de celular</h4></div>
+        </li>
+        <li class="mp-promo-step">
+          <div class="mp-promo-step-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+          <div class="mp-promo-step-body"><h4>1 TAG con 20% de descuento (RD$1,990)</h4></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="mp-plans">
+    <div class="mp-plans-head">
+      <span class="eyebrow">Nuestro plan</span>
+      <h2>Un solo plan, todo incluido</h2>
+      <p>Protege tu inversión contra robos con rastreo GPS pensado para motor y pasola.</p>
+    </div>
+    <div class="mp-plans-grid mp-plans-grid--single">
+
+      <article class="mp-plan mp-plan--featured" id="planMotorPasola">
+        <div class="corner-bl"></div><div class="corner-br"></div>
+        <span class="mp-plan-badge">-20% Descuento</span>
+        <h3 class="mp-plan-name">GPS Motor y Pasola</h3>
+        <p class="mp-plan-desc">Protege tu inversión contra robos.</p>
+        <div class="mp-plan-breakdown">
+          <div class="mp-plan-breakdown-row"><span>Instalación</span><strong>RD$4,500</strong></div>
+          <div class="mp-plan-breakdown-row"><span>1 año plataforma</span><strong>RD$2,490</strong></div>
+        </div>
+        <div class="mp-plan-price mp-plan-price--total">Total: RD$6,990 <span>pago único, incluye instalación</span></div>
+        <a class="mp-plan-btn" href="agendar.html?plan=GPS%20Motor%20%2F%20Pasola">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+          Agendar cita
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="mp-proof">
+    <div class="mp-proof-head">
+      <span class="eyebrow">Clientes reales, resultados reales</span>
+      <h2>Instalaciones y testimonios</h2>
+    </div>
+    <div class="mp-proof-grid">
+
+      <article class="mp-proof-card">
+        <div class="mp-phone-frame mp-phone-frame--sm">
+          <img class="frame-img" src="../assets/images/mockups/phone-frame-naranja.webp" alt="" aria-hidden="true">
+          <div class="mp-yt-player" id="mpYtPlayerT1">
+            <button type="button" class="mp-yt-poster" id="mpYtPosterT1" disabled aria-label="Reproducir testimonio">
+              <img src="" alt="" loading="lazy">
+              <span class="mp-yt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
+              <span class="mp-yt-pending-label">Video próximamente</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="mp-proof-card">
+        <div class="mp-phone-frame mp-phone-frame--sm">
+          <img class="frame-img" src="../assets/images/mockups/phone-frame-naranja.webp" alt="" aria-hidden="true">
+          <div class="mp-yt-player" id="mpYtPlayerT2">
+            <button type="button" class="mp-yt-poster" id="mpYtPosterT2" disabled aria-label="Reproducir testimonio">
+              <img src="" alt="" loading="lazy">
+              <span class="mp-yt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
+              <span class="mp-yt-pending-label">Video próximamente</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="mp-proof-card">
+        <div class="mp-phone-frame mp-phone-frame--sm">
+          <img class="frame-img" src="../assets/images/mockups/phone-frame-naranja.webp" alt="" aria-hidden="true">
+          <div class="mp-yt-player" id="mpYtPlayerT3">
+            <button type="button" class="mp-yt-poster" id="mpYtPosterT3" disabled aria-label="Reproducir testimonio">
+              <img src="" alt="" loading="lazy">
+              <span class="mp-yt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
+              <span class="mp-yt-pending-label">Video próximamente</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
     </div>
   </section>
 
@@ -385,6 +613,30 @@ a { color: inherit; text-decoration: none; }
     posterBtn.disabled = false;
     posterBtn.addEventListener('click', function () {
       wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0&playsinline=1" title="' + label + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+    });
+  })();
+</script>
+
+<script>
+  // Conecta los 3 videos de testimonios (mismos del resto del sitio)
+  (function () {
+    var items = [
+      { wrapId: 'mpYtPlayerT1', btnId: 'mpYtPosterT1', id: 'Y5n1WYn7orw', label: 'Testimonio de cliente 1' },
+      { wrapId: 'mpYtPlayerT2', btnId: 'mpYtPosterT2', id: 'vO4aus1M-Ro', label: 'Testimonio de cliente 2' },
+      { wrapId: 'mpYtPlayerT3', btnId: 'mpYtPosterT3', id: 'GDIFMt_GHeQ', label: 'Testimonio de cliente 3' }
+    ];
+    items.forEach(function (item) {
+      var wrap = document.getElementById(item.wrapId);
+      var posterBtn = document.getElementById(item.btnId);
+      if (!wrap || !posterBtn) return;
+      var img = posterBtn.querySelector('img');
+      img.src = 'https://i.ytimg.com/vi/' + item.id + '/hqdefault.jpg';
+      img.alt = item.label;
+      posterBtn.classList.add('has-thumb');
+      posterBtn.disabled = false;
+      posterBtn.addEventListener('click', function () {
+        wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + item.id + '?autoplay=1&rel=0&playsinline=1" title="' + item.label + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+      });
     });
   })();
 </script>
