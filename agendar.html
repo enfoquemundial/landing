@@ -176,6 +176,28 @@ a { color: inherit; text-decoration: none; }
 }
 
 </style>
+<style>
+  /* Botón flotante de WhatsApp (global) */
+  .wa-float-btn {
+    position: fixed; right: 18px; bottom: 18px; z-index: 9998;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25D366; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 26px -8px rgba(0,0,0,.55), 0 0 0 rgba(37,211,102,.5);
+    text-decoration: none; border: none; cursor: pointer;
+    animation: waPulse 2.4s ease-in-out infinite;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .wa-float-btn:hover { transform: scale(1.08); background: #20BD5A; }
+  .wa-float-btn svg { width: 30px; height: 30px; fill: #fff; }
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 10px 26px -8px rgba(0,0,0,.55), 0 0 0 0 rgba(37,211,102,.45); }
+    50% { box-shadow: 0 10px 26px -8px rgba(0,0,0,.55), 0 0 0 10px rgba(37,211,102,0); }
+  }
+  @media (max-width: 480px) {
+    .wa-float-btn { width: 52px; height: 52px; right: 14px; bottom: 14px; }
+    .wa-float-btn svg { width: 26px; height: 26px; }
+  }
+</style>
 </head>
 <body>
 
@@ -619,5 +641,8 @@ a { color: inherit; text-decoration: none; }
   })();
 </script>
 
+<a class="wa-float-btn" href="https://wa.me/18495646329?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" aria-label="Chatea con nosotros por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
+</a>
 </body>
 </html>
