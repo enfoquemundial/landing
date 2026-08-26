@@ -32,6 +32,20 @@ a { color: inherit; text-decoration: none; }
   background: radial-gradient(ellipse at center, rgba(235,20,20,.32) 0%, rgba(180,0,0,.12) 45%, rgba(0,0,0,0) 75%);
   filter: blur(60px); transform: rotate(-15deg);
 }
+#dotsCanvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bg-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; }
+.svg-line-group { transform-origin: center; animation: waveMotion 12s ease-in-out infinite alternate; }
+.svg-line-group-reverse { transform-origin: center; animation: waveMotionAlt 16s ease-in-out infinite alternate; }
+@keyframes waveMotion {
+  0% { transform: translateY(0) scaleY(1) rotate(0deg); }
+  50% { transform: translateY(-25px) scaleY(1.05) rotate(.8deg); }
+  100% { transform: translateY(20px) scaleY(.95) rotate(-.5deg); }
+}
+@keyframes waveMotionAlt {
+  0% { transform: translateY(0) scaleX(1) rotate(0deg); }
+  50% { transform: translateY(20px) scaleX(1.03) rotate(-.8deg); }
+  100% { transform: translateY(-18px) scaleX(.97) rotate(.6deg); }
+}
 
 .wrap { position: relative; z-index: 1; max-width: 480px; }
 .brand { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 40px; }
@@ -57,7 +71,36 @@ p { margin-top: 14px; color: var(--text-muted); font-size: 1.05rem; line-height:
 </head>
 <body>
 
-<div class="bg-canvas" aria-hidden="true"><div class="red-laser-glow"></div></div>
+<div class="bg-canvas" aria-hidden="true">
+  <div class="red-laser-glow"></div>
+  <canvas id="dotsCanvas"></canvas>
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <defs>
+      <linearGradient id="redGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ff1e1e" stop-opacity="0.8" />
+        <stop offset="50%" stop-color="#b91c1c" stop-opacity="0.3" />
+        <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="thinLine" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.05" />
+        <stop offset="50%" stop-color="#ef4444" stop-opacity="0.4" />
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+      </linearGradient>
+    </defs>
+    <g class="svg-line-group">
+      <path d="M -100 200 C 300 600, 800 -100, 1600 500" stroke="url(#redGlow)" stroke-width="4" fill="none" filter="drop-shadow(0 0 12px #ff0000)" />
+      <path d="M -50 250 C 350 650, 850 -50, 1650 550" stroke="url(#redGlow)" stroke-width="1.5" fill="none" />
+    </g>
+    <g class="svg-line-group-reverse">
+      <path d="M -200 900 C 400 400, 900 1100, 1800 200" stroke="url(#thinLine)" stroke-width="1" fill="none" />
+      <path d="M -200 850 C 400 350, 900 1050, 1800 150" stroke="url(#thinLine)" stroke-width="1" fill="none" />
+      <path d="M -200 800 C 400 300, 900 1000, 1800 100" stroke="url(#thinLine)" stroke-width="0.75" fill="none" />
+      <path d="M -200 750 C 400 250, 900 950, 1800 50" stroke="url(#thinLine)" stroke-width="0.5" fill="none" />
+      <path d="M -100 100 C 500 800, 1100 300, 1900 900" stroke="url(#thinLine)" stroke-width="0.8" fill="none" />
+      <path d="M -100 150 C 500 850, 1100 350, 1900 950" stroke="url(#thinLine)" stroke-width="0.5" fill="none" />
+    </g>
+  </svg>
+</div>
 
 <div class="wrap">
   <a href="index.html" class="brand">
@@ -83,6 +126,46 @@ p { margin-top: 14px; color: var(--text-muted); font-size: 1.05rem; line-height:
     </a>
   </div>
 </div>
+
+<script>
+  // Puntos rojos flotando sutilmente sobre el fondo — 100% código.
+  (function () {
+    var canvas = document.getElementById('dotsCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    var dots = [];
+    for (var i = 0; i < 50; i++) {
+      dots.push({
+        x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+        radius: Math.random() * 1.8 + 0.6,
+        vx: (Math.random() - 0.5) * 0.12, vy: (Math.random() - 0.5) * 0.12,
+        alpha: Math.random() * 0.6 + 0.2, pulse: Math.random() * 0.01 + 0.003
+      });
+    }
+    function animateDots() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      dots.forEach(function (dot) {
+        dot.x += dot.vx; dot.y += dot.vy;
+        if (dot.x < 0) dot.x = canvas.width;
+        if (dot.x > canvas.width) dot.x = 0;
+        if (dot.y < 0) dot.y = canvas.height;
+        if (dot.y > canvas.height) dot.y = 0;
+        dot.alpha += Math.sin(Date.now() * dot.pulse * 0.05) * 0.002;
+        var a = Math.max(0.15, Math.min(0.85, dot.alpha));
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(239, 68, 68, ' + a + ')';
+        ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 6;
+        ctx.fill();
+      });
+      requestAnimationFrame(animateDots);
+    }
+    animateDots();
+  })();
+</script>
 
 </body>
 </html>
