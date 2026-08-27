@@ -162,6 +162,59 @@ p { margin: 0; }
 .lp-hero h1 { margin-top: var(--sp-4); font-size: clamp(2rem, 5vw, 2.9rem); color: var(--text); }
 .lp-hero p.lead { margin-top: var(--sp-5); font-size: 1.12rem; color: var(--text-muted); line-height: 1.7; max-width: 62ch; margin-left: auto; margin-right: auto; }
 .lp-hero-cta { margin-top: var(--sp-7); display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+/* ---- Escenario de vehículos (idéntico a la de motor) ---- */
+.lp-stage {
+  position: relative; max-width: 1000px; margin: 60px auto 0; height: 340px; overflow: hidden;
+  border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
+}
+.lp-stage::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 54px; height: 2px;
+  background: linear-gradient(to right, transparent, rgba(220,38,38,.5) 15%, rgba(220,38,38,.5) 85%, transparent);
+}
+.lp-vehicle { position: absolute; bottom: 54px; width: 40%; max-width: 400px; }
+.lp-vehicle::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 145%; aspect-ratio: 1/1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(150,28,28,.5) 0%, rgba(80,15,15,.22) 45%, transparent 72%);
+  z-index: -1; pointer-events: none;
+}
+.lp-vehicle img { width: 100%; height: auto; filter: drop-shadow(0 18px 24px rgba(0,0,0,.6)); }
+.lp-vehicle-sedan {
+  left: 2%; transform: translateX(-140%);
+  animation: lpDriveInLeft 1.3s cubic-bezier(.22,.75,.2,1) .4s forwards;
+}
+.lp-vehicle-suv {
+  right: 2%; transform: translateX(140%);
+  animation: lpDriveInRight 1.3s cubic-bezier(.22,.75,.2,1) .7s forwards;
+}
+@keyframes lpDriveInLeft {
+  0%   { transform: translateX(-140%); opacity: 0; }
+  70%  { transform: translateX(4%); opacity: 1; }
+  85%  { transform: translateX(-1%); }
+  100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes lpDriveInRight {
+  0%   { transform: translateX(140%); opacity: 0; }
+  70%  { transform: translateX(-4%); opacity: 1; }
+  85%  { transform: translateX(1%); }
+  100% { transform: translateX(0); opacity: 1; }
+}
+.lp-vehicle-label {
+  position: absolute; bottom: 16px; font-family: var(--font-head); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint);
+  opacity: 0; animation: lpLabelFadeIn .6s ease 1.7s forwards;
+}
+.lp-vehicle-label-sedan { left: 2%; }
+.lp-vehicle-label-suv { right: 2%; }
+@keyframes lpLabelFadeIn { to { opacity: 1; } }
+@media (max-width: 760px) {
+  .lp-stage { height: 240px; margin-top: 40px; }
+  .lp-vehicle { width: 52%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-vehicle-sedan, .lp-vehicle-suv, .lp-vehicle-label { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
 .lp-hero-trust { margin-top: var(--sp-8); padding-top: var(--sp-7); border-top: 1px solid var(--card-border); display: flex; justify-content: center; gap: var(--sp-7); flex-wrap: wrap; }
 .lp-hero-trust span { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-faint); font-family: var(--font-mono); }
 .lp-hero-trust svg { width: 15px; height: 15px; color: var(--accent); }
@@ -647,6 +700,17 @@ p { margin: 0; }
         </div>
       </div>
     </section>
+
+    <div class="lp-stage" aria-hidden="true">
+      <div class="lp-vehicle lp-vehicle-sedan">
+        <img src="../assets/images/sedan_tight.webp" alt="">
+      </div>
+      <div class="lp-vehicle lp-vehicle-suv">
+        <img src="../assets/images/suv_tight.webp" alt="">
+      </div>
+      <span class="lp-vehicle-label lp-vehicle-label-sedan">Carro</span>
+      <span class="lp-vehicle-label lp-vehicle-label-suv">Jepeta</span>
+    </div>
 
     <!-- VIDEO VERTICAL -->
     <section class="lp-video" id="video">
