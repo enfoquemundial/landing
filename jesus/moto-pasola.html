@@ -157,17 +157,26 @@ a { color: inherit; text-decoration: none; }
   .mp-vehicle-moto, .mp-vehicle-pasola, .mp-label { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 
-/* ---- Beneficios ---- */
-.mp-features { margin-top: 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.mp-feature {
-  background: rgba(18,18,20,.55); border: 1px solid var(--card-border); border-radius: 14px; padding: 22px 20px;
+/* ---- Tira de beneficios (compacta, scroll automático) ---- */
+.mp-chipstrip {
+  margin-top: 48px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
-.mp-feature-icon { display: inline-flex; }
-.mp-feature-icon svg { width: 28px; height: 28px; color: var(--accent); }
-.mp-feature h3 { margin-top: 14px; font-size: 1.02rem; }
-.mp-feature p { margin-top: 8px; color: var(--text-muted); font-size: 0.88rem; line-height: 1.55; }
+.mp-chipstrip-track { display: flex; gap: 10px; width: max-content; animation: mpChipScroll 34s linear infinite; }
+.mp-chipstrip:hover .mp-chipstrip-track { animation-play-state: paused; }
+@keyframes mpChipScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.mp-chip {
+  display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
+  background: rgba(18,18,20,.6); border: 1px solid var(--card-border); border-radius: 999px;
+  padding: 9px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;
+}
+.mp-chip svg { width: 15px; height: 15px; color: var(--accent); flex-shrink: 0; }
 @media (max-width: 760px) {
-  .mp-features { grid-template-columns: 1fr; margin-top: 36px; }
+  .mp-chipstrip { margin-top: 32px; }
+  .mp-chipstrip-track { animation-duration: 22s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mp-chipstrip-track { animation: none; flex-wrap: wrap; }
 }
 
 /* ---- Plan (tematica flotilla) ---- */
@@ -499,54 +508,6 @@ a { color: inherit; text-decoration: none; }
     <span class="mp-label mp-label-pasola">Pasola</span>
   </div>
 
-  <div class="mp-features">
-    <div class="mp-feature">
-      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5c-.5 1.8-1.8 3.2-3.3 4.4C7 8.4 6 10.3 6 12.5A6 6 0 0018 12.5c0-2.2-1-4.1-2.7-5.6-1.5-1.2-2.8-2.6-3.3-4.4z"/><path d="M9 12.5a3 3 0 106 0" stroke="var(--bg-2)" stroke-width="2" fill="none"/></svg></span>
-      <h3>Apagado remoto</h3>
-      <p>Apaga el vehículo a distancia si detectas un movimiento sospechoso.</p>
-    </div>
-    <div class="mp-feature">
-      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2v20"/><path d="M6 3.5l11 3-11 3.5z" fill="var(--accent)"/><circle cx="6" cy="20" r="2"/></svg></span>
-      <h3>Historial de recorrido</h3>
-      <p>Revisa dónde ha estado tu motor o pasola, cuando quieras.</p>
-    </div>
-    <div class="mp-feature">
-      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7.8 2 4.5 5.4 4.5 9.5c0 6 7.5 12.5 7.5 12.5s7.5-6.5 7.5-12.5C19.5 5.4 16.2 2 12 2z"/><circle cx="12" cy="9.5" r="3" fill="var(--bg-2)"/></svg></span>
-      <h3>Ubicación en vivo</h3>
-      <p>Mira la posición exacta de tu vehículo en tiempo real.</p>
-    </div>
-    <div class="mp-feature">
-      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="1.5"/><rect x="9" y="19" width="6" height="1.8" fill="currentColor"/><rect x="4.3" y="6" width="15.4" height="8.5" fill="var(--bg-2)"/></svg></span>
-      <h3>Plataforma premium</h3>
-      <p>Panel completo desde tu celular o computadora.</p>
-    </div>
-    <div class="mp-feature">
-      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="10" r="8"/><path d="M6 10a6 6 0 0012 0c0-3.3-2.7-8-6-8" stroke="var(--bg-2)" stroke-width="1.6" fill="none"/><circle cx="12" cy="20" r="1.6"/></svg></span>
-      <h3>Cobertura en Haití</h3>
-      <p>Funciona incluso si tu vehículo cruza la frontera.</p>
-    </div>
-    <div class="mp-feature">
-      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a6 6 0 00-6 6v4l-2 4h16l-2-4V8a6 6 0 00-6-6z"/><path d="M9.5 18a2.5 2.5 0 005 0z"/></svg></span>
-      <h3>Alertas por WhatsApp y Telegram</h3>
-      <p>Recibe notificaciones al instante en la app que prefieras.</p>
-    </div>
-    <div class="mp-feature">
-      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2.5" y="7" width="17" height="10" rx="1.5"/><rect x="20.3" y="9.5" width="2" height="5" rx="1"/><rect x="10.5" y="9.5" width="3" height="5" fill="var(--bg-2)"/></svg></span>
-      <h3>Alerta de batería</h3>
-      <p>Te avisamos si la batería fue desconectada.</p>
-    </div>
-    <div class="mp-feature">
-      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="7" cy="12" r="5"/><rect x="11.5" y="10.7" width="10" height="2.6" rx="1"/><rect x="17" y="13.3" width="2.3" height="3.4" rx="1"/></svg></span>
-      <h3>Alerta de encendido</h3>
-      <p>Sabes al momento si alguien enciende tu vehículo sin permiso.</p>
-    </div>
-    <div class="mp-feature">
-      <span class="mp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="3" width="12" height="18" rx="2"/><path d="M4 6l3-3h9l-3 3z" fill="var(--bg-2)"/><rect x="6.5" y="9" width="7" height="5" fill="var(--bg-2)"/><path d="M15 16a6.5 6.5 0 010 5M18 14.5a9.5 9.5 0 010 8M21 13a12.5 12.5 0 010 11"/></svg></span>
-      <h3>SIM internacional 4G</h3>
-      <p>Cobertura real, incluso donde hay poca señal o si el vehículo sale del país.</p>
-    </div>
-  </div>
-
   <section class="mp-video">
     <div class="mp-video-inner">
       <div class="mp-video-copy">
@@ -708,6 +669,30 @@ a { color: inherit; text-decoration: none; }
 
     </div>
   </section>
+
+  <div class="mp-chipstrip">
+    <div class="mp-chipstrip-track">
+      <span class="mp-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5c-.5 1.8-1.8 3.2-3.3 4.4C7 8.4 6 10.3 6 12.5A6 6 0 0018 12.5c0-2.2-1-4.1-2.7-5.6-1.5-1.2-2.8-2.6-3.3-4.4z"/><path d="M9 12.5a3 3 0 106 0" stroke="var(--bg-2)" stroke-width="2" fill="none"/></svg>Apagado remoto</span>
+      <span class="mp-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2v20"/><path d="M6 3.5l11 3-11 3.5z" fill="var(--accent)"/><circle cx="6" cy="20" r="2"/></svg>Historial de recorrido</span>
+      <span class="mp-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7.8 2 4.5 5.4 4.5 9.5c0 6 7.5 12.5 7.5 12.5s7.5-6.5 7.5-12.5C19.5 5.4 16.2 2 12 2z"/><circle cx="12" cy="9.5" r="3" fill="var(--bg-2)"/></svg>Ubicación en vivo</span>
+      <span class="mp-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="1.5"/><rect x="9" y="19" width="6" height="1.8" fill="currentColor"/><rect x="4.3" y="6" width="15.4" height="8.5" fill="var(--bg-2)"/></svg>Plataforma premium</span>
+      <span class="mp-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="10" r="8"/><path d="M6 10a6 6 0 0012 0c0-3.3-2.7-8-6-8" stroke="var(--bg-2)" stroke-width="1.6" fill="none"/><circle cx="12" cy="20" r="1.6"/></svg>Cobertura en Haití</span>
+      <span class="mp-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a6 6 0 00-6 6v4l-2 4h16l-2-4V8a6 6 0 00-6-6z"/><path d="M9.5 18a2.5 2.5 0 005 0z"/></svg>Alertas por WhatsApp y Telegram</span>
+      <span class="mp-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2.5" y="7" width="17" height="10" rx="1.5"/><rect x="20.3" y="9.5" width="2" height="5" rx="1"/><rect x="10.5" y="9.5" width="3" height="5" fill="var(--bg-2)"/></svg>Alerta de batería</span>
+      <span class="mp-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="7" cy="12" r="5"/><rect x="11.5" y="10.7" width="10" height="2.6" rx="1"/><rect x="17" y="13.3" width="2.3" height="3.4" rx="1"/></svg>Alerta de encendido</span>
+      <span class="mp-chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="3" width="12" height="18" rx="2"/><path d="M4 6l3-3h9l-3 3z" fill="var(--bg-2)"/><rect x="6.5" y="9" width="7" height="5" fill="var(--bg-2)"/><path d="M15 16a6.5 6.5 0 010 5M18 14.5a9.5 9.5 0 010 8M21 13a12.5 12.5 0 010 11"/></svg>SIM internacional 4G</span>
+      <!-- duplicado para el loop continuo -->
+      <span class="mp-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5c-.5 1.8-1.8 3.2-3.3 4.4C7 8.4 6 10.3 6 12.5A6 6 0 0018 12.5c0-2.2-1-4.1-2.7-5.6-1.5-1.2-2.8-2.6-3.3-4.4z"/><path d="M9 12.5a3 3 0 106 0" stroke="var(--bg-2)" stroke-width="2" fill="none"/></svg>Apagado remoto</span>
+      <span class="mp-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2v20"/><path d="M6 3.5l11 3-11 3.5z" fill="var(--accent)"/><circle cx="6" cy="20" r="2"/></svg>Historial de recorrido</span>
+      <span class="mp-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.8 2 4.5 5.4 4.5 9.5c0 6 7.5 12.5 7.5 12.5s7.5-6.5 7.5-12.5C19.5 5.4 16.2 2 12 2z"/><circle cx="12" cy="9.5" r="3" fill="var(--bg-2)"/></svg>Ubicación en vivo</span>
+      <span class="mp-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="2.5" y="4" width="19" height="13" rx="1.5"/><rect x="9" y="19" width="6" height="1.8" fill="currentColor"/><rect x="4.3" y="6" width="15.4" height="8.5" fill="var(--bg-2)"/></svg>Plataforma premium</span>
+      <span class="mp-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="10" r="8"/><path d="M6 10a6 6 0 0012 0c0-3.3-2.7-8-6-8" stroke="var(--bg-2)" stroke-width="1.6" fill="none"/><circle cx="12" cy="20" r="1.6"/></svg>Cobertura en Haití</span>
+      <span class="mp-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a6 6 0 00-6 6v4l-2 4h16l-2-4V8a6 6 0 00-6-6z"/><path d="M9.5 18a2.5 2.5 0 005 0z"/></svg>Alertas por WhatsApp y Telegram</span>
+      <span class="mp-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="2.5" y="7" width="17" height="10" rx="1.5"/><rect x="20.3" y="9.5" width="2" height="5" rx="1"/><rect x="10.5" y="9.5" width="3" height="5" fill="var(--bg-2)"/></svg>Alerta de batería</span>
+      <span class="mp-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="12" r="5"/><rect x="11.5" y="10.7" width="10" height="2.6" rx="1"/><rect x="17" y="13.3" width="2.3" height="3.4" rx="1"/></svg>Alerta de encendido</span>
+      <span class="mp-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="3" width="12" height="18" rx="2"/><path d="M4 6l3-3h9l-3 3z" fill="var(--bg-2)"/><rect x="6.5" y="9" width="7" height="5" fill="var(--bg-2)"/><path d="M15 16a6.5 6.5 0 010 5M18 14.5a9.5 9.5 0 010 8M21 13a12.5 12.5 0 010 11"/></svg>SIM internacional 4G</span>
+    </div>
+  </div>
 
   <section class="mp-faq" id="preguntas-frecuentes">
     <div class="mp-faq-head">
