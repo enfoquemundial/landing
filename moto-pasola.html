@@ -36,7 +36,7 @@ a { color: inherit; text-decoration: none; }
 .red-laser-glow {
   position: absolute; top: -20%; right: -10%; width: 75vw; height: 140vh;
   background: radial-gradient(ellipse at center, rgba(235,20,20,.32) 0%, rgba(180,0,0,.12) 45%, rgba(0,0,0,0) 75%);
-  filter: blur(60px); transform: rotate(-15deg);
+  filter: blur(38px); transform: rotate(-15deg); will-change: auto;
 }
 #dotsCanvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .bg-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; }
@@ -786,7 +786,7 @@ a { color: inherit; text-decoration: none; }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     var dots = [];
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < 25; i++) {
       dots.push({
         x: Math.random() * canvas.width, y: Math.random() * canvas.height,
         radius: Math.random() * 1.8 + 0.6,
@@ -807,7 +807,7 @@ a { color: inherit; text-decoration: none; }
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(239, 68, 68, ' + a + ')';
-        ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 6;
+        
         ctx.fill();
       });
       requestAnimationFrame(animateDots);
