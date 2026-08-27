@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Protege tu vehículo — Planes Premium y VIP | GPS Portátiles</title>
+<title>Protege tu vehículo — Planes Premium y VIP | Gordo GPS</title>
 <meta name="description" content="Protege tu vehículo del robo con GPS 4G, alertas en tiempo real y detección anti-jammer. Planes Premium y VIP con instalación incluida.">
 <meta name="theme-color" content="#0C0C0E">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
@@ -174,11 +174,52 @@ p { margin: 0; }
 .lp-alert-inner strong { color: var(--dark-text); }
 
 /* ---- Video ---- */
-.lp-video { padding: var(--sp-12) 0; background: transparent; }
+.lp-video { padding: var(--sp-9) 0; background: transparent; }
 .lp-video-inner { display: grid; grid-template-columns: 1fr 340px; gap: var(--sp-11); align-items: start; max-width: 980px; margin: 0 auto; }
 .lp-video-copy h2 { margin-top: var(--sp-3); font-size: 1.9rem; }
 .lp-video-copy p { margin-top: var(--sp-4); color: var(--text-muted); line-height: 1.7; max-width: 46ch; }
 .lp-video-copy .btn { margin-top: var(--sp-7); }
+
+/* ---- Comparación Premium/VIP (solo escritorio) ---- */
+.lp-vs-strip { display: none; }
+@media (min-width: 901px) {
+  .lp-vs-strip {
+    display: flex; align-items: center; gap: 22px; margin-top: 42px; padding-top: 30px;
+    border-top: 1px solid var(--card-border);
+  }
+  .lp-vs-item {
+    display: flex; align-items: center; gap: 12px; opacity: 0; transform: translateY(10px);
+    animation: lpVsRise .6s ease forwards;
+  }
+  .lp-vs-item:nth-of-type(1) { animation-delay: .15s; }
+  .lp-vs-item:nth-of-type(3) { animation-delay: .35s; }
+  .lp-vs-item:nth-of-type(5) { animation-delay: .55s; }
+  @keyframes lpVsRise { to { opacity: 1; transform: translateY(0); } }
+  .lp-vs-diamond {
+    position: relative; width: 34px; height: 34px; flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(220,38,38,.22), rgba(220,38,38,.04));
+    border: 1px solid var(--card-border-strong); transform: rotate(45deg);
+    display: flex; align-items: center; justify-content: center;
+    animation: lpVsGlow 3.2s ease-in-out infinite;
+  }
+  .lp-vs-diamond svg { width: 16px; height: 16px; color: var(--accent); transform: rotate(-45deg); }
+  @keyframes lpVsGlow {
+    0%, 100% { box-shadow: 0 0 0 rgba(220,38,38,0); }
+    50% { box-shadow: 0 0 14px rgba(220,38,38,.35); }
+  }
+  .lp-vs-text { display: flex; flex-direction: column; line-height: 1.3; }
+  .lp-vs-text strong { font-family: var(--font-head); font-size: 0.86rem; text-transform: uppercase; letter-spacing: .03em; color: var(--text); }
+  .lp-vs-text span { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; }
+  .lp-vs-divider {
+    width: 1px; height: 32px; flex-shrink: 0; align-self: center;
+    background: linear-gradient(180deg, transparent, var(--card-border-strong), transparent);
+    background-size: 100% 200%; animation: lpVsShimmer 3.2s ease-in-out infinite;
+  }
+  @keyframes lpVsShimmer {
+    0%, 100% { background-position: 0 0%; }
+    50% { background-position: 0 100%; }
+  }
+}
 .lp-phone-frame {
   position: relative; width: 100%; max-width: 300px; margin: 0 auto; aspect-ratio: 480/990;
   filter: drop-shadow(0 25px 45px rgba(0,0,0,.5));
@@ -201,7 +242,7 @@ p { margin: 0; }
 .yt-poster.has-thumb .yt-pending-label { display: none; }
 
 /* ---- Pasos ---- */
-.lp-steps { padding: var(--sp-12) 0; }
+.lp-steps { padding: var(--sp-9) 0; }
 .lp-steps-head { text-align: center; max-width: 560px; margin: 0 auto var(--sp-10); }
 .lp-steps-head p { margin-top: var(--sp-3); color: var(--text-muted); }
 .lp-steps-list { max-width: 640px; margin: 0 auto; }
@@ -217,7 +258,7 @@ p { margin: 0; }
 .lp-step-body p { margin-top: 6px; color: var(--text-muted); font-size: 0.94rem; line-height: 1.6; }
 
 /* ---- Planes ---- */
-.lp-plans { padding: var(--sp-12) 0; background: rgba(18,18,20,.55); }
+.lp-plans { padding: var(--sp-9) 0; background: rgba(18,18,20,.55); }
 .lp-plans-head { text-align: center; max-width: 640px; margin: 0 auto var(--sp-9); }
 .lp-plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-7); max-width: 980px; margin: 0 auto; align-items: stretch; }
 .lp-plan {
@@ -263,7 +304,7 @@ p { margin: 0; }
 .lp-plan-promo { margin-top: var(--sp-4); background: var(--accent-soft); color: var(--accent); border: var(--border-w) solid var(--accent-soft-strong); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.82rem; font-weight: 700; text-align: center; }
 
 /* ---- Preguntas frecuentes ---- */
-.lp-faq { padding: var(--sp-12) 0; }
+.lp-faq { padding: var(--sp-9) 0; }
 .lp-faq-head { text-align: center; max-width: 560px; margin: 0 auto var(--sp-9); }
 .lp-faq-list { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
 .lp-faq-item { background: rgba(18,18,20,.5); border: var(--border-w) solid var(--card-border); border-radius: 12px; overflow: hidden; }
@@ -275,7 +316,7 @@ p { margin: 0; }
 .lp-faq-a { padding: 0 20px 20px; margin: 0; color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
 
 /* ---- Jammer ---- */
-.lp-jammer { padding: var(--sp-12) 0; }
+.lp-jammer { padding: var(--sp-9) 0; }
 .lp-jammer-inner { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-9); align-items: center; }
 .lp-jammer-copy h2 { margin-top: var(--sp-3); font-size: 1.9rem; }
 .lp-jammer-copy p { margin-top: var(--sp-4); color: var(--text-muted); line-height: 1.7; }
@@ -285,7 +326,7 @@ p { margin: 0; }
 .lp-jammer-step p { margin: 0; color: var(--dark-text-muted); font-size: 0.92rem; }
 
 /* ---- Empresa ---- */
-.lp-trust { padding: var(--sp-12) 0; background: rgba(18,18,20,.55); }
+.lp-trust { padding: var(--sp-9) 0; background: rgba(18,18,20,.55); }
 .lp-trust-head { text-align: center; max-width: 620px; margin: 0 auto var(--sp-9); }
 .lp-trust-head p { margin-top: var(--sp-3); color: var(--text-muted); line-height: 1.7; }
 .lp-trust-head p strong { color: var(--text); }
@@ -298,15 +339,69 @@ p { margin: 0; }
 .lp-trust-item--years span { margin-top: 6px; font-size: 0.74rem; color: var(--dark-text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-mono); }
 
 /* ---- Beneficios ---- */
-.lp-features-strip { padding: var(--sp-10) 0; }
-.lp-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-6); max-width: 980px; margin: 0 auto; }
-.lp-feature-item { text-align: center; }
-.lp-feature-item svg { width: 32px; height: 32px; color: var(--accent); margin-bottom: var(--sp-3); }
-.lp-feature-item h3 { font-size: 0.96rem; }
-.lp-feature-item p { margin-top: 4px; color: var(--text-muted); font-size: 0.84rem; line-height: 1.5; }
+/* ---- Agenda hoy (mismo estilo que motor) ---- */
+.lp-promo { padding: var(--sp-10) 0; }
+.lp-promo-card {
+  position: relative; max-width: 560px; margin: 0 auto; background: rgba(18,18,20,.28); backdrop-filter: blur(8px);
+  border: 1px solid var(--card-border-strong); border-radius: 18px; padding: 32px 30px 28px; text-align: center;
+}
+.lp-promo-ribbon {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #fff; font-family: var(--font-head); font-size: 0.72rem; font-weight: 800;
+  letter-spacing: .05em; text-transform: uppercase; padding: 6px 20px; border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.35); white-space: nowrap;
+}
+.lp-promo-sticker {
+  position: absolute; top: -46px; right: -18px; width: 92px; height: 92px; z-index: 3;
+  transform: rotate(12deg); animation: lpPromoStickerWiggle 3.6s ease-in-out infinite;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.45)); display: flex; align-items: center; justify-content: center;
+}
+.lp-promo-sticker svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.lp-promo-sticker-text {
+  position: relative; z-index: 1; font-family: var(--font-head); font-weight: 800; font-size: 15px;
+  color: #1a1200; letter-spacing: .02em;
+}
+@keyframes lpPromoStickerWiggle {
+  0%, 100% { transform: rotate(12deg); }
+  50% { transform: rotate(6deg); }
+}
+@media (max-width: 480px) {
+  .lp-promo-sticker { width: 74px; height: 74px; top: -36px; right: -10px; }
+  .lp-promo-sticker-text { font-size: 13px; }
+}
+.lp-promo-card h3 {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  font-family: var(--font-head); font-size: 1.1rem; text-transform: uppercase; letter-spacing: .03em; color: var(--accent);
+  text-shadow: 0 0 18px rgba(220,38,38,.45);
+}
+.lp-promo-star { width: 18px; height: 18px; flex-shrink: 0; color: var(--accent); animation: lpPromoStarPulse 1.8s ease-in-out infinite; }
+.lp-promo-star.is-right { animation-delay: .5s; }
+@keyframes lpPromoStarPulse {
+  0%, 100% { transform: scale(1); opacity: .85; }
+  50% { transform: scale(1.25); opacity: 1; }
+}
+.lp-promo-steps { list-style: none; margin: 22px 0 0; padding: 0; max-width: 420px; margin-left: auto; margin-right: auto; text-align: left; }
+.lp-promo-step { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: center; position: relative; padding-bottom: 22px; }
+.lp-promo-step:last-child { padding-bottom: 0; }
+.lp-promo-step::before { content: ""; position: absolute; left: 19px; top: 40px; bottom: 0; width: 1px; background: var(--card-border); }
+.lp-promo-step:last-child::before { display: none; }
+.lp-promo-step-marker {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--accent); border: 1px solid var(--accent);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.lp-promo-step-marker svg { width: 19px; height: 19px; color: #fff; flex-shrink: 0; }
+.lp-promo-step-body h4 {
+  font-family: var(--font-head); font-size: 0.92rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .01em; margin: 0; color: var(--text);
+}
+@media (max-width: 760px) {
+  .lp-promo { padding: var(--sp-8) 0; }
+  .lp-promo-card { padding: 28px 22px 24px; }
+  .lp-promo-step-body h4 { font-size: 0.88rem; }
+}
 
 /* ---- Testimonios ---- */
-.lp-proof { padding: var(--sp-12) 0; background: rgba(18,18,20,.55); }
+.lp-proof { padding: var(--sp-9) 0; background: rgba(18,18,20,.55); }
 .lp-proof-head { text-align: center; max-width: 620px; margin: 0 auto var(--sp-8); }
 .lp-proof-note { margin-top: var(--sp-5); display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-faint); background: var(--card); border: 1px dashed var(--card-border-strong); border-radius: var(--radius-sm); padding: 8px 14px; font-family: var(--font-mono); }
 .lp-proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-7); max-width: 900px; margin: 0 auto; }
@@ -346,7 +441,7 @@ p { margin: 0; }
 }
 
 /* ---- CTA Final ---- */
-.lp-final-cta { background: rgba(12,12,14,.55); padding: var(--sp-12) 0; text-align: center; }
+.lp-final-cta { background: rgba(12,12,14,.55); padding: var(--sp-9) 0; text-align: center; }
 .lp-final-cta h2 { color: var(--dark-text); font-size: 1.9rem; }
 .lp-final-cta p { margin-top: var(--sp-4); color: var(--dark-text-muted); max-width: 52ch; margin-left: auto; margin-right: auto; }
 .lp-final-cta-actions { margin-top: var(--sp-7); display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
@@ -366,7 +461,6 @@ p { margin: 0; }
 @media (max-width: 900px) {
   .lp-plans-grid { grid-template-columns: 1fr; max-width: 460px; }
   .lp-jammer-inner { grid-template-columns: 1fr; }
-  .lp-features-grid { grid-template-columns: repeat(2, 1fr); }
   .lp-trust-grid { grid-template-columns: repeat(2, 1fr); }
   .lp-video-inner { grid-template-columns: 1fr; text-align: center; }
   .lp-video-copy p { margin-left: auto; margin-right: auto; }
@@ -395,7 +489,7 @@ p { margin: 0; }
 .lp-final-cta::before, .lp-alert-strip::before { content: ""; display: block; height: 4px; width: 64px; margin: 0 auto var(--sp-6); background: var(--accent); }
 
 /* ---- Agendar cita ---- */
-.lp-appointment { background: rgba(18,18,20,.55); padding: var(--sp-12) 0; text-align: center; }
+.lp-appointment { background: rgba(18,18,20,.55); padding: var(--sp-9) 0; text-align: center; }
 .lp-appointment h2 { margin-top: var(--sp-3); font-size: 1.9rem; }
 .lp-appointment p { margin-top: var(--sp-4); color: var(--text-muted); max-width: 52ch; margin-left: auto; margin-right: auto; }
 .lp-appointment-actions { margin-top: var(--sp-7); display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
@@ -520,7 +614,7 @@ p { margin: 0; }
         </span>
       </a>
       <div class="header-actions">
-        <a class="btn btn-whatsapp" href="https://wa.me/18494416329?text=Hola%2C%20quiero%20proteger%20mi%20veh%C3%ADculo%2C%20me%20interesa%20el%20plan%20Premium%20o%20VIP." target="_blank" rel="noopener">
+        <a class="btn btn-whatsapp" href="https://wa.me/18097526329?text=Hola%2C%20quiero%20proteger%20mi%20veh%C3%ADculo%2C%20me%20interesa%20el%20plan%20Premium%20o%20VIP." target="_blank" rel="noopener">
           <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
           WhatsApp
         </a>
@@ -535,11 +629,14 @@ p { margin: 0; }
     <section class="lp-hero">
       <div class="container lp-hero-inner">
         <span class="eyebrow">Protección vehicular</span>
-        <h1>Hoy en día, robarse un carro es <span class="accent">más fácil de lo que crees</span></h1>
-        <p class="lead">Por eso creamos dos planes de protección real: rastreo GPS 4G, alertas al instante y tecnología que se adelanta al ladrón — incluso cuando intenta bloquear la señal.</p>
+        <h1>Protege tu vehículo <span class="accent">antes de que sea demasiado tarde</span></h1>
+        <p class="lead">Monitorea tu vehículo en tiempo real, recibe alertas al instante y mantén el control desde tu celular con tecnología GPS 4G.</p>
         <div class="lp-hero-cta">
-          <a class="btn btn-primary btn-lg" href="#planes">Ver los planes <svg aria-hidden="true" focusable="false"><use href="#icon-arrow"></use></svg></a>
-          <a class="btn btn-outline btn-lg" href="https://wa.me/18494416329?text=Hola%2C%20tengo%20una%20duda%20sobre%20los%20planes%20de%20protecci%C3%B3n%20vehicular." target="_blank" rel="noopener">
+          <a class="btn btn-primary btn-lg" href="agendar.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+            Agendar mi instalación
+          </a>
+          <a class="btn btn-outline btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20tengo%20una%20duda%20sobre%20los%20planes%20de%20protecci%C3%B3n%20vehicular." target="_blank" rel="noopener">
             <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
             Hacer una pregunta
           </a>
@@ -552,12 +649,29 @@ p { margin: 0; }
       <div class="container lp-video-inner">
         <div class="lp-video-copy">
           <span class="eyebrow">Míralo en acción</span>
-          <h2>Así se ve la instalación y la app funcionando</h2>
-          <p>Un video corto y directo: la instalación real en el vehículo, la app en el celular y cómo llegan las alertas al instante.</p>
-          <a class="btn btn-whatsapp btn-lg" href="https://wa.me/18494416329?text=Hola%2C%20vi%20el%20video%20y%20quiero%20proteger%20mi%20veh%C3%ADculo." target="_blank" rel="noopener">
-            <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
-            Quiero el mío
+          <h2>Premium vs VIP: ¿cuál es mejor para ti?</h2>
+          <p>Conoce las diferencias entre ambos planes y elige el nivel de protección que mejor se adapta a tu vehículo.</p>
+          <a class="btn btn-primary btn-lg" href="agendar.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+            Agendar mi instalación
           </a>
+
+          <div class="lp-vs-strip">
+            <div class="lp-vs-item">
+              <span class="lp-vs-diamond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linejoin="miter" d="M12 2l7 3v6c0 5-3 8.5-7 11-4-2.5-7-6-7-11V5z"/></svg></span>
+              <div class="lp-vs-text"><strong>Premium</strong><span>Protección esencial</span></div>
+            </div>
+            <span class="lp-vs-divider"></span>
+            <div class="lp-vs-item">
+              <span class="lp-vs-diamond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linejoin="miter" d="M12 2l7 3v6c0 5-3 8.5-7 11-4-2.5-7-6-7-11V5z"/><path stroke-width="1.6" d="M9 12l2 2 4-4"/></svg></span>
+              <div class="lp-vs-text"><strong>VIP</strong><span>Doble GPS + anti-jammer</span></div>
+            </div>
+            <span class="lp-vs-divider"></span>
+            <div class="lp-vs-item">
+              <span class="lp-vs-diamond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="5.2"/><path d="M9 12.5L7 22l5-3 5 3-2-9.5"/></svg></span>
+              <div class="lp-vs-text"><strong>Ambos</strong><span>1 año de garantía</span></div>
+            </div>
+          </div>
         </div>
         <div class="lp-phone-frame">
           <img class="frame-img" src="../assets/images/mockups/phone-frame-naranja.webp" alt="" aria-hidden="true">
@@ -600,7 +714,7 @@ p { margin: 0; }
             <span class="corner-bl"></span><span class="corner-br"></span>
             <h3 class="lp-plan-name">Plan Premium</h3>
             <p class="lp-plan-desc">Protección confiable con altos estándares de seguridad.</p>
-            <div class="lp-plan-price"><strong>RD$7,990</strong><span>pago único + instalación</span></div>
+            <div class="lp-plan-price"><strong>RD$7,990</strong><span>pago único</span></div>
             <div class="lp-plan-breakdown">
               <div class="lp-plan-breakdown-row"><span>Instalación</span><strong>RD$5,500</strong></div>
               <div class="lp-plan-breakdown-row"><span>1 año plataforma</span><strong>RD$2,490</strong></div>
@@ -618,7 +732,7 @@ p { margin: 0; }
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="miter" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path stroke-linecap="round" d="M10.5 18.5h3"/></svg><span><strong>1 rastreo de celular</strong> gratis</span></li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="5.2"/><path d="M9 12.5L7 22l5-3 5 3-2-9.5"/><path stroke-width="1.5" d="M12 5.3l.9 1.9 2.1.3-1.5 1.5.35 2.1L12 10.1l-1.85.9.35-2.1-1.5-1.5 2.1-.3z"/></svg><span><strong>1 año de garantía</strong></span></li>
             </ul>
-            <a class="btn btn-whatsapp btn-block btn-lg" href="https://wa.me/18494416329?text=Hola%2C%20quiero%20el%20plan%20PREMIUM%20de%20protecci%C3%B3n%20vehicular%20(RD%247%2C990)." target="_blank" rel="noopener">
+            <a class="btn btn-whatsapp btn-block btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20quiero%20el%20plan%20PREMIUM%20de%20protecci%C3%B3n%20vehicular%20(RD%247%2C990)." target="_blank" rel="noopener">
               <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
               Elegir plan Premium
             </a>
@@ -634,7 +748,7 @@ p { margin: 0; }
             </span>
             <h3 class="lp-plan-name">Plan VIP</h3>
             <p class="lp-plan-desc">El GPS que los ladrones NO pueden bloquear.</p>
-            <div class="lp-plan-price"><strong>RD$13,990</strong><span>pago único + instalación</span></div>
+            <div class="lp-plan-price"><strong>RD$13,990</strong><span>pago único</span></div>
             <div class="lp-plan-breakdown">
               <div class="lp-plan-breakdown-row"><span>Instalación</span><strong>RD$10,500</strong></div>
               <div class="lp-plan-breakdown-row"><span>1 año plataforma</span><strong>RD$3,490</strong></div>
@@ -652,7 +766,7 @@ p { margin: 0; }
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="miter" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path stroke-linecap="round" d="M10.5 18.5h3"/></svg><span><strong>1 rastreo de celular</strong> gratis</span></li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="5.2"/><path d="M9 12.5L7 22l5-3 5 3-2-9.5"/><path stroke-width="1.5" d="M12 5.3l.9 1.9 2.1.3-1.5 1.5.35 2.1L12 10.1l-1.85.9.35-2.1-1.5-1.5 2.1-.3z"/></svg><span><strong>1 año de garantía</strong></span></li>
             </ul>
-            <a class="btn btn-whatsapp btn-block btn-lg" href="https://wa.me/18494416329?text=Hola%2C%20quiero%20el%20plan%20VIP%20de%20protecci%C3%B3n%20vehicular%20(RD%2413%2C990)." target="_blank" rel="noopener">
+            <a class="btn btn-whatsapp btn-block btn-lg" href="https://wa.me/18097526329?text=Hola%2C%20quiero%20el%20plan%20VIP%20de%20protecci%C3%B3n%20vehicular%20(RD%2413%2C990)." target="_blank" rel="noopener">
               <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
               Elegir plan VIP
             </a>
@@ -666,8 +780,8 @@ p { margin: 0; }
       <div class="container lp-jammer-inner">
         <div class="lp-jammer-copy">
           <span class="eyebrow">Solo en el plan VIP</span>
-          <h2>Los ladrones ahora usan bloqueadores de señal — nosotros ya nos adelantamos</h2>
-          <p>Hoy en día existen dispositivos llamados <strong>jammers</strong> que los ladrones encienden para dejar sin señal a los GPS tradicionales. Nuestro sistema del plan VIP detecta cuando esto pasa, te avisa al instante y bloquea el vehículo automáticamente — antes de que el ladrón pueda completar el robo.</p>
+          <h2>¿Y si intentan bloquear la señal de tu GPS?<br><span class="accent">El Plan VIP está preparado para detectarlo</span></h2>
+          <p>Los bloqueadores de señal, conocidos como <strong>jammers</strong>, pueden interferir con el funcionamiento de un GPS convencional. El Plan VIP incorpora un sistema de protección que detecta intentos de interferencia, genera una alerta y activa el protocolo de seguridad configurado en tu vehículo.</p>
         </div>
         <div class="lp-jammer-visual">
           <div class="lp-jammer-step"><span class="lp-jammer-step-num">1</span><p>El ladrón enciende el jammer para bloquear la señal del GPS</p></div>
@@ -677,13 +791,31 @@ p { margin: 0; }
       </div>
     </section>
 
-    <!-- FRANJA DE BENEFICIOS -->
-    <section class="lp-features-strip">
-      <div class="container lp-features-grid">
-        <div class="lp-feature-item"><svg aria-hidden="true" focusable="false"><use href="#icon-signal"></use></svg><h3>SIM internacional</h3><p>Funciona incluso fuera del país</p></div>
-        <div class="lp-feature-item"><svg aria-hidden="true" focusable="false"><use href="#icon-lock"></use></svg><h3>Plataforma privada</h3><p>Solo tú tienes acceso a la ubicación de tu vehículo</p></div>
-        <div class="lp-feature-item"><svg aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg><h3>Soporte directo</h3><p>Habla con una persona real por WhatsApp</p></div>
-        <div class="lp-feature-item"><svg aria-hidden="true" focusable="false"><use href="#icon-truck"></use></svg><h3>Instalación incluida</h3><p>Nosotros instalamos el equipo por ti</p></div>
+    <!-- AGENDA HOY -->
+    <section class="lp-promo">
+      <div class="container lp-promo-card">
+        <span class="lp-promo-ribbon">Extra</span>
+        <span class="lp-promo-sticker" aria-hidden="true">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="60.0,2.0 69.4,12.9 82.2,6.4 86.7,20.1 101.0,19.0 99.9,33.3 113.6,37.8 107.1,50.6 118.0,60.0 107.1,69.4 113.6,82.2 99.9,86.7 101.0,101.0 86.7,99.9 82.2,113.6 69.4,107.1 60.0,118.0 50.6,107.1 37.8,113.6 33.3,99.9 19.0,101.0 20.1,86.7 6.4,82.2 12.9,69.4 2.0,60.0 12.9,50.6 6.4,37.8 20.1,33.3 19.0,19.0 33.3,20.1 37.8,6.4 50.6,12.9" fill="#F5C518"/>
+          </svg>
+          <span class="lp-promo-sticker-text">EXTRA</span>
+        </span>
+        <h3><svg class="lp-promo-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.4L20 10l-6.2 1.6L12 18l-1.8-6.4L4 10l6.2-1.6z"/></svg>Agenda hoy y recibe beneficios exclusivos<svg class="lp-promo-star is-right" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.4L20 10l-6.2 1.6L12 18l-1.8-6.4L4 10l6.2-1.6z"/></svg></h3>
+        <ul class="lp-promo-steps">
+          <li class="lp-promo-step">
+            <div class="lp-promo-step-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></div>
+            <div class="lp-promo-step-body"><h4>1 año de garantía certificada</h4></div>
+          </li>
+          <li class="lp-promo-step">
+            <div class="lp-promo-step-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+            <div class="lp-promo-step-body"><h4>1 rastreo de celular gratis</h4></div>
+          </li>
+          <li class="lp-promo-step">
+            <div class="lp-promo-step-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+            <div class="lp-promo-step-body"><h4>1 TAG con 20% de descuento (RD$1,990)</h4></div>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -738,16 +870,14 @@ p { margin: 0; }
         <div class="lp-proof-logos">
           <span class="lp-proof-logos-label">Marcas y clientes que confían</span>
           <div class="lp-proof-logos-row">
-            <div class="lp-logo-slot"><img src="../assets/images/logo-brisaride.webp" alt="Brisa Ride" loading="lazy"></div>
-            <div class="lp-logo-slot"><img src="../assets/images/logo-joselito.webp" alt="Joselito Auto Import SRL" loading="lazy"></div>
-            <div class="lp-logo-slot"><img src="../assets/images/logo-lupali.webp" alt="Inversiones Lupali" loading="lazy"></div>
-            <div class="lp-logo-slot"><img src="../assets/images/logo-villar.webp" alt="Villar Te Monta" loading="lazy"></div>
-            <div class="lp-logo-slot"><img src="../assets/images/logo-coopegas.webp" alt="Coopegas" loading="lazy"></div>
+            <div class="lp-logo-slot"><img src="../assets/images/logo-brisaride.webp" alt="Brisa Ride"></div>
+            <div class="lp-logo-slot"><img src="../assets/images/logo-joselito.webp" alt="Joselito Auto Import SRL"></div>
+            <div class="lp-logo-slot"><img src="../assets/images/logo-lupali.webp" alt="Inversiones Lupali"></div>
+            <div class="lp-logo-slot"><img src="../assets/images/logo-villar.webp" alt="Villar Te Monta"></div>
+            <div class="lp-logo-slot"><img src="../assets/images/logo-coopegas.webp" alt="Coopegas"></div>
           </div>
         </div>
         <div class="lp-hero-trust">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M12 2l7 3v6c0 5-3 8.5-7 11-4-2.5-7-6-7-11V5z"/><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>Empresa registrada</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="8" r="5.2"/><path stroke-width="1.8" d="M9 12.5L7 22l5-3 5 3-2-9.5"/><path stroke-width="1.6" d="M12 5.3l.9 1.9 2.1.3-1.5 1.5.35 2.1L12 10.1l-1.85.9.35-2.1-1.5-1.5 2.1-.3z"/></svg>10 años de experiencia</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path stroke-linejoin="miter" d="M14.7 6.3a3.5 3.5 0 00-4.6 4.2L3 17.6V21h3.4l7.1-7.1a3.5 3.5 0 004.2-4.6l-2.5 2.5-2-2z"/></svg>Instalación incluida</span>
         </div>
       </div>
@@ -796,7 +926,7 @@ p { margin: 0; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
             Agendar mi instalación
           </a>
-          <a class="btn-outline-appt" href="https://wa.me/18494416329?text=Hola%2C%20quisiera%20hablar%20con%20un%20asesor%20sobre%20la%20protecci%C3%B3n%20de%20mi%20veh%C3%ADculo." target="_blank" rel="noopener">
+          <a class="btn-outline-appt" href="https://wa.me/18097526329?text=Hola%2C%20quisiera%20hablar%20con%20un%20asesor%20sobre%20la%20protecci%C3%B3n%20de%20mi%20veh%C3%ADculo." target="_blank" rel="noopener">
             <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
             Hablar con un asesor
           </a>
@@ -810,7 +940,7 @@ p { margin: 0; }
   <footer class="site-footer">
     <div class="container">
       <div class="footer-brand"><img src="../assets/images/logo-gordo.webp" alt="Gordo GPS"></div>
-      <p class="footer-copy">© 2026 GPS Portátiles · Santiago de los Caballeros, República Dominicana</p>
+      <p class="footer-copy">© 2026 Gordo GPS · Santiago de los Caballeros, República Dominicana</p>
       <a class="footer-app-link" href="descargar.html">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
         Descargar la app (iPhone y Android)
@@ -851,7 +981,7 @@ p { margin: 0; }
     (function () {
       // GORDO GPS: pega aquí el ID de cada video de YouTube.
       var VIDEOS = [
-        { wrapId: 'ytPlayer',   btnId: 'ytPosterBtn', id: 'Te68bKma7Mw', label: 'Video de instalación GPS Portátiles' },
+        { wrapId: 'ytPlayer',   btnId: 'ytPosterBtn', id: 'Te68bKma7Mw', label: 'Video de instalación Gordo GPS' },
         { wrapId: 'ytPlayerT1', btnId: 'ytPosterT1',  id: 'cIw-Rz0k3Vg', label: 'Testimonio de cliente 1' },
         { wrapId: 'ytPlayerT2', btnId: 'ytPosterT2',  id: 'cO4Hp6Qjxiw', label: 'Testimonio de cliente 2' },
         { wrapId: 'ytPlayerT3', btnId: 'ytPosterT3',  id: '8Ell5oVeEFM', label: 'Testimonio de cliente 3' }
@@ -981,7 +1111,7 @@ p { margin: 0; }
     })();
   </script>
 
-<a class="wa-float-btn" href="https://wa.me/18494416329?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" aria-label="Chatea con nosotros por WhatsApp">
+<a class="wa-float-btn" href="https://wa.me/18097526329?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" aria-label="Chatea con nosotros por WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
 </a>
 </body>
