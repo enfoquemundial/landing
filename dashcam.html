@@ -163,60 +163,25 @@ p { margin: 0; }
 .lp-hero p.lead { margin-top: var(--sp-5); font-size: 1.12rem; color: var(--text-muted); line-height: 1.7; max-width: 62ch; margin-left: auto; margin-right: auto; }
 .lp-hero-cta { margin-top: var(--sp-7); display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 
-/* ---- Escenario de vehículos (idéntico a la de motor) ---- */
+/* ---- Escenario de video dashcam ---- */
 .lp-stage {
   position: relative; max-width: 1000px; margin: 60px auto 0; height: 340px; overflow: hidden;
   border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
+  background: #000;
 }
-.lp-stage::before {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 54px; height: 2px;
-  background: linear-gradient(to right, transparent, rgba(220,38,38,.5) 15%, rgba(220,38,38,.5) 85%, transparent);
+.lp-stage-video, .lp-stage-freeze {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
 }
-.lp-vehicle { position: absolute; bottom: 54px; width: 40%; max-width: 400px; }
-.lp-vehicle::before {
-  content: ""; position: absolute; left: 50%; top: 50%; width: 145%; aspect-ratio: 1/1;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(150,28,28,.5) 0%, rgba(80,15,15,.22) 45%, transparent 72%);
-  z-index: -1; pointer-events: none;
+.lp-stage-freeze {
+  opacity: 0; pointer-events: none; transition: opacity .5s ease;
 }
-.lp-vehicle img { width: 100%; height: auto; filter: drop-shadow(0 18px 24px rgba(0,0,0,.6)); }
-.lp-vehicle-sedan {
-  left: 2%; transform: translateX(-140%);
-  animation: lpDriveInLeft 1.3s cubic-bezier(.22,.75,.2,1) .4s forwards;
-}
-.lp-vehicle-suv {
-  right: 2%; transform: translateX(140%);
-  animation: lpDriveInRight 1.3s cubic-bezier(.22,.75,.2,1) .7s forwards;
-}
-@keyframes lpDriveInLeft {
-  0%   { transform: translateX(-140%); opacity: 0; }
-  70%  { transform: translateX(4%); opacity: 1; }
-  85%  { transform: translateX(-1%); }
-  100% { transform: translateX(0); opacity: 1; }
-}
-@keyframes lpDriveInRight {
-  0%   { transform: translateX(140%); opacity: 0; }
-  70%  { transform: translateX(-4%); opacity: 1; }
-  85%  { transform: translateX(1%); }
-  100% { transform: translateX(0); opacity: 1; }
-}
-.lp-vehicle-label {
-  position: absolute; bottom: 16px; font-family: var(--font-head); font-size: 0.78rem; font-weight: 600;
-  letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint);
-  opacity: 0; animation: lpLabelFadeIn .6s ease 1.7s forwards;
-}
-.lp-vehicle-label-sedan { left: 2%; }
-.lp-vehicle-label-suv { right: 2%; }
-@keyframes lpLabelFadeIn { to { opacity: 1; } }
+.lp-stage-freeze.is-visible { opacity: 1; }
 @media (max-width: 760px) {
   .lp-stage { height: 170px; margin-top: 24px; }
-  .lp-stage::before { bottom: 30px; }
-  .lp-vehicle { bottom: 30px; }
-  .lp-vehicle-label { bottom: 8px; }
-  .lp-vehicle { width: 52%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .lp-vehicle-sedan, .lp-vehicle-suv, .lp-vehicle-label { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .lp-stage-video { display: none; }
+  .lp-stage-freeze { opacity: 1; }
 }
 .lp-hero-trust { margin-top: var(--sp-8); padding-top: var(--sp-7); border-top: 1px solid var(--card-border); display: flex; justify-content: center; gap: var(--sp-7); flex-wrap: wrap; }
 
@@ -725,15 +690,37 @@ p { margin: 0; }
     </section>
 
     <div class="lp-stage" aria-hidden="true">
-      <div class="lp-vehicle lp-vehicle-sedan">
-        <img src="assets/images/sedan_tight.webp" alt="">
-      </div>
-      <div class="lp-vehicle lp-vehicle-suv">
-        <img src="assets/images/suv_tight.webp" alt="">
-      </div>
-      <span class="lp-vehicle-label lp-vehicle-label-sedan">Carro</span>
-      <span class="lp-vehicle-label lp-vehicle-label-suv">Jepeta</span>
+      <video
+        class="lp-stage-video"
+        id="lpStageVideo"
+        src="assets/video/dashcam-hero.mp4"
+        poster="assets/images/dashcam-hero-freeze.jpg"
+        autoplay muted playsinline preload="auto"
+        aria-hidden="true"
+      ></video>
+      <img
+        class="lp-stage-freeze"
+        id="lpStageFreeze"
+        src="assets/images/dashcam-hero-freeze.jpg"
+        alt=""
+      >
     </div>
+    <script>
+      (function () {
+        var vid = document.getElementById('lpStageVideo');
+        var freeze = document.getElementById('lpStageFreeze');
+        if (!vid) return;
+        var showFreeze = function () {
+          freeze.classList.add('is-visible');
+        };
+        vid.addEventListener('ended', showFreeze);
+        // Respaldo: si el navegador bloquea el autoplay o el video falla, mostramos el congelado igual.
+        vid.addEventListener('error', showFreeze);
+        setTimeout(function () {
+          if (vid.paused && vid.currentTime === 0) showFreeze();
+        }, 1500);
+      })();
+    </script>
 
     <!-- VIDEO VERTICAL -->
     <section class="lp-video" id="video">
